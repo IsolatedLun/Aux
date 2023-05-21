@@ -1,0 +1,17 @@
+$colors-dark: (
+	text: (
+		muted: hsl(0 0% 60%)
+	)
+);
+
+$colors-light: ();
+
+$active-theme: $colors-dark;
+
+@each $colorTuple, $colorValues in $active-theme {
+	@each $colorName, $colorValue in $colorValues {
+		.clr-#{$colorTuple}-#{$colorName} {
+			color: $colorValue;
+		}
+	}
+}

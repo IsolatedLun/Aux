@@ -1,0 +1,44 @@
+@use '../../abstracts/mixins' as *;
+@use '../../abstracts/' as *;
+
+.song-card {
+    .card__img-container {
+        aspect-ratio: 1;
+
+        .card__play-btn {
+            @include transformCenter();
+
+            opacity: 0;
+            transition: opacity 200ms ease-in-out;
+            z-index: $z-index-1;
+        }
+
+        img {
+            transition-property: transform, filter;
+            transition-duration: 200ms;
+            transition-timing-function: ease-in-out;
+        }
+    }
+
+    .card__profile-container {
+        width: $songCard-profile-width;
+        border-radius: $border-radius-max;
+        aspect-ratio: 1;
+    }
+
+    &:is(:hover, :focus-visible) {
+        .card__img-container {
+            img {
+                filter: 
+                    brightness($songCard-thumbnail-brightness-on-hov) 
+                    blur($songCard-thumbnail-blur-on-hov)
+                ;
+                transform: scale($songCard-thumbnail-scale-on-hov);
+            }
+
+            .card__play-btn {
+                opacity: 1;
+            }
+        }
+    }
+}

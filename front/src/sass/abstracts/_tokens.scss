@@ -1,0 +1,22 @@
+@use 'sass:color';
+
+@use './colors.scss' as *;
+
+// Global
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+$global-FontSize: var(--fs-400);
+$global-FontFamily: 'Poppins', system-ui;
+
+$border-radius-bevelled: 9px;
+$border-radius-max: 100vmax;
+
+$z-index-1: 999;
+$z-index-2: 9999;
+$z-index-3: 99999;
+// Modules/SongCard
+$songCard-profile-width: 1.475rem;
+$songCard-thumbnail-brightness-on-hov: 50%;
+$songCard-thumbnail-blur-on-hov: 1px;
+$songCard-thumbnail-scale-on-hov: 1.2;

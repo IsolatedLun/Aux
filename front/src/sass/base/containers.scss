@@ -1,0 +1,8 @@
+.main-container {
+    max-width: min(1300px, calc(100% - 2rem));
+    margin-inline: auto;
+}
+
+.song-card-container {
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+}
