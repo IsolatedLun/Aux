@@ -2,7 +2,7 @@
 @use '../../abstracts/' as *;
 
 .song-card {
-    .card__img-container {
+    .card__thumbnail-container {
         aspect-ratio: 1;
 
         .card__play-btn {
@@ -27,7 +27,7 @@
     }
 
     &:is(:hover, :focus-visible) {
-        .card__img-container {
+        .card__thumbnail-container {
             img {
                 filter: 
                     brightness($songCard-thumbnail-brightness-on-hov) 

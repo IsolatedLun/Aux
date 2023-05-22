@@ -3,7 +3,6 @@
 	import { cubeCss } from "../../../../utils/cubeCss/cubeCss";
 	import type { Props_CubeCSS_API } from "../../../../utils/cubeCss/types";
 	import { autoIndexGridChildren, createGridRow } from "../utils";
-	import { GRID_CHILD_STR } from "../../../../consts/consts";
 
     onMount(() => {
         let gridArea = '';

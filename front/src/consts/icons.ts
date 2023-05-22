@@ -20,6 +20,7 @@ export const ICON_ELLIPSIS_V = '\uf142';
 export const ICON_USER = '\uf007';
 export const ICON_HOME = '\uf015'
 export const ICON_SAVE = '\uf0c7';
+export const ICON_PLAY = '\uf04b';
 
 export const ICON_EYE = '\uf06e';
 

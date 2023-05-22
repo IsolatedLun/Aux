@@ -2,9 +2,10 @@
 	import { onMount } from "svelte";
 	import { cubeCss } from "../../../../utils/cubeCss/cubeCss";
 	import type { Props_CubeCSS_API } from "../../../../utils/cubeCss/types";
+	import { GRID_CHILD_STR } from "../../../../consts/consts";
 
     onMount(() => {
-        _this.style.gridArea = 'child-' + index;
+        _this.style.gridArea = GRID_CHILD_STR + index;
 
         use(_this);
     })

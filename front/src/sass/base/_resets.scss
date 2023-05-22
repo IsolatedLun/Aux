@@ -21,6 +21,7 @@ html {
 body {
 	font-family: $global-FontFamily;
 	font-size: $global-FontSize;
+	background-image: var(--clr-background-400);
 
 	overflow-x: hidden;
 	text-rendering: optimizeLegibility;
@@ -53,7 +54,7 @@ button,
 select,
 textarea {
 	font-family: inherit;
-	font-size: inherit;
+	font-size: var(--fs-350);
 }
 
 textarea {

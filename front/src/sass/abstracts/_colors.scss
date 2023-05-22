@@ -1,6 +1,14 @@
 $colors-dark: (
 	text: (
 		muted: hsl(0 0% 60%)
+	),
+	primary: (
+		400: hsl(261, 40%, 55%)
+	),
+	background: (
+		300: hsl(0 0% 8%),
+		400: hsl(0 0% 15%),
+		500: hsl(0 0% 30%)
 	)
 );
 

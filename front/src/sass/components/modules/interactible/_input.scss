@@ -1,0 +1,17 @@
+@use '../../../abstracts/' as *;
+
+@use 'sass:color';
+
+.input {
+    padding: $input-padding;
+    border: 2px solid $clr-input-border;
+    border-radius: $border-radius-bevelled;
+
+    background-color: $clr-input;
+
+    transition: border-color $input-border-color-transition-duration;
+    &:is(:hover, :focus-visible) {
+        border-color: $clr-input-border-on-hov;
+        box-shadow: $input-box-shadow;
+    }
+}

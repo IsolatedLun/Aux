@@ -4,6 +4,8 @@
 
 	export let tag = 'span';
 	export let cls = cubeCss({});
+	export let ariaLabel: string;
+	export let ariaHidden = true;
 
 	const _class = cls.to_string({
         compostClass: 'icon',
@@ -11,6 +13,6 @@
     })
 </script>
 
-<svelte:element this={tag} class={_class} aria-hidden="true">
+<svelte:element this={tag} class={_class} aria-hidden={ariaHidden} aria-label={ariaLabel}>
 	<slot />
 </svelte:element>
