@@ -1,8 +1,9 @@
+@use '../../abstracts/' as *;
+
 .primary-navbar {
-    padding: 0.25rem 1rem;
-    background-color: var(--clr-background-400);
+    padding: $primary-navbar-padding;
 
     .input-container {
-        max-width: 32ch;
+        max-width: $primary-navbar-input-max-width;
     }
 }

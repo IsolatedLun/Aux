@@ -2,13 +2,21 @@
 
 @use './colors.scss' as *;
 
-// Global
+// Colors
+$clr-primary-400: map-get($map: map-get($active-theme, $key: "primary"), $key: 400);
 
+$clr-text-muted: map-get($map: map-get($active-theme, $key: "text"), $key: "muted");
+
+$clr-background-300: map-get($map: map-get($active-theme, $key: "background"), $key: 300);
+$clr-background-400: map-get($map: map-get($active-theme, $key: "background"), $key: 400);
+$clr-background-500: map-get($map: map-get($active-theme, $key: "background"), $key: 500);
+
+// Global
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
 
 $global-FontSize: var(--fs-400);
 $global-FontFamily: 'Poppins', system-ui;
-$global-background-clr: var(--clr-background-400);
+$global-background-clr: $clr-background-300;
 
 $border-radius-bevelled: 9px;
 $border-radius-max: 100vmax;
@@ -17,30 +25,30 @@ $z-index-1: 999;
 $z-index-2: 9999;
 $z-index-3: 99999;
 
-// Colors
-$clr-primary-400: map-get($map: map-get($active-theme, $key: "primary"), $key: 400);
-
-$clr-background-400: map-get($map: map-get($active-theme, $key: "background"), $key: 400);
-$clr-background-500: map-get($map: map-get($active-theme, $key: "background"), $key: 500);
-
 // Modules/SongCard
 $songCard-profile-width: 1.475rem;
 $songCard-thumbnail-brightness-on-hov: 35%;
 $songCard-thumbnail-blur-on-hov: 1px;
 $songCard-thumbnail-scale-on-hov: 1.2;
 
+// Layouts/PrimaryNavbar
+$primary-navbar-padding: 0.4rem 1rem;
+$primary-navbar-input-max-width: 32ch;
+
 // Modules/Interactible/Button
 $clr-button-primary: $clr-primary-400;
 $button-padding: 0.3rem 0.6rem;
+$button-padding-tiny: 0.1rem 0.3rem;
 $button-padding-small: 0.2rem 0.6rem;
 $button-padding-big: 0.4rem 0.8rem;
 $button-padding-huge: 0.8rem 1.2rem;
 
 // Modules/Interactible/Input
 $clr-input: $clr-background-400;
+$clr-input-neutral: $clr-background-500;
 $clr-input-border-on-hov: $clr-primary-400;
 $clr-input-border: $clr-background-500;
 
-$input-box-shadow: 0 0 0px 3px transparentize($clr-input-border-on-hov, 0.5);
+$input-box-shadow: 0 0 0px 3px;
 $input-padding: 0.3rem 0.6rem;
 $input-border-color-transition-duration: 375ms;

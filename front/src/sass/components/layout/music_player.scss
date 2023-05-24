@@ -1,0 +1,50 @@
+@use '../../abstracts/' as *;
+
+.music-player {
+    padding: 0.5rem 1rem;
+
+    max-width: 300px;
+    background-color: $clr-background-400;
+    border: 2px solid $clr-background-500;
+    z-index: $z-index-3;
+
+    .player__thumbnail {
+        aspect-ratio: 1;
+        margin-inline: auto;
+    }
+}
+
+@media screen and (min-width: $breakpoint-small) {
+    .music-player {
+        @include transformCenter($bottom: -16%);
+
+        .player__thumbnail {
+            width: 12rem;
+        }
+    }
+}
+
+@media screen and (max-width: $breakpoint-small) {
+    .music-player {
+        @include transformCenter(auto, auto, auto, auto);
+
+        position: fixed !important;
+        width: 100%;
+        inset: 0;
+
+        .music-player-inner {
+            height: 80%;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .player__time-controls {
+            width: 100%;
+            align-items: center;
+        }
+
+        .player__thumbnail {
+            width: 30vh;
+        }
+    }
+}

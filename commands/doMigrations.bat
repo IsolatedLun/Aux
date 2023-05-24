@@ -1,0 +1,1 @@
+cd .. && cd back && python manage.py makemigrations && python manage.py migrate

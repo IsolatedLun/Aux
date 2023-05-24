@@ -15,10 +15,14 @@
     }
 
     &[data-attachments*='hologram'] {
-        $background: transparentize($background, 0.75);
+        $background: transparentize($background, 0.55);
 
         background-color: $background;
         outline-color: $background;
+    }
+
+    &[data-attachments*='tiny-pad'] {
+        padding: $button-padding-tiny;
     }
 
     &[data-attachments*='small-pad'] {
@@ -53,6 +57,10 @@
 
     &[data-attachments*='cube'] {
         aspect-ratio: 1;
+    }
+
+    &[data-attachments*='transparent'] {
+        background-color: transparent;
     }
 }
 

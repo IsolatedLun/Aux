@@ -1,5 +1,6 @@
 <script>
-	import PrimaryNavbar from "../components/Layout/PrimaryNavbar.svelte";
+	import MusicPlayer from "../components/Layout/MusicPlayer/MusicPlayer.svelte";
+import PrimaryNavbar from "../components/Layout/Navbar/PrimaryNavbar.svelte";
 
 </script>
 
@@ -7,6 +8,7 @@
 <main class="[ main-container ]">
     <slot />
 </main>
+<MusicPlayer />
 
 <style>
     @import url('../../static/posty.css');

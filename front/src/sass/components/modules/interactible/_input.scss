@@ -1,17 +1,58 @@
 @use '../../../abstracts/' as *;
-
 @use 'sass:color';
 
-.input {
-    padding: $input-padding;
-    border: 2px solid $clr-input-border;
-    border-radius: $border-radius-bevelled;
+@mixin createInput($theme) {
+    .input-end-button {
+        @include transformCenter($left: 92%);
+        color: $clr-input-neutral;
 
-    background-color: $clr-input;
+        transition: color $input-border-color-transition-duration ease-in-out;
+    }
 
-    transition: border-color $input-border-color-transition-duration;
-    &:is(:hover, :focus-visible) {
-        border-color: $clr-input-border-on-hov;
-        box-shadow: $input-box-shadow;
+    .input {
+        padding: $input-padding;
+        border: none;
+        border-bottom: 2px solid $clr-input-neutral;
+        border-radius: $border-radius-bevelled;
+    
+        background-color: $theme;
+    
+        transition: border-color $input-border-color-transition-duration ease-in-out;
+        &:is(:hover, :focus-visible) {
+            border-color: $clr-input-border-on-hov;
+            box-shadow: $input-box-shadow transparentize($theme, 0.5);
+        }
+    
+        &[data-attachments*='border-flat'] {
+            border-radius: 0;
+        }
+    
+        &[data-attachments*='border-bottom'] {
+            border-top: none;
+            border-left: none;
+            border-right: none;
+    
+            border-radius: 0;
+        }
+    
+        &[data-attachments*='shadow-none'] {
+            box-shadow: none;
+        }
+    
+        &[data-attachments*='transparent'] {
+            background-color: transparent;
+        }
+    }
+
+    &:is(:focus-within) {
+        .input-end-button {
+            color: $theme;
+        }
+    }
+}
+
+.input-container {
+    &[data-variant='primary'] {
+        @include createInput($clr-primary-400);
     }
 }

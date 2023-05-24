@@ -2,9 +2,6 @@ from rest_framework import serializers
 from django.apps import apps
 
 from . import models
-from consts import MAX_RELEVANT_COMMUNITIES
-from posts.serializers import PostPreviewSerializer
-from communities.serializers import CommunityPreviewSerializer
 
 
 class cUserSerializer(serializers.ModelSerializer):

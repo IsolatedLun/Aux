@@ -3,6 +3,7 @@
 
 .song-card {
     .card__thumbnail-container {
+        border: 2px solid $clr-background-500;
         aspect-ratio: 1;
 
         .card__play-btn {
