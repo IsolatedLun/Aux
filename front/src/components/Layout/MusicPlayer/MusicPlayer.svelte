@@ -1,45 +1,67 @@
-<script lang='ts'>
-	import { ICON_CARET_LEFT, ICON_CARET_RIGHT, ICON_GRIP, ICON_PLAY } from "../../../consts/icons";
-	import { cubeCss } from "../../../utils/cubeCss/cubeCss";
-	import Flex from "../../Box/Flex/Flex.svelte";
-	import Icon from "../../Modules/Icon/Icon.svelte";
-	import Button from "../../Modules/Interactible/Button/Button.svelte";
-
-
+<script lang="ts">
+	import {
+		ICON_CARET_LEFT,
+		ICON_CARET_RIGHT,
+		ICON_ELLIPSIS_V,
+		ICON_FAST_LEFT,
+		ICON_FAST_RIGHT,
+		ICON_GRIP,
+		ICON_PLAY,
+		ICON_SAVE
+	} from '../../../consts/icons';
+	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
+	import Flex from '../../Box/Flex/Flex.svelte';
+	import Grid from '../../Box/Grid/Grid.svelte';
+	import Icon from '../../Modules/Icon/Icon.svelte';
+	import Button from '../../Modules/Interactible/Button/Button.svelte';
 </script>
 
-<div class="[ music-player ] [ pos-fixed border-radius-bevelled ]">
-    <Flex cls={cubeCss({blockClass: 'music-player-inner'})} useColumn={true} align='center'>
-        <Flex useColumn={true} gap={1} align='center'>
-            <Button attachments={['transparent', 'tiny-pad']}>
-                <Icon ariaLabel=''>{ICON_GRIP}</Icon>
-            </Button>
-            <div class="[ player__thumbnail ] [ border-radius-bevelled ]">
-                <img src="https://i.ytimg.com/vi/FumQefCcn3s/hqdefault.jpg?sqp=-oaymwE2COADEI4CSFXyq4qpAygIARUAAIhCGAFwAcABBvABAfgBzgWAAtAFigIMCAAQARhlIEIoTTAP&rs=AOn4CLCAVOl5_h0gv5zpx0X4qhitN-t-ag" alt="" />
-            </div>
-        </Flex>
-        <p class="[ text-ellipsis-2 ]">End of the world</p>
-        <Flex cls={cubeCss({blockClass: 'player__time-controls'})} useColumn={true} gap={0}>
-            <div class="[ player__bar ] [ width-100 ]">
-                <input class="[ width-100 ]" type="range" min="0" max="1213241" step="1" />
-            </div>
-            <Flex cls={cubeCss({utilClass: 'width-100'})} justify='space-between'>
-                <p class="[ fs-300 ]">00:00</p>
-                <p class="[ fs-300 ]">00:00</p>
-            </Flex>
-        </Flex>
-        <Flex cls={cubeCss({utilClass: 'width-100'})} align='center' gap={1} justify='space-between'>
-            <Button cls={cubeCss({blockClass: 'fs-500'})} attachments={['transparent', 'small-pad']}>
-                <Icon ariaLabel='Previous'>{ICON_CARET_LEFT}</Icon>
-            </Button>
-            <Button cls={cubeCss({blockClass: 'fs-500'})} attachments={['hologram', 'capsule', 'big-pad']}>
-                <Icon ariaLabel='Play'>{ICON_PLAY}</Icon>
-            </Button>
-            <Button cls={cubeCss({blockClass: 'fs-500'})} attachments={['transparent', 'small-pad']}>
-                <Icon ariaLabel='Next'>{ICON_CARET_RIGHT}</Icon>
-            </Button>
-        </Flex>
-    </Flex>
+<div class="[ music-player ] [ grid pos-fixed ]">
+	<Button cls={cubeCss({ blockClass: 'player__close-btn' })} attachments={['flat']}>
+		<Icon ariaLabel="">{ICON_GRIP}</Icon>
+	</Button>
 
-    <audio src=""></audio>
+	<section class="[ player__info ]">
+		<div class="[ info__wrapper ] [ grid place-items-center margin-block-auto height-100 ]">
+			<Flex cls={cubeCss({ blockClass: 'info__content' })} useColumn={true} align="center">
+				<div class="[ music__thumbnail ]">
+					<img
+						src="https://hips.hearstapps.com/hmg-prod/images/domestic-cat-lies-in-a-basket-with-a-knitted-royalty-free-image-1592337336.jpg?crop=0.668xw:1.00xh;0.247xw,0&resize=1200:*"
+						alt="A cat"
+					/>
+				</div>
+				<div class="[ text-align-center ]">
+					<h2>End of the world</h2>
+					<p class="[ fs-350 clr-text-muted ]">FORGOTTENAGE</p>
+				</div>
+			</Flex>
+		</div>
+	</section>
+
+	<section class="[ player__other ]">
+		<p>Song 1</p>
+	</section>
+
+	<section class="[ player__bar-container ] [ pos-relative ]">
+		<input class="[ bar ] [ pos-absolute width-100 ]" type="range" />
+		<Flex align="center" justify="start">
+			<Flex cls={cubeCss({ utilClass: 'padding-2' })} align="center" justify="start" gap={3}>
+				<Button cls={cubeCss({ utilClass: 'fs-400' })}>
+					<Icon ariaLabel="">{ICON_FAST_LEFT}</Icon>
+				</Button>
+				<Button
+					cls={cubeCss({ utilClass: 'fs-500' })}
+					attachments={['hologram', 'capsule', 'big-pad']}
+				>
+					<Icon ariaLabel="">{ICON_PLAY}</Icon>
+				</Button>
+				<Button cls={cubeCss({ utilClass: 'fs-400' })}>
+					<Icon ariaLabel="">{ICON_FAST_RIGHT}</Icon>
+				</Button>
+			</Flex>
+			<p class="[ fs-350 ]">00:00</p>
+			<p class="[ clr-text-muted ]">|</p>
+			<p class="[ fs-350 ]">00:00</p>
+		</Flex>
+	</section>
 </div>

@@ -21,7 +21,7 @@ html {
 body {
 	font-family: $global-FontFamily;
 	font-size: $global-FontSize;
-	background-image: var(--clr-background-400);
+	background-color: $global-background-clr;
 
 	overflow-x: hidden;
 	text-rendering: optimizeLegibility;

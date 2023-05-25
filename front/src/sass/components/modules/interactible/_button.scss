@@ -14,9 +14,12 @@
         background-color: color.scale($background, $lightness: 50%);
     }
 
+    
+
     &[data-attachments*='hologram'] {
         $background: transparentize($background, 0.55);
 
+        border: 2px solid $background;
         background-color: $background;
         outline-color: $background;
     }

@@ -24,6 +24,7 @@ $border-radius-max: 100vmax;
 $z-index-1: 999;
 $z-index-2: 9999;
 $z-index-3: 99999;
+$z-index-4: 999999;
 
 // Modules/SongCard
 $songCard-profile-width: 1.475rem;
@@ -34,6 +35,11 @@ $songCard-thumbnail-scale-on-hov: 1.2;
 // Layouts/PrimaryNavbar
 $primary-navbar-padding: 0.4rem 1rem;
 $primary-navbar-input-max-width: 32ch;
+
+// Layouts/MusicPlayer
+$music-player-thumbnail-max-width: 16rem;
+$music-player-row-ratios: 4% 1fr 12%;
+$music-player-row-ratios-mobile: 4% 1fr;
 
 // Modules/Interactible/Button
 $clr-button-primary: $clr-primary-400;
