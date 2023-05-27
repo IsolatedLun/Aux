@@ -18,6 +18,7 @@
 	export let attachments: ButtonAttachments[] = [];
 	export let use: (_this: HTMLElement) => void = () => null;
 	export let to: string = '';
+	export let selected = false;
 
 	const dispatch = createEventDispatcher();
 	const _class = cls.to_string({
@@ -45,6 +46,7 @@
 		class={_class}
 		data-variant={variant}
 		data-attachments={attachments.join(',')}
+		data-selected={selected}
 		on:click={handleClick}
 	>
 		<slot />

@@ -2,14 +2,8 @@
 	import SongCard from "../components/Modules/SongCard/SongCard.svelte";
     import Grid from '../components/Box/Grid/Grid.svelte';
 	import { cubeCss } from "../utils/cubeCss/cubeCss";
+	import SongContainer from "../components/Layout/SongContainer/SongContainer.svelte";
+	import { createDefaultSongCard } from "../utils/defaultCreates";
 </script>
 
-<Grid cls={cubeCss({blockClass: 'song-card-container', utilClass: 'margin-block-2'})} gap={2}>
-    <SongCard />
-    <SongCard />
-    <SongCard />
-    <SongCard />
-    <SongCard />
-    <SongCard />
-    <SongCard />
-</Grid>
+<SongContainer songs={[createDefaultSongCard(), createDefaultSongCard(), createDefaultSongCard(), createDefaultSongCard()]} />

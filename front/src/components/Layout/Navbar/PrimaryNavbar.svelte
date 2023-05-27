@@ -4,7 +4,7 @@
 	import TextInput from '../../Modules/Interactible/Input/TextInput.svelte';
 </script>
 
-<nav class="[ primary-navbar ]">
+<nav class="[ primary-navbar ] [ margin-block-end-2 ]">
 	<Flex align="center" justify="space-between">
 		<h1 class="[ fw-lighter ]">Aux</h1>
 		<TextInput

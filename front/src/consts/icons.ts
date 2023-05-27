@@ -26,6 +26,10 @@ export const ICON_SAVE = '\uf0c7';
 export const ICON_PLAY = '\uf04b';
 export const ICON_GRIP = '\uf58d';
 
+export const ICON_GRID_V = '\uf58e';
+export const ICON_GRID_H = '\uf58d';
+export const ICON_TABLE_CELLS = '\uf009';
+
 export const ICON_EYE = '\uf06e';
 
 export const ICON_TRASH = '\uf1f8';

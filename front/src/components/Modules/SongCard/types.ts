@@ -9,3 +9,10 @@ export interface Props_SongCard extends Props_DataModel {
     likes: number;
     dislikes: number;
 }
+
+export enum SongCardShapeEnum {
+    COMPACT_H,
+    COMPACT_Y,
+
+    SPACIOUS
+}

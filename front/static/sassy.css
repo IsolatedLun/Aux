@@ -23,8 +23,16 @@
   font-size: var(--fs-200) !important;
 }
 
+.fs-275 {
+  font-size: var(--fs-275) !important;
+}
+
 .fs-300 {
   font-size: var(--fs-300) !important;
+}
+
+.fs-325 {
+  font-size: var(--fs-325) !important;
 }
 
 .fs-350 {
@@ -1858,7 +1866,9 @@
   --clr-background-400: hsl(0, 0%, 15%);
   --clr-background-500: hsl(0, 0%, 22%);
   --fs-200: 0.5rem;
+  --fs-275: 0.6875rem;
   --fs-300: 0.75rem;
+  --fs-325: 0.8125rem;
   --fs-350: 0.875rem;
   --fs-400: 1rem;
   --fs-450: 1.125rem;
@@ -1992,7 +2002,9 @@ canvas {
 @media screen and (max-width: 65em) {
   :root {
     --fs-200: 0.45rem;
+    --fs-275: 0.61875rem;
     --fs-300: 0.675rem;
+    --fs-325: 0.73125rem;
     --fs-350: 0.7875rem;
     --fs-400: 0.9rem;
     --fs-450: 1.0125rem;
@@ -2005,8 +2017,14 @@ canvas {
   .fs-200 {
     font-size: var(--fs-200) !important;
   }
+  .fs-275 {
+    font-size: var(--fs-275) !important;
+  }
   .fs-300 {
     font-size: var(--fs-300) !important;
+  }
+  .fs-325 {
+    font-size: var(--fs-325) !important;
   }
   .fs-350 {
     font-size: var(--fs-350) !important;
@@ -2041,7 +2059,9 @@ canvas {
 @media screen and (max-width: 50em) {
   :root {
     --fs-200: 0.42rem;
+    --fs-275: 0.5775rem;
     --fs-300: 0.63rem;
+    --fs-325: 0.6825rem;
     --fs-350: 0.735rem;
     --fs-400: 0.84rem;
     --fs-450: 0.945rem;
@@ -2051,7 +2071,9 @@ canvas {
     --fs-800: 1.68rem;
     --fs-900: 1.89rem;
     --fs-200: 0.42rem;
+    --fs-275: 0.5775rem;
     --fs-300: 0.63rem;
+    --fs-325: 0.6825rem;
     --fs-350: 0.735rem;
     --fs-400: 0.84rem;
     --fs-450: 0.945rem;
@@ -2089,8 +2111,14 @@ canvas {
   .fs-200 {
     font-size: var(--fs-200) !important;
   }
+  .fs-275 {
+    font-size: var(--fs-275) !important;
+  }
   .fs-300 {
     font-size: var(--fs-300) !important;
+  }
+  .fs-325 {
+    font-size: var(--fs-325) !important;
   }
   .fs-350 {
     font-size: var(--fs-350) !important;
@@ -2126,7 +2154,22 @@ canvas {
 }
 
 .song-card-container {
-  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(var(--column-size), 1fr));
+}
+
+.song-card-container[data-shape=spacious] {
+  --column-size: 10rem;
+}
+
+.song-card-container[data-shape=compact_y] {
+  --column-size: 8rem;
+}
+
+.song-card-container[data-shape=compact_h] {
+  --column-size: 16rem;
+}
+.song-card-container[data-shape=compact_h] .card__thumbnail-container {
+  max-width: 4rem;
 }
 
 .border-radius-bevelled {
@@ -2513,7 +2556,6 @@ canvas {
 }
 .song-card .card__profile-container {
   width: 1.475rem;
-  border-radius: 100vmax;
   aspect-ratio: 1;
 }
 .song-card:is(:hover, :focus-visible) .card__thumbnail-container img {
@@ -2548,6 +2590,9 @@ canvas {
   border: 2px solid rgba(126, 94, 186, 0.45);
   background-color: rgba(126, 94, 186, 0.45);
   outline-color: rgba(126, 94, 186, 0.45);
+}
+.button[data-variant=primary][data-attachments*=hologram][data-selected=true] {
+  background-color: hsl(261, 40%, 55%);
 }
 .button[data-variant=primary][data-attachments*=tiny-pad] {
   padding: 0.1rem 0.3rem;
@@ -2592,6 +2637,10 @@ canvas {
   pointer-events: none;
   transform-origin: center;
   animation: anim 0.35s linear forwards;
+}
+
+select {
+  padding: 0.3rem 0.6rem;
 }
 
 @keyframes anim {
@@ -2654,6 +2703,7 @@ canvas {
 }
 
 .music-player {
+  display: none;
   grid-template-areas: "playerCloseButton playerCloseButton" "playerInfo playerOther" "playerBarContainer playerBarContainer";
   grid-template-rows: 4% 1fr 12%;
   inset: 0;

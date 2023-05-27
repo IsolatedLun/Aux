@@ -14,14 +14,16 @@
         background-color: color.scale($background, $lightness: 50%);
     }
 
-    
-
     &[data-attachments*='hologram'] {
-        $background: transparentize($background, 0.55);
+        $transparentBackground: transparentize($background, 0.55);
 
-        border: 2px solid $background;
-        background-color: $background;
-        outline-color: $background;
+        border: 2px solid $transparentBackground;
+        background-color: $transparentBackground;
+        outline-color: $transparentBackground;
+
+        &[data-selected='true'] {
+            background-color: $background;
+        }
     }
 
     &[data-attachments*='tiny-pad'] {
@@ -89,6 +91,10 @@
         transform-origin: center;
         animation: anim 0.35s linear forwards;
     }
+}
+
+select {
+    padding: $button-padding;
 }
 
 @keyframes anim {

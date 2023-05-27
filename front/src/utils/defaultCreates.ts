@@ -12,7 +12,7 @@ export function createDefaultUser(): Props_User {
 	return {
 		...createDefaultModel(),
 
-		username: '',
+		username: 'Default user',
 		profile: 'https://yt3.googleusercontent.com/ytc/AGIKgqOx0UQaegbV4xKIx7pyjLxbIVaQxakK2ZZXZ5pDag=s176-c-k-c0x00ffffff-no-rj',
 		is_staff: false
 	};

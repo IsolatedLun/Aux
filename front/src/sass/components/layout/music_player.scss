@@ -1,6 +1,7 @@
 @use '../../abstracts/' as *;
 
 .music-player {
+    display: none;
     grid-template-areas: 
         "playerCloseButton playerCloseButton"
         "playerInfo playerOther"  
