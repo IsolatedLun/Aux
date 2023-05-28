@@ -2598,6 +2598,10 @@ canvas {
 .button[data-variant=primary][data-attachments*=hologram][data-selected=true] {
   background-color: hsl(261, 40%, 55%);
 }
+.button[data-variant=primary][data-disabled=true] {
+  opacity: 0.5;
+  pointer-events: none;
+}
 .button[data-variant=primary][data-attachments*=tiny-pad] {
   padding: 0.1rem 0.3rem;
 }

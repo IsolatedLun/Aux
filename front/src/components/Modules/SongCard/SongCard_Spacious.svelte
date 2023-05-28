@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
 	import { BACKEND_URL } from '../../../consts';
 	import { ICON_EYE, ICON_PLAY } from '../../../consts/icons';
 	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
@@ -16,12 +17,14 @@
 		blockClass: 'song-card',
 		utilClass: 'pos-relative'
 	});
+	const dispatch = createEventDispatcher();
 </script>
 <Flex useColumn={true} cls={cubeCss(_combinedCss)}>
 	<div
 		class="[ card__thumbnail-container ] [ pos-relative overflow-hidden border-radius-bevelled ]"
 	>
 		<Button
+			on:click={() => dispatch('select')}
 			attachments={['capsule', 'cube', 'huge-pad']}
 			cls={cubeCss({ blockClass: 'card__play-btn', utilClass: 'pos-absolute' })}
 		>

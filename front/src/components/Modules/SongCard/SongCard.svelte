@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { ICON_EYE, ICON_PLAY } from '../../../consts/icons';
+	import { songStore } from '../../../stores/songStore';
 	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
 	import { createDefaultSongCard } from '../../../utils/defaultCreates';
 	import Flex from '../../Box/Flex/Flex.svelte';
@@ -12,11 +13,15 @@
 	
 	export let props: Props_SongCard = createDefaultSongCard();
 	export let cardShape: SongCardShapeEnum = SongCardShapeEnum.SPACIOUS;
+
+	function setSong() {
+		songStore.update((e) => props);
+	}
 </script>
 {#if cardShape === SongCardShapeEnum.SPACIOUS}
-	<SongCardSpacious {props} />
+	<SongCardSpacious on:select={setSong} {props} />
 	{:else if cardShape === SongCardShapeEnum.COMPACT_H}
-	<SongCardCompact useColumn={false} {props} />
+	<SongCardCompact on:select={setSong} useColumn={false} {props} />
 	{:else if cardShape === SongCardShapeEnum.COMPACT_Y}
-	<SongCardCompact useColumn={true} {props} />
+	<SongCardCompact on:select={setSong} useColumn={true} {props} />
 {/if}

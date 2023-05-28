@@ -26,6 +26,11 @@
         }
     }
 
+    &[data-disabled='true'] {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
     &[data-attachments*='tiny-pad'] {
         padding: $button-padding-tiny;
     }

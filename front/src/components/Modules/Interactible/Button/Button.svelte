@@ -16,6 +16,7 @@
 	export let cls = cubeCss({});
 	export let variant = 'primary';
 	export let attachments: ButtonAttachments[] = [];
+	export let disabled = false;
 	export let use: (_this: HTMLElement) => void = () => null;
 	export let to: string = '';
 	export let selected = false;
@@ -36,6 +37,7 @@
 		class={_class}
 		data-variant={variant}
 		data-attachments={attachments.join(',')}
+		data-disabled={disabled}
 		on:click={handleClick}
 	>
 		<slot />
@@ -46,6 +48,7 @@
 		class={_class}
 		data-variant={variant}
 		data-attachments={attachments.join(',')}
+		data-disabled={disabled}
 		data-selected={selected}
 		on:click={handleClick}
 	>

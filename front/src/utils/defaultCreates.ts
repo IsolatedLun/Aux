@@ -13,7 +13,7 @@ export function createDefaultUser(): Props_User {
 		...createDefaultModel(),
 
 		username: 'Default user',
-		profile: 'https://yt3.googleusercontent.com/ytc/AGIKgqOx0UQaegbV4xKIx7pyjLxbIVaQxakK2ZZXZ5pDag=s176-c-k-c0x00ffffff-no-rj',
+		profile: '',
 		is_staff: false
 	};
 }
@@ -24,7 +24,8 @@ export function createDefaultSongCard(): Props_SongCard {
 
 		user: createDefaultUser(),
 		title: 'Default title',
-		thumbnail: 'https://i.ytimg.com/vi/FumQefCcn3s/hqdefault.jpg?sqp=-oaymwE2COADEI4CSFXyq4qpAygIARUAAIhCGAFwAcABBvABAfgBzgWAAtAFigIMCAAQARhlIEIoTTAP&rs=AOn4CLCAVOl5_h0gv5zpx0X4qhitN-t-ag',
+		thumbnail: '',
+		audio: '',
 		likes: 0,
 		dislikes: 0,
 		views: 0
