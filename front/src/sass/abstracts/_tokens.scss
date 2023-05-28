@@ -37,10 +37,19 @@ $songCard-thumbnail-scale-on-hov: 1.2;
 $primary-navbar-padding: 0.4rem 1rem;
 $primary-navbar-input-max-width: 32ch;
 
+// Containers/SongContainer
+$song-container-spacious-column: 10rem;
+$song-container-compact-horizontal-column: 16rem;
+$song-container-compact-vertical-column: 8rem;
+
+$song-container-compact-vertical-column-max-thumbnail-width: 4rem;
+
 // Layouts/MusicPlayer
 $music-player-thumbnail-max-width: 16rem;
-$music-player-row-ratios: 4% 1fr 12%;
+$music-player-close-button-ratio: 4%;
+$music-player-row-ratios: $music-player-close-button-ratio 1fr 12%;
 $music-player-row-ratios-mobile: 4% 1fr;
+$music-player-expanding-transition: 244ms;
 
 // Modules/Interactible/Button
 $clr-button-primary: $clr-primary-400;

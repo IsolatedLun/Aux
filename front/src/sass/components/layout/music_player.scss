@@ -1,15 +1,20 @@
 @use '../../abstracts/' as *;
 
 .music-player {
-    display: none;
     grid-template-areas: 
         "playerCloseButton playerCloseButton"
         "playerInfo playerOther"  
         "playerBarContainer playerBarContainer";
     grid-template-rows: $music-player-row-ratios;
+    grid-template-columns: 1fr 1fr;
 
     inset: 0;
     z-index: $z-index-4;
+    transition: transform $music-player-expanding-transition ease-in-out;
+
+    &[data-expanded='false'] {
+        transform: translateY(calc(100% - $music-player-close-button-ratio));
+    }
 
     .player__info {
         grid-area: playerInfo;

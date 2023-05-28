@@ -12,12 +12,6 @@
 	
 	export let props: Props_SongCard = createDefaultSongCard();
 	export let cardShape: SongCardShapeEnum = SongCardShapeEnum.SPACIOUS;
-	export let cls = cubeCss({});
-
-	let _combinedCss = cls.combine({
-		blockClass: 'song-card',
-		utilClass: 'pos-relative'
-	});
 </script>
 {#if cardShape === SongCardShapeEnum.SPACIOUS}
 	<SongCardSpacious {props} />

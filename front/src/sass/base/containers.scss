@@ -10,17 +10,17 @@
 }
 
 .song-card-container[data-shape='spacious'] {
-    --column-size: 10rem;
+    --column-size: #{$song-container-spacious-column};
 }
 
 .song-card-container[data-shape='compact_y'] {
-    --column-size: 8rem;
+    --column-size: #{$song-container-compact-vertical-column};
 }
 
 .song-card-container[data-shape='compact_h'] {
-    --column-size: 16rem;
+    --column-size: #{$song-container-compact-horizontal-column};
 
     .card__thumbnail-container {
-        max-width: 4rem;
+        max-width: #{$song-container-compact-vertical-column-max-thumbnail-width};
     }
 }

@@ -10,14 +10,22 @@
 		ICON_SAVE
 	} from '../../../consts/icons';
 	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
+	import { createDefaultSongCard } from '../../../utils/defaultCreates';
 	import Flex from '../../Box/Flex/Flex.svelte';
 	import Grid from '../../Box/Grid/Grid.svelte';
 	import Icon from '../../Modules/Icon/Icon.svelte';
 	import Button from '../../Modules/Interactible/Button/Button.svelte';
+	import SongContainer from '../SongContainer/SongContainer.svelte';
+
+	let expanded = false;
 </script>
 
-<div class="[ music-player ] [ grid pos-fixed ]">
-	<Button cls={cubeCss({ blockClass: 'player__close-btn' })} attachments={['flat']}>
+<div class="[ music-player ] [ grid pos-fixed ]" data-expanded={expanded}>
+	<Button
+		on:click={() => (expanded = !expanded)}
+		cls={cubeCss({ blockClass: 'player__close-btn' })}
+		attachments={['flat']}
+	>
 		<Icon ariaLabel="">{ICON_GRIP}</Icon>
 	</Button>
 
@@ -38,8 +46,8 @@
 		</div>
 	</section>
 
-	<section class="[ player__other ]">
-		<p>Song 1</p>
+	<section class="[ player__other ] [ padding-2 overflow-y-auto ]">
+		<SongContainer songs={[createDefaultSongCard()]} />
 	</section>
 
 	<section class="[ player__bar-container ] [ pos-relative ]">

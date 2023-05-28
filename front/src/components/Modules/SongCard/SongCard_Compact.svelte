@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { BACKEND_URL } from '../../../consts';
 	import { ICON_EYE, ICON_PLAY } from '../../../consts/icons';
 	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
 	import { createDefaultSongCard } from '../../../utils/defaultCreates';
@@ -31,7 +32,7 @@
 			<Icon ariaLabel="Play">{ICON_PLAY}</Icon>
 		</Button>
 		<img
-			src="{props.thumbnail}"
+			src="{BACKEND_URL}{props.thumbnail}"
 			alt="Thumbnail for {props.title}"
 		/>
 	</div>

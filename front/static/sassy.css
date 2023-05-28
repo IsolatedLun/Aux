@@ -2480,6 +2480,10 @@ canvas {
   overflow: hidden;
 }
 
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
 .display-block {
   display: block;
 }
@@ -2703,11 +2707,15 @@ select {
 }
 
 .music-player {
-  display: none;
   grid-template-areas: "playerCloseButton playerCloseButton" "playerInfo playerOther" "playerBarContainer playerBarContainer";
   grid-template-rows: 4% 1fr 12%;
+  grid-template-columns: 1fr 1fr;
   inset: 0;
   z-index: 999999;
+  transition: transform 244ms ease-in-out;
+}
+.music-player[data-expanded=false] {
+  transform: translateY(96%);
 }
 .music-player .player__info {
   grid-area: playerInfo;

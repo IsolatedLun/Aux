@@ -38,5 +38,8 @@
 		"vite": "^4.3.0",
 		"vitest": "^0.25.8"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"axios": "^1.4.0"
+	}
 }
