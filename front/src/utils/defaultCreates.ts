@@ -12,8 +12,8 @@ export function createDefaultUser(): Props_User {
 	return {
 		...createDefaultModel(),
 
-		username: 'Default user',
-		profile: '',
+		username: '',
+		profile: 'media/profiles/default.png',
 		is_staff: false
 	};
 }
@@ -23,8 +23,8 @@ export function createDefaultSongCard(): Props_SongCard {
 		...createDefaultModel(),
 
 		user: createDefaultUser(),
-		title: 'Default title',
-		thumbnail: '',
+		title: 'No song selected',
+		thumbnail: 'media/thumbnails/default.png',
 		audio: '',
 		likes: 0,
 		dislikes: 0,

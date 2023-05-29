@@ -8,9 +8,9 @@ import type { ErrorResponse, HeaderTypes, HTTP_METHODS } from './types';
  * @param data
  * @param method
  * @param headers
- * @summary Creates a HTTP response depending on the parameters inputted
+ * @summary Creates a HTTP request depending on the parameters inputted
  */
-export async function createResponse<DataT, ReturnT>(
+export async function createRequest<DataT, ReturnT>(
 	url: string,
 	data: DataT,
 	method: HTTP_METHODS,

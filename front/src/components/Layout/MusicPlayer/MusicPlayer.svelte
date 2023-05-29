@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { BACKEND_URL } from '../../../consts';
+	import { BACKEND_URL, PAGINATED_SONG_URL } from '../../../consts';
 	import {
 		ICON_FAST_LEFT,
 		ICON_FAST_RIGHT,
@@ -10,7 +10,6 @@
 	} from '../../../consts/icons';
 	import { songStore } from '../../../stores/songStore';
 	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
-	import { createDefaultSongCard } from '../../../utils/defaultCreates';
 	import Flex from '../../Box/Flex/Flex.svelte';
 	import Grid from '../../Box/Grid/Grid.svelte';
 	import Icon from '../../Modules/Icon/Icon.svelte';
@@ -19,6 +18,8 @@
 	import SongContainer from '../SongContainer/SongContainer.svelte';
 	import type { Props_AudioState } from './types';
 	import { convertToDateTime } from './utils';
+	import Paginator from '../Paginator/Paginator.svelte';
+	import SongCard from '../../Modules/SongCard/SongCard.svelte';
 
 	onMount(() => {
 		audioEl.addEventListener('loadstart', () => (audioState.audioLoaded = false));
@@ -81,7 +82,9 @@
 	</section>
 
 	<section class="[ player__other ] [ padding-2 overflow-y-auto ]">
-		<SongContainer songs={[createDefaultSongCard()]} />
+		{#if expanded}
+			<Paginator urlFn={PAGINATED_SONG_URL} component={SongCard} componentContainer={SongContainer}  />
+		{/if}
 	</section>
 
 	<section class="[ player__bar-container ] [ pos-relative ]">

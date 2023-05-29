@@ -22,7 +22,7 @@ class cUser(AbstractUser):
     email_address = models.EmailField(max_length=128, unique=True)
     password = models.CharField(max_length=128)
 
-    profile = models.ImageField(upload_to='profiles/', default='profiles/def.png')
+    profile = models.ImageField(upload_to='profiles/%Y', default='profiles/default.png')
 
     date_created = models.DateTimeField(auto_now_add=True)
 

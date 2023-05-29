@@ -41,7 +41,7 @@
 	</div>
 
 	<Flex useColumn={true}>
-        <p class="[ fs-325 text-ellipsis-2 ]">{props.title} and very epoch</p>
+        <p class="[ fs-325 text-ellipsis-2 ]">{props.title}</p>
         <p class="[ fs-275 clr-text-muted ]">{props.user.username}</p>
     </Flex>
 </Flex>

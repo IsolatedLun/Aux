@@ -2576,6 +2576,32 @@ canvas {
   font-weight: bold;
 }
 
+.auto-skeletron * > * {
+  position: relative;
+}
+.auto-skeletron img {
+  visibility: hidden;
+}
+.auto-skeletron * {
+  border: none;
+}
+.auto-skeletron * > *::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background-color: gray;
+  border-radius: 9px;
+  animation: skeletronAnim 800ms ease-in-out alternate infinite;
+}
+
+@keyframes skeletronAnim {
+  0% {
+    background-color: hsl(0, 0%, 35%);
+  }
+  100% {
+    background-color: hsl(0, 0%, 50%);
+  }
+}
 .button {
   position: relative;
   overflow: hidden;

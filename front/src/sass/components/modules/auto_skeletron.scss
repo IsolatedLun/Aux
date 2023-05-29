@@ -1,0 +1,35 @@
+@use '../../abstracts/' as *;
+
+.auto-skeletron {
+    * > * {
+        position: relative;
+    }
+
+    img {
+        visibility: hidden;
+    }
+
+    * {
+        border: none;
+    }
+
+    * > *::after {
+        @include pseudoElement();
+
+        inset: -2px;
+        background-color: gray;
+        border-radius: $border-radius-bevelled;
+
+        animation: skeletronAnim 800ms ease-in-out alternate infinite;
+    }
+}
+
+@keyframes skeletronAnim {
+	0% {
+		background-color: hsl(0, 0%, 35%);
+	}
+
+    100% {
+        background-color: hsl(0, 0%, 50%);
+    }
+}

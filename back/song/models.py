@@ -8,7 +8,7 @@ class Song(models.Model):
     user = models.ForeignKey(cUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=72)
     
-    thumbnail = models.ImageField(upload_to='thumbnails/%Y')
+    thumbnail = models.ImageField(upload_to='thumbnails/%Y', default='thumbnails/default.png')
     audio = models.FileField(
         upload_to='audios/%Y',
         validators=[FileExtensionValidator(
@@ -18,9 +18,9 @@ class Song(models.Model):
 
     tags = TaggableManager()
 
-    views = models.PositiveBigIntegerField()
-    likes = models.PositiveBigIntegerField()
-    dislikes = models.PositiveBigIntegerField()
+    views = models.PositiveBigIntegerField(default=0)
+    likes = models.PositiveBigIntegerField(default=0)
+    dislikes = models.PositiveBigIntegerField(default=0)
     
     date_created = models.DateTimeField(auto_now_add=True)
 
