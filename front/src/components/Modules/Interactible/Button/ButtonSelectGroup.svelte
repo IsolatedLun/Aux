@@ -9,6 +9,10 @@
 
         _this.addEventListener('click', (e) => {
             const currentButton = e.target as HTMLButtonElement;
+            if (!currentButton.classList.contains('button')) {
+                return;
+            }
+            
             const currentButtonIndex = currentButton.getAttribute('data-index');
             currentButton.setAttribute(
                 'data-selected', 
