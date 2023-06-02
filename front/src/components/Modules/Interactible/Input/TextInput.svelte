@@ -11,7 +11,7 @@
 		use(_this);
 	});
 
-	function handleInput(e: MouseEvent) {
+	function handleInput(e: Event) {
 		dispatch('input', e);
 	}
 
@@ -19,13 +19,13 @@
 	export let wrapperCls = cubeCss({});
 	export let variant = 'primary';
 	export let attachments: TextInputAttachments[] = [];
-	export let type = 'text';
 	export let label: string;
 	export let placeholder: string;
 	export let use: (_this: HTMLElement) => void = () => null;
 	export let showLabel = false;
 
 	export let id = '';
+	export let value = '';
 
 	export let endIcon: string | null = null;
 	export let endButtonAction: (_this: HTMLElement) => void = () => null;
@@ -50,12 +50,13 @@
 	</label>
 	<input
 		bind:this={_this}
+		bind:value={value}
 		class={_class}
 		data-variant={variant}
 		data-attachments={attachments.join(',')}
-		on:click={handleInput}
+		on:input={handleInput}
 		{id}
-		{type}
+		type='text'
 		{placeholder}
 	/>
 

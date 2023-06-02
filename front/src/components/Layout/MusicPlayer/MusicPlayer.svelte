@@ -105,7 +105,7 @@
 				<Button
 					on:click={() => (audioState.paused ? audioEl.play() : audioEl.pause())}
 					cls={cubeCss({ utilClass: 'fs-500' })}
-					attachments={['hologram', 'capsule', 'big-pad']}
+					attachments={['hologram', 'capsule', 'big-pad', 'ratio-1']}
 					disabled={!audioState.audioLoaded}
 				>
 					{#if audioState.paused}

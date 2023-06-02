@@ -2356,6 +2356,14 @@ canvas {
   flex-wrap: wrap;
 }
 
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.flex-grow-0 {
+  flex-grow: 0;
+}
+
 .flex-row-reverse {
   flex-direction: row-reverse;
 }
@@ -2490,6 +2498,10 @@ canvas {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.pointers-none {
+  pointer-events: none;
 }
 
 .outline-none {
@@ -2628,6 +2640,13 @@ canvas {
   opacity: 0.5;
   pointer-events: none;
 }
+.button[data-variant=primary][data-attachments*=hollow] {
+  background-color: transparent;
+  border: 2px solid hsl(261, 40%, 55%);
+}
+.button[data-variant=primary][data-attachments*=ratio-1] {
+  aspect-ratio: 1;
+}
 .button[data-variant=primary][data-attachments*=tiny-pad] {
   padding: 0.1rem 0.3rem;
 }
@@ -2734,6 +2753,9 @@ select {
 }
 .primary-navbar .input-container {
   max-width: 32ch;
+}
+.primary-navbar .navbar__user-profile {
+  max-width: 2.25rem;
 }
 
 .music-player {

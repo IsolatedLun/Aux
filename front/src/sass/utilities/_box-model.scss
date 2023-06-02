@@ -38,6 +38,14 @@ $box-values: column, row;
 	flex-wrap: wrap;
 }
 
+.flex-grow-1 {
+	flex-grow: 1;
+}
+
+.flex-grow-0 {
+	flex-grow: 0;
+}
+
 .flex-row-reverse {
 	flex-direction: row-reverse;
 }

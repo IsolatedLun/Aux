@@ -50,6 +50,10 @@ $text-alignments: start, center, end;
 	cursor: pointer;
 }
 
+.pointers-none {
+	pointer-events: none;
+}
+
 .outline-none {
 	outline: none;
 }

@@ -2,6 +2,7 @@
 	import { ICON_SEARCH } from '../../../consts/icons';
 	import Flex from '../../Box/Flex/Flex.svelte';
 	import TextInput from '../../Modules/Interactible/Input/TextInput.svelte';
+	import NavbarUserProfile from './NavbarUserProfile.svelte';
 </script>
 
 <nav class="[ primary-navbar ] [ margin-block-end-2 ]">
@@ -13,6 +14,6 @@
 			attachments={['border-bottom', 'shadow-none', 'transparent']}
 			endIcon={ICON_SEARCH}
 		/>
-		<ul>LOL</ul>
+		<NavbarUserProfile />
 	</Flex>
 </nav>

@@ -31,6 +31,15 @@
         pointer-events: none;
     }
 
+    &[data-attachments*='hollow'] {
+        background-color: transparent;
+        border: 2px solid $background;
+    }
+
+    &[data-attachments*='ratio-1'] {
+        aspect-ratio: 1;
+    }
+
     &[data-attachments*='tiny-pad'] {
         padding: $button-padding-tiny;
     }

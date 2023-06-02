@@ -1,18 +1,14 @@
 <script lang="ts">
-	import { ICON_EYE, ICON_PLAY } from '../../../consts/icons';
+	import { getContext, setContext } from 'svelte';
 	import { songStore } from '../../../stores/songStore';
-	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
 	import { createDefaultSongCard } from '../../../utils/defaultCreates';
-	import Flex from '../../Box/Flex/Flex.svelte';
-	import Icon from '../../Modules/Icon/Icon.svelte';
-	import Button from '../Interactible/Button/Button.svelte';
-	import Numeric from '../Numeric/Numeric.svelte';
 	import SongCardCompact from './SongCard_Compact.svelte';
 	import SongCardSpacious from './SongCard_Spacious.svelte';
-	import { SongCardShapeEnum, type Props_SongCard } from './types';
+	import { SongCardShapeEnum, type Props_SongCard, type Props_SongCardContext } from './types';
 	
 	export let props: Props_SongCard = createDefaultSongCard();
-	export let cardShape: SongCardShapeEnum = SongCardShapeEnum.SPACIOUS;
+	const { getCardShape } = getContext('container') as Props_SongCardContext; 
+	const cardShape: SongCardShapeEnum = getCardShape();
 
 	function setSong() {
 		songStore.update((e) => props);

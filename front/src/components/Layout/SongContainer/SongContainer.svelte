@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { ICON_BARS, ICON_GRID_H, ICON_GRID_V, ICON_TABLE_CELLS } from '../../../consts/icons';
-	import { getSongs } from '../../../services/song/songService';
-	import { songStore } from '../../../stores/songStore';
+	import { setContext } from 'svelte';
+	import { ICON_GRID_H, ICON_GRID_V, ICON_TABLE_CELLS } from '../../../consts/icons';
 	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
 	import Flex from '../../Box/Flex/Flex.svelte';
 	import Grid from '../../Box/Grid/Grid.svelte';
@@ -9,13 +8,16 @@
 	import Button from '../../Modules/Interactible/Button/Button.svelte';
 	import ButtonSelectGroup from '../../Modules/Interactible/Button/ButtonSelectGroup.svelte';
 	import Select from '../../Modules/Interactible/Input/Select.svelte';
-	import AutoSkeletron from '../../Modules/Skeletron/AutoSkeletron.svelte';
 	import SongCard from '../../Modules/SongCard/SongCard.svelte';
-	import type { Props_SongCard } from '../../Modules/SongCard/types';
+	import type { Props_SongCard, Props_SongCardContext } from '../../Modules/SongCard/types';
 	import { SongCardShapeEnum } from '../../Modules/SongCard/types';
 
 	export let songs: Props_SongCard[] = [];
-	export let cardShape: SongCardShapeEnum = SongCardShapeEnum.SPACIOUS;
+	export let cardShape: SongCardShapeEnum = SongCardShapeEnum.COMPACT_H;
+
+	setContext<Props_SongCardContext>('container', {
+		getCardShape: () => cardShape
+	})
 </script>
 
 <Flex useColumn={true}>
@@ -54,7 +56,7 @@
 			gap={3}
 		>
 			{#each songs as song}
-				<SongCard props={song} {cardShape} />
+				<SongCard props={song} />
 			{/each}
 
 			<slot />
