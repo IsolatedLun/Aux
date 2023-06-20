@@ -88,6 +88,14 @@
         @include createButton($clr-button-primary);
     }
 
+    &[data-variant='secondary'] {
+        @include createButton($clr-button-secondary);
+    }
+
+    &[data-variant='error'] {
+        @include createButton($clr-button-error);
+    }
+
     position: relative;
     overflow: hidden;
 

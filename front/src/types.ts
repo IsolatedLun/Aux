@@ -14,6 +14,8 @@ export interface KeyValue<T> {
 	[key: string]: T;
 }
 
+export type Some<T> = T | null;
+
 export type TypedKeyValue<K extends string | number, V> = { [key in K]: V };
 
 export type Complex_Data_Type<T, O> = { type: T; data: O };

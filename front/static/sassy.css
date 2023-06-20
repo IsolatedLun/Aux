@@ -7,6 +7,10 @@
   color: hsl(261, 40%, 55%);
 }
 
+.clr-primary-500 {
+  color: hsl(261, 40%, 65%);
+}
+
 .clr-background-300 {
   color: hsl(0, 0%, 7%);
 }
@@ -17,6 +21,10 @@
 
 .clr-background-500 {
   color: hsl(0, 0%, 22%);
+}
+
+.clr-misc-error {
+  color: hsl(2, 80%, 58%);
 }
 
 .fs-200 {
@@ -1847,6 +1855,10 @@
   color: hsl(261, 40%, 55%);
 }
 
+.clr-primary-500 {
+  color: hsl(261, 40%, 65%);
+}
+
 .clr-background-300 {
   color: hsl(0, 0%, 7%);
 }
@@ -1859,12 +1871,18 @@
   color: hsl(0, 0%, 22%);
 }
 
+.clr-misc-error {
+  color: hsl(2, 80%, 58%);
+}
+
 :root {
   --clr-text-muted: hsl(0, 0%, 60%);
   --clr-primary-400: hsl(261, 40%, 55%);
+  --clr-primary-500: hsl(261, 40%, 65%);
   --clr-background-300: hsl(0, 0%, 7%);
   --clr-background-400: hsl(0, 0%, 15%);
   --clr-background-500: hsl(0, 0%, 22%);
+  --clr-misc-error: hsl(2, 80%, 58%);
   --fs-200: 0.5rem;
   --fs-275: 0.6875rem;
   --fs-300: 0.75rem;
@@ -1886,6 +1904,9 @@
   .clr-primary-400 {
     color: hsl(261, 40%, 55%);
   }
+  .clr-primary-500 {
+    color: hsl(261, 40%, 65%);
+  }
   .clr-background-300 {
     color: hsl(0, 0%, 7%);
   }
@@ -1895,12 +1916,17 @@
   .clr-background-500 {
     color: hsl(0, 0%, 22%);
   }
+  .clr-misc-error {
+    color: hsl(2, 80%, 58%);
+  }
   :root {
     --clr-text-muted: hsl(0, 0%, 60%);
     --clr-primary-400: hsl(261, 40%, 55%);
+    --clr-primary-500: hsl(261, 40%, 65%);
     --clr-background-300: hsl(0, 0%, 7%);
     --clr-background-400: hsl(0, 0%, 15%);
     --clr-background-500: hsl(0, 0%, 22%);
+    --clr-misc-error: hsl(2, 80%, 58%);
   }
 }
 *,
@@ -2508,6 +2534,14 @@ canvas {
   outline: none;
 }
 
+.inset-0 {
+  inset: 0;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
 .text-ellipsis-1 {
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -2541,6 +2575,11 @@ canvas {
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.underline {
+  color: hsl(261, 40%, 65%);
+  border-bottom: 2px solid hsl(261, 40%, 65%);
 }
 
 .visually-hidden {
@@ -2679,6 +2718,128 @@ canvas {
 .button[data-variant=primary][data-attachments*=transparent] {
   background-color: transparent;
 }
+.button[data-variant=secondary] {
+  padding: 0.3rem 0.6rem;
+  background-color: hsl(0, 0%, 22%);
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+}
+.button[data-variant=secondary] .overlay {
+  background-color: #9c9c9c;
+}
+.button[data-variant=secondary][data-attachments*=hologram] {
+  border: 2px solid rgba(56, 56, 56, 0.45);
+  background-color: rgba(56, 56, 56, 0.45);
+  outline-color: rgba(56, 56, 56, 0.45);
+}
+.button[data-variant=secondary][data-attachments*=hologram][data-selected=true] {
+  background-color: hsl(0, 0%, 22%);
+}
+.button[data-variant=secondary][data-disabled=true] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.button[data-variant=secondary][data-attachments*=hollow] {
+  background-color: transparent;
+  border: 2px solid hsl(0, 0%, 22%);
+}
+.button[data-variant=secondary][data-attachments*=ratio-1] {
+  aspect-ratio: 1;
+}
+.button[data-variant=secondary][data-attachments*=tiny-pad] {
+  padding: 0.1rem 0.3rem;
+}
+.button[data-variant=secondary][data-attachments*=small-pad] {
+  padding: 0.2rem 0.6rem;
+}
+.button[data-variant=secondary][data-attachments*=big-pad] {
+  padding: 0.4rem 0.8rem;
+}
+.button[data-variant=secondary][data-attachments*=huge-pad] {
+  padding: 0.8rem 1.2rem;
+}
+.button[data-variant=secondary][data-attachments*=capsule] {
+  border-radius: 100vmax;
+}
+.button[data-variant=secondary][data-attachments*=border-left] {
+  border-start-start-radius: 0px;
+  border-end-start-radius: 0px;
+}
+.button[data-variant=secondary][data-attachments*=border-right] {
+  border-start-end-radius: 0px;
+  border-end-end-radius: 0px;
+}
+.button[data-variant=secondary][data-attachments*=flat] {
+  border-radius: 0px;
+}
+.button[data-variant=secondary][data-attachments*=cube] {
+  aspect-ratio: 1;
+}
+.button[data-variant=secondary][data-attachments*=transparent] {
+  background-color: transparent;
+}
+.button[data-variant=error] {
+  padding: 0.3rem 0.6rem;
+  background-color: hsl(2, 80%, 58%);
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+}
+.button[data-variant=error] .overlay {
+  background-color: #f4a19f;
+}
+.button[data-variant=error][data-attachments*=hologram] {
+  border: 2px solid rgba(234, 68, 62, 0.45);
+  background-color: rgba(234, 68, 62, 0.45);
+  outline-color: rgba(234, 68, 62, 0.45);
+}
+.button[data-variant=error][data-attachments*=hologram][data-selected=true] {
+  background-color: hsl(2, 80%, 58%);
+}
+.button[data-variant=error][data-disabled=true] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.button[data-variant=error][data-attachments*=hollow] {
+  background-color: transparent;
+  border: 2px solid hsl(2, 80%, 58%);
+}
+.button[data-variant=error][data-attachments*=ratio-1] {
+  aspect-ratio: 1;
+}
+.button[data-variant=error][data-attachments*=tiny-pad] {
+  padding: 0.1rem 0.3rem;
+}
+.button[data-variant=error][data-attachments*=small-pad] {
+  padding: 0.2rem 0.6rem;
+}
+.button[data-variant=error][data-attachments*=big-pad] {
+  padding: 0.4rem 0.8rem;
+}
+.button[data-variant=error][data-attachments*=huge-pad] {
+  padding: 0.8rem 1.2rem;
+}
+.button[data-variant=error][data-attachments*=capsule] {
+  border-radius: 100vmax;
+}
+.button[data-variant=error][data-attachments*=border-left] {
+  border-start-start-radius: 0px;
+  border-end-start-radius: 0px;
+}
+.button[data-variant=error][data-attachments*=border-right] {
+  border-start-end-radius: 0px;
+  border-end-end-radius: 0px;
+}
+.button[data-variant=error][data-attachments*=flat] {
+  border-radius: 0px;
+}
+.button[data-variant=error][data-attachments*=cube] {
+  aspect-ratio: 1;
+}
+.button[data-variant=error][data-attachments*=transparent] {
+  background-color: transparent;
+}
 .button .overlay {
   position: absolute;
   width: 1rem;
@@ -2748,6 +2909,14 @@ select {
   color: hsl(261, 40%, 55%);
 }
 
+.drag-drop-input-container {
+  border: 9px solid hsl(0, 0%, 7%);
+  padding: 2rem;
+  border-style: double;
+  border-radius: 9px;
+  background-color: rgba(126, 94, 186, 0.3);
+}
+
 .primary-navbar {
   padding: 0.4rem 1rem;
 }
@@ -2756,6 +2925,21 @@ select {
 }
 .primary-navbar .navbar__user-profile {
   max-width: 2.25rem;
+}
+
+.secondary-navbar {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: hsl(0, 0%, 15%);
+  z-index: 99999;
+  transition: transform 200ms ease-in-out;
+}
+.secondary-navbar[aria-expanded=false] {
+  transform: translateX(100%);
+}
+.secondary-navbar[aria-expanded=true] {
+  transform: translateX(0%);
 }
 
 .music-player {

@@ -1,3 +1,5 @@
+@use '../abstracts/' as *;
+
 @for $i from 1 through 5 {
     .text-ellipsis-#{$i} {
         display: -webkit-box;
@@ -6,6 +8,11 @@
 
         overflow: hidden;
     }
+}
+
+.underline {
+	color: $clr-primary-500;
+	border-bottom: 2px solid $clr-primary-500;
 }
 
 // Screen readers

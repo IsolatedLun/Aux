@@ -3,13 +3,17 @@ $colors-dark: (
 		muted: hsl(0 0% 60%)
 	),
 	primary: (
-		400: hsl(261, 40%, 55%)
+		400: hsl(261 40% 55%),
+		500: hsl(261 40% 65%)
 	),
 	background: (
 		300: hsl(0 0% 7%),
 		400: hsl(0 0% 15%),
 		500: hsl(0 0% 22%)
-	)
+	),
+	misc: (
+		error: hsl(2 80% 58%),
+	),
 );
 
 $colors-light: ();

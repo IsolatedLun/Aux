@@ -2,6 +2,7 @@ export type ButtonAttachments =
 	| 'hologram'
 	| 'hollow'
 	| 'transparent'
+	| 'grow'
 	| 'tiny-pad'
 	| 'small-pad'
     | 'big-pad'
@@ -12,3 +13,5 @@ export type ButtonAttachments =
 	| 'flat'
 	| 'border-left'
 	| 'border-right';
+
+export type ButtonVariants = 'primary' | 'secondary';

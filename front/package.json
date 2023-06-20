@@ -11,7 +11,7 @@
 		"test:unit": "vitest",
 		"postcss-run": "postcss ./static/sassy.css -o ./static/posty.css --watch",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
-		"format": "prettier --plugin-search-dir . --write .",
+		"format": "prettier --watch --plugin-search-dir . --write .",
 		"test": "jest --env=jsdom --silent=false"
 	},
 	"devDependencies": {

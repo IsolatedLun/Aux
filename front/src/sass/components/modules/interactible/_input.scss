@@ -56,3 +56,11 @@
         @include createInput($clr-primary-400);
     }
 }
+
+.drag-drop-input-container {
+    border: 9px solid $clr-background-300;
+    padding: 2rem;
+    border-style: double;
+    border-radius: 9px;
+    background-color: transparentize($clr-primary-400, 0.7);
+}

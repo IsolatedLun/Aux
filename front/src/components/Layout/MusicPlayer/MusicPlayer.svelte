@@ -20,6 +20,7 @@
 	import { convertToDateTime } from './utils';
 	import Paginator from '../Paginator/Paginator.svelte';
 	import SongCard from '../../Modules/SongCard/SongCard.svelte';
+	import { MUSIC_PLAYER_OPEN_BUTTON_ID } from '../../../consts/consts';
 
 	onMount(() => {
 		audioEl.addEventListener('loadstart', () => (audioState.audioLoaded = false));
@@ -62,6 +63,7 @@
 	<Button
 		on:click={() => (expanded = !expanded)}
 		cls={cubeCss({ blockClass: 'player__close-btn' })}
+		use={(el) => el.id = MUSIC_PLAYER_OPEN_BUTTON_ID}
 		attachments={['flat']}
 	>
 		<Icon ariaLabel="">{ICON_GRIP}</Icon>

@@ -26,6 +26,7 @@ export const ICON_SAVE = '\uf0c7';
 export const ICON_PLAY = '\uf04b';
 export const ICON_PAUSE = '\uf04c';
 export const ICON_GRIP = '\uf58d';
+export const ICON_QUESTION_CIRCLE = '\uf059';
 
 export const ICON_GRID_V = '\uf58e';
 export const ICON_GRID_H = '\uf58d';

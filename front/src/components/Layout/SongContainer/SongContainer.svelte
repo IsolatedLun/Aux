@@ -14,6 +14,7 @@
 
 	export let songs: Props_SongCard[] = [];
 	export let cardShape: SongCardShapeEnum = SongCardShapeEnum.COMPACT_H;
+	export let previewMode = false;
 
 	setContext<Props_SongCardContext>('container', {
 		getCardShape: () => cardShape
