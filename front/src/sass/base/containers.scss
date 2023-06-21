@@ -5,8 +5,12 @@
     margin-inline: auto;
 }
 
-.song-card-container {
+.song-card-container[data-preview-mode='false'] {
     grid-template-columns: repeat(auto-fill, minmax(var(--column-size), 1fr));
+}
+
+.song-card-container[data-preview-mode='true'] {
+    grid-template-columns: var(--column-size);
 }
 
 .song-card-container[data-shape='spacious'] {
@@ -23,4 +27,12 @@
     .card__thumbnail-container {
         max-width: #{$song-container-compact-vertical-column-max-thumbnail-width};
     }
+}
+
+// Forms
+.upload-form {
+    display: grid;
+    max-width: 50vw;
+    place-items: center;
+    margin-inline: auto;
 }

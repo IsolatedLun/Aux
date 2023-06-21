@@ -11,13 +11,14 @@
 	export let tag = 'div';
 	export let cls = cubeCss({});
 	export let align: GridPlacementTypes = 'start';
+	export let columns = 0;
 	export let gap: string | number = 1;
 
 	export let collapseOnMobile = false;
 	
 	export let use: (_this: HTMLElement) => void = () => null;
 	const _class = cls.to_string({
-		utilClass: `grid place-items-${align} gap-${gap}`
+		utilClass: `grid place-items-${align} gap-${gap} grid-template-columns-${columns}`
 	});
 	export let _this: HTMLElement | null = null;
 </script>

@@ -8,4 +8,4 @@ export const BUTTON_OVERLAY_DURATION = 2000 // in seconds
 export const MUSIC_PLAYER_OPEN_BUTTON_ID = 'music-player-open-button'
 
 // Presets
-export const HOLOGRAM_INPUT_PRESET: TextInputAttachments = ['border-bottom', 'shadow-none', 'transparent', 'border-neutral']
+export const HOLOGRAM_INPUT_PRESET: TextInputAttachments[] = ['border-bottom', 'shadow-none', 'transparent', 'border-neutral']

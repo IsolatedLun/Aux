@@ -6,6 +6,8 @@
 $clr-primary-400: map-get($map: map-get($active-theme, $key: "primary"), $key: 400);
 $clr-primary-500: map-get($map: map-get($active-theme, $key: "primary"), $key: 500);
 
+$clr-secondary-400: map-get($map: map-get($active-theme, $key: "secondary"), $key: 400);
+
 $clr-text-muted: map-get($map: map-get($active-theme, $key: "text"), $key: "muted");
 
 $clr-background-300: map-get($map: map-get($active-theme, $key: "background"), $key: 300);
@@ -56,7 +58,8 @@ $music-player-expanding-transition: 244ms;
 
 // Modules/Interactible/Button
 $clr-button-primary: $clr-primary-400;
-$clr-button-secondary: $clr-background-500;
+$clr-button-secondary: $clr-secondary-400;
+$clr-button-gray: $clr-background-500;
 $clr-button-error: $clr-misc-error;
 
 $button-padding: 0.3rem 0.6rem;

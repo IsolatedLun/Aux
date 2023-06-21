@@ -22,12 +22,14 @@
 </script>
 
 <Flex useColumn={true}>
-	<Flex cls={cubeCss({ utilClass: 'width-100' })} gap={2} justify="end">
-		<Select 
-			options={[
-				{value: 'top-rated', text: 'Top Rated'}
-			]} 
-		/>
+	<Flex cls={cubeCss({ utilClass: 'width-100' })} gap={2} justify="{previewMode ? 'center' : 'end'}">
+		{#if !previewMode}
+			<Select 
+				options={[
+					{value: 'top-rated', text: 'Top Rated'}
+				]} 
+			/>
+		{/if}
 		<ButtonSelectGroup>
 			<Button
 				on:click={() => (cardShape = SongCardShapeEnum.SPACIOUS)}
@@ -51,7 +53,10 @@
 	</Flex>
 	{#key cardShape}
 		<Grid
-			use={(el) => el.setAttribute('data-shape', SongCardShapeEnum[cardShape].toLowerCase())}
+			use={(el) => {
+				el.setAttribute('data-shape', SongCardShapeEnum[cardShape].toLowerCase());
+				el.setAttribute('data-preview-mode', String(previewMode));
+			}}
 			align='center'
 			cls={cubeCss({ blockClass: 'song-card-container', utilClass: 'margin-block-2 width-100' })}
 			gap={3}
