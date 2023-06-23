@@ -26,10 +26,11 @@
             )
         });
 
-        buttons[0].click();
+        buttons[initialIdx].click();
     })
 
 	export let cls = cubeCss({});
+    export let initialIdx = 0;
 
 	const _combinedClass = cls.combine({
         blockClass: 'button-select-group'

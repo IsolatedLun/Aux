@@ -21,6 +21,10 @@
         }
     }
 
+    p {
+        word-wrap: anywhere;
+    }
+
     .card__profile-container {
         width: $songCard-profile-width;
         aspect-ratio: 1;

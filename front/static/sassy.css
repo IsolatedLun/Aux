@@ -2199,6 +2199,9 @@ canvas {
 .song-card-container[data-preview-mode=true] {
   grid-template-columns: var(--column-size);
 }
+.song-card-container[data-preview-mode=true] .card__thumbnail-container {
+  max-width: var(--column-size);
+}
 
 .song-card-container[data-shape=spacious] {
   --column-size: 10rem;
@@ -2633,6 +2636,9 @@ canvas {
   transition-duration: 200ms;
   transition-timing-function: ease-in-out;
 }
+.song-card p {
+  word-wrap: anywhere;
+}
 .song-card .card__profile-container {
   width: 1.475rem;
   aspect-ratio: 1;
@@ -2971,7 +2977,7 @@ select {
 
 .music-player {
   grid-template-areas: "playerCloseButton playerCloseButton" "playerInfo playerOther" "playerBarContainer playerBarContainer";
-  grid-template-rows: 4% 1fr 12%;
+  grid-template-rows: 4% 1fr max(10%, 2vmax);
   grid-template-columns: 1fr 1fr;
   inset: 0;
   z-index: 999999;

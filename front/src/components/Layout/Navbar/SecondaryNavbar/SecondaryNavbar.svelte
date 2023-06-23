@@ -1,5 +1,5 @@
-<script>
-	import { createEventDispatcher } from 'svelte';
+<script lang='ts'>
+	import { createEventDispatcher, onMount } from 'svelte';
 	import {
 		ICON_QUESTION_CIRCLE,
 		ICON_SETTINGS,
@@ -14,7 +14,20 @@
 	import Button from '../../../Modules/Interactible/Button/Button.svelte';
 	import SecondaryNavbarItem from './SecondaryNavbarItem.svelte';
 
+	onMount(() => {
+		const observer = new MutationObserver(() => {
+			if (currentLocation !== document.location.href) {
+				currentLocation = document.location.href;
+				dispatch('close');
+			}
+		})
+
+		observer.observe(document.querySelector('html') as HTMLElement);
+	})
+
 	export let expanded = false;
+
+	let currentLocation = '';
 
 	const dispatch = createEventDispatcher()
 </script>

@@ -52,7 +52,7 @@ $song-container-compact-vertical-column-max-thumbnail-width: 4rem;
 // Layouts/MusicPlayer
 $music-player-thumbnail-max-width: 16rem;
 $music-player-close-button-ratio: 4%;
-$music-player-row-ratios: $music-player-close-button-ratio 1fr 12%;
+$music-player-row-ratios: $music-player-close-button-ratio 1fr max(10%, 2vmax);
 $music-player-row-ratios-mobile: 4% 1fr;
 $music-player-expanding-transition: 244ms;
 

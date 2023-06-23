@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { HOLOGRAM_INPUT_PRESET } from '../../../consts/consts';
 	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
-	import { createDefaultSongCard } from '../../../utils/defaultCreates';
+	import { createDefaultSongCard, createDefaultUser } from '../../../utils/defaultCreates';
 	import Flex from '../../Box/Flex/Flex.svelte';
 	import Grid from '../../Box/Grid/Grid.svelte';
 	import SongContainer from '../../Layout/SongContainer/SongContainer.svelte';
@@ -10,6 +10,7 @@
 	import TagInput from '../../Modules/Interactible/Input/TagInput.svelte';
 	import TextInput from '../../Modules/Interactible/Input/TextInput.svelte';
 	import SongCard from '../../Modules/SongCard/SongCard.svelte';
+	import { SongCardShapeEnum } from '../../Modules/SongCard/types';
 	import type { Form_Song } from './types';
 
 	function removeTag(tag: string) {
@@ -17,10 +18,13 @@
 	}
 
 	export let songForm: Form_Song = {
-		title: '',
+		title: 'Enter a title',
 		tags: [],
+
 		thumbnail: null,
-		audio: null
+		audio: null,
+
+		user: createDefaultUser(),
 	};
 </script>
 
@@ -42,9 +46,15 @@
 		</Flex>
 	</Flex>
 	<h3 class="[ margin-block-2 ]">Preview</h3>
-	<div class="[ margin-block-end-4 ]">
-		<SongContainer previewMode={true}>
-			<SongCard props={createDefaultSongCard()} />
+	<Flex cls={cubeCss({utilClass: 'margin-block-end-4'})} justify='space-between' gap={4}>
+		<SongContainer cardShape={SongCardShapeEnum.SPACIOUS} previewMode={true}>
+			<SongCard props={{...createDefaultSongCard(), ...songForm, thumbnail: '', audio: ''}} />
 		</SongContainer>
-	</div>
+		<SongContainer initialButtonIdx={1} cardShape={SongCardShapeEnum.COMPACT_H} previewMode={true}>
+			<SongCard props={{...createDefaultSongCard(), ...songForm, thumbnail: '', audio: ''}} />
+		</SongContainer>
+		<SongContainer initialButtonIdx={2} cardShape={SongCardShapeEnum.COMPACT_Y} previewMode={true}>
+			<SongCard props={{...createDefaultSongCard(), ...songForm, thumbnail: '', audio: ''}} />
+		</SongContainer>
+	</Flex>
 </form>

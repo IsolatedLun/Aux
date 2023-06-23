@@ -11,6 +11,10 @@
 
 .song-card-container[data-preview-mode='true'] {
     grid-template-columns: var(--column-size);
+
+    .card__thumbnail-container {
+        max-width: var(--column-size);
+    }
 }
 
 .song-card-container[data-shape='spacious'] {

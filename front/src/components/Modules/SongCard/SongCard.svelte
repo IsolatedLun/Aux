@@ -6,13 +6,17 @@
 	import SongCardSpacious from './SongCard_Spacious.svelte';
 	import { SongCardShapeEnum, type Props_SongCard, type Props_SongCardContext } from './types';
 	
+	function setSong() {
+		if(!isPreview)
+			songStore.update((e) => props);
+	}
+
 	export let props: Props_SongCard = createDefaultSongCard();
+	export let isPreview = false;
+
 	const { getCardShape } = getContext('container') as Props_SongCardContext; 
 	const cardShape: SongCardShapeEnum = getCardShape();
 
-	function setSong() {
-		songStore.update((e) => props);
-	}
 </script>
 {#if cardShape === SongCardShapeEnum.SPACIOUS}
 	<SongCardSpacious on:select={setSong} {props} />
