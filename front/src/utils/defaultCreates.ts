@@ -11,7 +11,7 @@ export function createDefaultModel(): Props_DataModel {
 export function createDefaultUser(): Props_User {
 	return {
 		...createDefaultModel(),
-
+		
 		username: 'Default User',
 		profile: 'media/profiles/default.png',
 		is_staff: false

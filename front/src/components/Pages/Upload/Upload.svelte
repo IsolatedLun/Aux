@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { HOLOGRAM_INPUT_PRESET } from '../../../consts/consts';
 	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
 	import { createDefaultSongCard, createDefaultUser } from '../../../utils/defaultCreates';
 	import Flex from '../../Box/Flex/Flex.svelte';
@@ -48,13 +47,13 @@
 	<h3 class="[ margin-block-2 ]">Preview</h3>
 	<Flex cls={cubeCss({utilClass: 'margin-block-end-4'})} justify='space-between' gap={4}>
 		<SongContainer cardShape={SongCardShapeEnum.SPACIOUS} previewMode={true}>
-			<SongCard props={{...createDefaultSongCard(), ...songForm, thumbnail: '', audio: ''}} />
+			<SongCard props={{...createDefaultSongCard(), ...songForm, thumbnail: 'profiles/def.png', audio: ''}} />
 		</SongContainer>
 		<SongContainer initialButtonIdx={1} cardShape={SongCardShapeEnum.COMPACT_H} previewMode={true}>
-			<SongCard props={{...createDefaultSongCard(), ...songForm, thumbnail: '', audio: ''}} />
+			<SongCard props={{...createDefaultSongCard(), ...songForm, thumbnail: 'profiles/def.png', audio: ''}} />
 		</SongContainer>
 		<SongContainer initialButtonIdx={2} cardShape={SongCardShapeEnum.COMPACT_Y} previewMode={true}>
-			<SongCard props={{...createDefaultSongCard(), ...songForm, thumbnail: '', audio: ''}} />
+			<SongCard props={{...createDefaultSongCard(), ...songForm, thumbnail: 'profiles/def.png', audio: ''}} />
 		</SongContainer>
 	</Flex>
 </form>

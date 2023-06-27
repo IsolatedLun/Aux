@@ -15,13 +15,16 @@
 
 	let _combinedCss = cls.combine({
 		blockClass: 'song-card',
-		utilClass: 'pos-relative'
+		utilClass: 'pos-relative width-100'
 	});
 	const dispatch = createEventDispatcher();
 </script>
 <Flex useColumn={true} cls={cubeCss(_combinedCss)}>
 	<div
-		class="[ card__thumbnail-container ] [ pos-relative overflow-hidden border-radius-bevelled ]"
+		class="
+			[ card__thumbnail-container ] 
+			[ pos-relative overflow-hidden border-radius-bevelled width-100 ]
+		"
 	>
 		<Button
 			on:click={() => dispatch('select')}

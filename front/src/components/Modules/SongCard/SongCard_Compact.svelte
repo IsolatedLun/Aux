@@ -25,7 +25,10 @@
 
 <Flex {useColumn} cls={cubeCss(_combinedCss)}>
 	<div
-		class="[ card__thumbnail-container ] [ pos-relative overflow-hidden border-radius-bevelled ]"
+		class="
+			[ card__thumbnail-container ] 
+			[ pos-relative overflow-hidden border-radius-bevelled width-100 ]
+		"
 	>
 		<Button
 			on:click={() => dispatch('select')}

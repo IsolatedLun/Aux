@@ -43,7 +43,7 @@
 			<Button variant="secondary" attachments={['hologram']} on:click={() => handleTagClick(tag)}>
 				<Flex gap={1} align="center">
 					{tag}
-					<Icon ariaLabel="Remove tags ">{ICON_TIMES}</Icon>
+					<Icon ariaLabel="Remove tag">{ICON_TIMES}</Icon>
 				</Flex>
 			</Button>
 		{/each}

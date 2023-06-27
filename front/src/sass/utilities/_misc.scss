@@ -1,3 +1,5 @@
+@use '../abstracts/' as *; 
+
 $text-alignments: start, center, end;
 
 @each $alignment in $text-alignments {
@@ -64,4 +66,21 @@ $text-alignments: start, center, end;
 
 .opacity-0 {
 	opacity: 0;
+}
+
+// ===========
+.z-index-low {
+	z-index: $z-index-1;
+}
+
+.z-index-medium {
+	z-index: $z-index-2;
+}
+
+.z-index-high {
+	z-index: $z-index-3;
+}
+
+.z-index-higher {
+	z-index: $z-index-4;
 }

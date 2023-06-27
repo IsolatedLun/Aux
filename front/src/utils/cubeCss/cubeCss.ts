@@ -1,12 +1,12 @@
 import type { Props_CubeCSS, Props_CubeCSS_API } from './types';
 
 export function cubeCss(cls: Props_CubeCSS): Props_CubeCSS_API {
-    let updatedCubeCss =  createObjectCubeClass(cls);
-    return {
-        cls: updatedCubeCss,
-        combine: combineObjectCubeClassesWrapper(updatedCubeCss),
-        to_string: createStringCubeCSSClassWrapper(updatedCubeCss)
-    }
+	let updatedCubeCss = createObjectCubeClass(cls);
+	return {
+		cls: updatedCubeCss,
+		combine: combineObjectCubeClassesWrapper(updatedCubeCss),
+		to_string: createStringCubeCSSClassWrapper(updatedCubeCss)
+	};
 }
 
 function propOrDefault<T>(x: T | undefined, def: any): T {
@@ -51,10 +51,12 @@ function combineObjectCubeClasses(self: Props_CubeCSS, other: Props_CubeCSS): Pr
 	};
 }
 
-function combineObjectCubeClassesWrapper(self: Props_CubeCSS): (other: Props_CubeCSS) => Props_CubeCSS {
-    return (other: Props_CubeCSS) => combineObjectCubeClasses(self, other)
+function combineObjectCubeClassesWrapper(
+	self: Props_CubeCSS
+): (other: Props_CubeCSS) => Props_CubeCSS {
+	return (other: Props_CubeCSS) => combineObjectCubeClasses(self, other);
 }
 
 function createStringCubeCSSClassWrapper(self: Props_CubeCSS): (other: Props_CubeCSS) => string {
-    return (other: Props_CubeCSS) => createStringCubeCSSClass(self, other)
+	return (other: Props_CubeCSS) => createStringCubeCSSClass(self, other);
 }

@@ -1,4 +1,4 @@
-import type { Some. Props_User } from "../../../types";
+import type { Some, Props_User } from "../../../types";
 
 export interface Form_Song {
     title: string;

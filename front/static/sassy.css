@@ -2569,6 +2569,22 @@ canvas {
   opacity: 0;
 }
 
+.z-index-low {
+  z-index: 999;
+}
+
+.z-index-medium {
+  z-index: 9999;
+}
+
+.z-index-high {
+  z-index: 99999;
+}
+
+.z-index-higher {
+  z-index: 999999;
+}
+
 .text-ellipsis-1 {
   display: -webkit-box;
   -webkit-line-clamp: 1;

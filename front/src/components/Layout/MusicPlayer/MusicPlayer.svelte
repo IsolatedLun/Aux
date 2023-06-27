@@ -84,9 +84,7 @@
 	</section>
 
 	<section class="[ player__other ] [ padding-2 overflow-y-auto ]">
-		{#if expanded}
-			<Paginator urlFn={PAGINATED_SONG_URL} component={SongCard} componentContainer={SongContainer}  />
-		{/if}
+		<Paginator urlFn={PAGINATED_SONG_URL} component={SongCard} componentContainer={SongContainer}  />
 	</section>
 
 	<section class="[ player__bar-container ] [ pos-relative ]">

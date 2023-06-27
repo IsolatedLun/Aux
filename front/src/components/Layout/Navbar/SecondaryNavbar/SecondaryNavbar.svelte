@@ -22,7 +22,7 @@
 			}
 		})
 
-		observer.observe(document.querySelector('html') as HTMLElement);
+		// observer.observe(document.querySelector('html') as HTMLElement);
 	})
 
 	export let expanded = false;
