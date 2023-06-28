@@ -40,7 +40,7 @@
 	/>
 	<Flex justify="start" cls={cubeCss({ utilClass: 'flex-wrap' })}>
 		{#each tags as tag}
-			<Button variant="secondary" attachments={['hologram']} on:click={() => handleTagClick(tag)}>
+			<Button variant="secondary" attachments={['hologram', 'small-pad']} on:click={() => handleTagClick(tag)}>
 				<Flex gap={1} align="center">
 					{tag}
 					<Icon ariaLabel="Remove tag">{ICON_TIMES}</Icon>

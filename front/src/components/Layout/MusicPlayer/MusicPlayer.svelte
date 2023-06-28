@@ -5,8 +5,9 @@
 		ICON_FAST_LEFT,
 		ICON_FAST_RIGHT,
 		ICON_GRIP,
+		ICON_MUSIC_DISC,
 		ICON_PAUSE,
-		ICON_PLAY,
+		ICON_PLAY
 	} from '../../../consts/icons';
 	import { songStore } from '../../../stores/songStore';
 	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
@@ -63,8 +64,7 @@
 	<Button
 		on:click={() => (expanded = !expanded)}
 		cls={cubeCss({ blockClass: 'player__close-btn' })}
-		use={(el) => el.id = MUSIC_PLAYER_OPEN_BUTTON_ID}
-		attachments={['flat']}
+		use={(el) => (el.id = MUSIC_PLAYER_OPEN_BUTTON_ID)}
 	>
 		<Icon ariaLabel="">{ICON_GRIP}</Icon>
 	</Button>
@@ -84,45 +84,55 @@
 	</section>
 
 	<section class="[ player__other ] [ padding-2 overflow-y-auto ]">
-		<Paginator urlFn={PAGINATED_SONG_URL} component={SongCard} componentContainer={SongContainer}  />
+		<Paginator urlFn={PAGINATED_SONG_URL} component={SongCard} componentContainer={SongContainer} />
 	</section>
 
 	<section class="[ player__bar-container ] [ pos-relative ]">
 		<input
 			bind:this={barEl}
-			on:input={() => audioEl.currentTime = Number(barEl.value)}
+			on:input={() => (audioEl.currentTime = Number(barEl.value))}
 			class="[ bar ] [ pos-absolute width-100 outline-none ]"
 			type="range"
 			min={0}
 			max={100}
 			value="0"
 		/>
-		<Flex align="center" justify="start">
-			<Flex cls={cubeCss({ utilClass: 'padding-2' })} align="center" justify="start" gap={3}>
+		<Flex
+			cls={cubeCss({ utilClass: 'width-100' })}
+			align="center"
+			justify="space-between"
+			useColumn={true}
+			gap={1}
+		>
+			<Flex
+				cls={cubeCss({ utilClass: 'width-100 margin-block-start-3 padding-inline-2' })}
+				justify="space-between"
+			>
+				<p class="[ fs-350 ]">{audioState.currentTime}</p>
+				<p class="[ fs-350 ]">{audioState.totalTime}</p>
+			</Flex>
+			<Flex align="center" justify="start" gap={3}>
 				<Button disabled={!audioState.audioLoaded} cls={cubeCss({ utilClass: 'fs-400' })}>
 					<Icon ariaLabel="">{ICON_FAST_LEFT}</Icon>
 				</Button>
 				<Button
 					on:click={() => (audioState.paused ? audioEl.play() : audioEl.pause())}
 					cls={cubeCss({ utilClass: 'fs-500' })}
-					attachments={['hologram', 'capsule', 'big-pad', 'ratio-1']}
+					attachments={
+						[
+							audioState.paused ? 'hologram' : '', 
+							audioState.paused ? '' : 'rotate-icon',
+							'capsule', 'big-pad', 'ratio-1'
+						]
+					}
 					disabled={!audioState.audioLoaded}
 				>
-					{#if audioState.paused}
-						<Icon ariaLabel="">{ICON_PLAY}</Icon>
-					{:else}
-						<Icon ariaLabel="">{ICON_PAUSE}</Icon>
-					{/if}
+					<Icon ariaLabel="">{ICON_MUSIC_DISC}</Icon>
 				</Button>
 				<Button disabled={!audioState.audioLoaded} cls={cubeCss({ utilClass: 'fs-400' })}>
 					<Icon ariaLabel="">{ICON_FAST_RIGHT}</Icon>
 				</Button>
 			</Flex>
-			<Grid cls={cubeCss({ utilClass: 'grid-template-columns-3' })} align="center" gap={0}>
-				<p class="[ fs-350 ]">{audioState.currentTime}</p>
-				<p class="[ clr-text-muted ]">|</p>
-				<p class="[ fs-350 ]">{audioState.totalTime}</p>
-			</Grid>
 		</Flex>
 	</section>
 </div>

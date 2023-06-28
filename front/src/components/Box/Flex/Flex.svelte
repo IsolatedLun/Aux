@@ -34,7 +34,7 @@
 	class={_class}
 	bind:this={_this}
 	data-collapse={collapseOnMobile}
-	data-flex-collapse-center={alignCenterOnMobile}
+	data-center-on-mobile={alignCenterOnMobile}
 	data-flex-wrap={wrapOnMobile}
 	on:submit|preventDefault
 >

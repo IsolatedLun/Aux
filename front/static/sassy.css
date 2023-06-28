@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&display=swap");
 .clr-text-muted {
   color: hsl(0, 0%, 60%);
 }
@@ -2130,11 +2131,11 @@ canvas {
     grid-template-columns: 1fr !important;
     grid-template-areas: var(--_mobile-grid-area, none) !important;
   }
-  :root *.flex:is([data-mobile-center=true], .center-on-mobile) {
+  :root *.flex:is([data-center-on-mobile=true], .center-on-mobile) {
     justify-content: center;
     align-items: center;
   }
-  :root *.grid:is([data-mobile-center=true], .center-on-mobile) {
+  :root *.grid:is([data-center-on-mobile=true], .center-on-mobile) {
     place-items: center !important;
   }
   :root *[data-spacing-collapse] {
@@ -2220,7 +2221,7 @@ canvas {
 
 .upload-form {
   display: grid;
-  max-width: 50vw;
+  max-width: 700px;
   place-items: center;
   margin-inline: auto;
 }
@@ -2648,6 +2649,7 @@ canvas {
   z-index: 999;
 }
 .song-card .card__thumbnail-container img {
+  text-indent: -100vmax;
   transition-property: transform, filter;
   transition-duration: 200ms;
   transition-timing-function: ease-in-out;
@@ -2708,10 +2710,10 @@ canvas {
   overflow: hidden;
 }
 .button[data-variant=primary] {
-  padding: 0.3rem 0.6rem;
+  padding: 0.4rem 0.7rem;
   background-color: hsl(261, 40%, 55%);
-  border: none;
-  border-radius: 9px;
+  border: 2px solid transparent;
+  border-radius: 3px;
   cursor: pointer;
 }
 .button[data-variant=primary] .overlay {
@@ -2724,6 +2726,10 @@ canvas {
 }
 .button[data-variant=primary][data-attachments*=hologram][data-selected=true] {
   background-color: hsl(261, 40%, 55%);
+}
+.button[data-variant=primary][data-attachments*=rotate-icon] .icon {
+  display: block;
+  animation: rotateButtonIconAnimation 1s infinite alternate;
 }
 .button[data-variant=primary][data-disabled=true] {
   opacity: 0.5;
@@ -2769,10 +2775,10 @@ canvas {
   background-color: transparent;
 }
 .button[data-variant=secondary] {
-  padding: 0.3rem 0.6rem;
+  padding: 0.4rem 0.7rem;
   background-color: hsl(201, 60%, 55%);
-  border: none;
-  border-radius: 9px;
+  border: 2px solid transparent;
+  border-radius: 3px;
   cursor: pointer;
 }
 .button[data-variant=secondary] .overlay {
@@ -2785,6 +2791,10 @@ canvas {
 }
 .button[data-variant=secondary][data-attachments*=hologram][data-selected=true] {
   background-color: hsl(201, 60%, 55%);
+}
+.button[data-variant=secondary][data-attachments*=rotate-icon] .icon {
+  display: block;
+  animation: rotateButtonIconAnimation 1s infinite alternate;
 }
 .button[data-variant=secondary][data-disabled=true] {
   opacity: 0.5;
@@ -2830,10 +2840,10 @@ canvas {
   background-color: transparent;
 }
 .button[data-variant=error] {
-  padding: 0.3rem 0.6rem;
+  padding: 0.4rem 0.7rem;
   background-color: hsl(2, 80%, 58%);
-  border: none;
-  border-radius: 9px;
+  border: 2px solid transparent;
+  border-radius: 3px;
   cursor: pointer;
 }
 .button[data-variant=error] .overlay {
@@ -2846,6 +2856,10 @@ canvas {
 }
 .button[data-variant=error][data-attachments*=hologram][data-selected=true] {
   background-color: hsl(2, 80%, 58%);
+}
+.button[data-variant=error][data-attachments*=rotate-icon] .icon {
+  display: block;
+  animation: rotateButtonIconAnimation 1s infinite alternate;
 }
 .button[data-variant=error][data-disabled=true] {
   opacity: 0.5;
@@ -2900,14 +2914,14 @@ canvas {
   border-radius: 100vmax;
   pointer-events: none;
   transform-origin: center;
-  animation: anim 0.35s linear forwards;
+  animation: overlayAnimation 0.35s linear forwards;
 }
 
 select {
-  padding: 0.3rem 0.6rem;
+  padding: 0.4rem 0.7rem;
 }
 
-@keyframes anim {
+@keyframes overlayAnimation {
   0% {
     scale: 0;
     opacity: 1;
@@ -2919,6 +2933,20 @@ select {
   100% {
     scale: 4.5;
     opacity: 0;
+  }
+}
+@keyframes rotateButtonIconAnimation {
+  0% {
+    scale: 0.9;
+    rotate: 45deg;
+  }
+  50% {
+    scale: 0.85;
+    rotate: -180deg;
+  }
+  100% {
+    scale: 0.95;
+    rotate: 270deg;
   }
 }
 .input-container[data-variant=primary] .input-end-button {
@@ -2957,13 +2985,18 @@ select {
 .input-container[data-variant=primary]:is(:focus-within) .input-end-button {
   color: hsl(0, 0%, 15%);
 }
-
-.drag-drop-input-container {
-  border: 9px solid hsl(0, 0%, 7%);
-  padding: 2rem;
-  border-style: double;
-  border-radius: 9px;
+.input-container.drag-drop-input-container {
   background-color: rgba(126, 94, 186, 0.3);
+  border: 9px solid hsl(0, 0%, 7%);
+  border-style: double;
+  border-radius: 3px;
+}
+.input-container.drag-drop-input-container[data-variant=compact] {
+  max-width: 100%;
+  padding: 0.5rem 1rem;
+}
+.input-container.drag-drop-input-container[data-variant=drag-drop] {
+  padding: 1.25rem;
 }
 
 .primary-navbar {
@@ -2981,8 +3014,8 @@ select {
   bottom: 0;
   right: 0;
   background-color: hsl(0, 0%, 15%);
-  z-index: 99999;
   transition: transform 200ms ease-in-out;
+  z-index: 999999;
 }
 .secondary-navbar[aria-expanded=false] {
   transform: translateX(100%);
@@ -2993,14 +3026,14 @@ select {
 
 .music-player {
   grid-template-areas: "playerCloseButton playerCloseButton" "playerInfo playerOther" "playerBarContainer playerBarContainer";
-  grid-template-rows: 4% 1fr max(10%, 2vmax);
+  grid-template-rows: 28px 1fr max(18%, 80px);
   grid-template-columns: 1fr 1fr;
   inset: 0;
   z-index: 999999;
   transition: transform 244ms ease-in-out;
 }
 .music-player[data-expanded=false] {
-  transform: translateY(96%);
+  transform: translateY(calc(100% - 28px));
 }
 .music-player .player__info {
   grid-area: playerInfo;
@@ -3028,7 +3061,6 @@ select {
 @media screen and (max-width: 50em) {
   .music-player {
     grid-template-areas: "playerCloseButton playerCloseButton" "playerInfo playerInfo" "playerBarContainer playerBarContainer";
-    grid-template-rows: 4% 1fr;
   }
   .player__other {
     display: none;

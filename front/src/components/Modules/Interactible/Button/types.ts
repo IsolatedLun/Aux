@@ -1,4 +1,5 @@
 export type ButtonAttachments =
+	| ''
 	| 'hologram'
 	| 'hollow'
 	| 'transparent'
@@ -12,6 +13,7 @@ export type ButtonAttachments =
 	| 'capsule'
 	| 'flat'
 	| 'border-left'
+	| 'rotate-icon'
 	| 'border-right';
 
 export type ButtonVariants = 'primary' | 'secondary';

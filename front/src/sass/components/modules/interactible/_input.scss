@@ -55,12 +55,21 @@
     &[data-variant='primary'] {
         @include createInput($clr-background-400);
     }
-}
 
-.drag-drop-input-container {
-    border: 9px solid $clr-background-300;
-    padding: 2rem;
-    border-style: double;
-    border-radius: 9px;
-    background-color: transparentize($clr-primary-400, 0.7);
+    &.drag-drop-input-container {
+        background-color: transparentize($clr-primary-400, 0.7);
+        
+        border: 9px solid $clr-background-300;
+        border-style: double;
+        border-radius: 3px;
+
+        &[data-variant='compact'] {
+            max-width: 100%;
+            padding: 0.5rem 1rem;
+        }
+
+        &[data-variant='drag-drop'] {
+            padding: 1.25rem;
+        }
+    }
 }

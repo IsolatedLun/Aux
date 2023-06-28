@@ -5,7 +5,7 @@
 	import Grid from '../../Box/Grid/Grid.svelte';
 	import SongContainer from '../../Layout/SongContainer/SongContainer.svelte';
 	import Button from '../../Modules/Interactible/Button/Button.svelte';
-	import DragNDrop from '../../Modules/Interactible/Input/DragNDrop.svelte';
+	import FileInput from '../../Modules/Interactible/Input/FileInput.svelte';
 	import TagInput from '../../Modules/Interactible/Input/TagInput.svelte';
 	import TextInput from '../../Modules/Interactible/Input/TextInput.svelte';
 	import SongCard from '../../Modules/SongCard/SongCard.svelte';
@@ -13,7 +13,7 @@
 	import type { Form_Song } from './types';
 
 	function removeTag(tag: string) {
-		songForm.tags = songForm.tags.filter(_tag => _tag !== tag);
+		songForm.tags = songForm.tags.filter((_tag) => _tag !== tag);
 	}
 
 	export let songForm: Form_Song = {
@@ -23,37 +23,77 @@
 		thumbnail: null,
 		audio: null,
 
-		user: createDefaultUser(),
+		user: createDefaultUser()
 	};
 </script>
 
 <form class="[ upload-form ] [ grid place-items-center ]">
 	<h2 class="[ margin-block-end-2 ]">Upload Your Song</h2>
-	<Flex gap={2} useColumn={true}>
-		<Grid columns={2} gap={4}>
-			<Flex useColumn={true} gap={2}>
-				<TextInput variant="primary" bind:value={songForm.title} label="Title" showLabel={true} placeholder="Enter title" />
-				<TagInput bind:tags={songForm.tags} on:remove={(e) => removeTag(e.detail)} />
-			</Flex>
-			<Flex useColumn={true} align='center'>
-				<DragNDrop fileType='image' variant='thumbnail' /> 
-			</Flex>
-		</Grid>
-		<Flex>
+	<Grid columns={2} gap={4} collapseOnMobile={true} alignCenterOnMobile={true} align="start">
+		<Flex useColumn={true} gap={2}>
+			<TextInput
+				variant="primary"
+				bind:value={songForm.title}
+				label="Title"
+				showLabel={true}
+				placeholder="Enter title"
+			/>
+			<TagInput bind:tags={songForm.tags} on:remove={(e) => removeTag(e.detail)} />
+		</Flex>
+		<Flex useColumn={true} align="center">
+			<FileInput fileType="audio" variant="drag-drop" />
+		</Flex>
+	</Grid>
+
+	<Flex
+		cls={cubeCss({ utilClass: 'width-100 margin-block-start-2' })}
+		align="start"
+		useColumn={true}
+	>
+		<FileInput fileType="audio" variant="compact" />
+		<Flex cls={cubeCss({ utilClass: 'margin-inline-start-1' })} gap={2}>
 			<Button>Upload</Button>
-			<Button variant='error'>Cancel</Button>
+			<Button variant="error">Cancel</Button>
 		</Flex>
 	</Flex>
+
 	<h3 class="[ margin-block-2 ]">Preview</h3>
-	<Flex cls={cubeCss({utilClass: 'margin-block-end-4'})} justify='space-between' gap={4}>
+	<Flex
+		cls={cubeCss({ utilClass: 'margin-block-end-4' })}
+		justify="space-between"
+		gap={4}
+		alignCenterOnMobile={true}
+		collapseOnMobile={true}
+	>
 		<SongContainer cardShape={SongCardShapeEnum.SPACIOUS} previewMode={true}>
-			<SongCard props={{...createDefaultSongCard(), ...songForm, thumbnail: 'profiles/def.png', audio: ''}} />
+			<SongCard
+				props={{
+					...createDefaultSongCard(),
+					...songForm,
+					thumbnail: 'profiles/def.png',
+					audio: ''
+				}}
+			/>
 		</SongContainer>
 		<SongContainer initialButtonIdx={1} cardShape={SongCardShapeEnum.COMPACT_H} previewMode={true}>
-			<SongCard props={{...createDefaultSongCard(), ...songForm, thumbnail: 'profiles/def.png', audio: ''}} />
+			<SongCard
+				props={{
+					...createDefaultSongCard(),
+					...songForm,
+					thumbnail: 'profiles/def.png',
+					audio: ''
+				}}
+			/>
 		</SongContainer>
 		<SongContainer initialButtonIdx={2} cardShape={SongCardShapeEnum.COMPACT_Y} previewMode={true}>
-			<SongCard props={{...createDefaultSongCard(), ...songForm, thumbnail: 'profiles/def.png', audio: ''}} />
+			<SongCard
+				props={{
+					...createDefaultSongCard(),
+					...songForm,
+					thumbnail: 'profiles/def.png',
+					audio: ''
+				}}
+			/>
 		</SongContainer>
 	</Flex>
 </form>

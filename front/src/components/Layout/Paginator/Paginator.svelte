@@ -40,6 +40,7 @@
             urlFn(next_page), null, HTTP_METHODS.GET, {}
         );
         results = [...results, ...data.results];
+        next_page = data.next_page;
 
         isFetching = false;
     }
@@ -59,14 +60,13 @@
 <div class="[ paginator ]">
     <div class="[ results ]">
         <svelte:component this={componentContainer}>
-            {#if isFetching}
+            {#each results as result}
+                <svelte:component this={component} props={result} />
+            {/each}
+            {#if isFetching && next_page !== null}
                 <AutoSkeletron>
                     <SongCard />
                 </AutoSkeletron>
-                {:else}
-                    {#each results as result}
-                        <svelte:component this={component} props={result} />
-                    {/each}
             {/if}
         </svelte:component>
     </div>

@@ -36,6 +36,7 @@ export const ICON_EYE = '\uf06e';
 
 export const ICON_TRASH = '\uf1f8';
 export const ICON_BUCKET = '\ue4cf';
+export const ICON_MUSIC_DISC = '\uf51f';
 
 export const ICON_IMAGE = '\uf03e';
 export const ICON_MEDIA = '\uf03d';

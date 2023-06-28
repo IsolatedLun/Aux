@@ -10,7 +10,7 @@
 
 <nav class="[ primary-navbar ] [ margin-block-end-2 ]">
 	<Flex align="center" justify="space-between">
-		<h1 class="[ fw-lighter ]">
+		<h1 class="[ fw-bold ]">
 			<a href="/">Aux</a>
 		</h1>
 		<TextInput

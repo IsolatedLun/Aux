@@ -18,9 +18,12 @@ $clr-misc-error: map-get($map: map-get($active-theme, $key: "misc"), $key: "erro
 
 // Global
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&display=swap');
+
+$global-CustomFont: 'Poppins';
 
 $global-FontSize: var(--fs-400);
-$global-FontFamily: 'Poppins', system-ui;
+$global-FontFamily: $global-CustomFont, system-ui;
 $global-background-clr: $clr-background-300;
 
 $border-radius-bevelled: 9px;
@@ -51,8 +54,8 @@ $song-container-compact-vertical-column-max-thumbnail-width: 4rem;
 
 // Layouts/MusicPlayer
 $music-player-thumbnail-max-width: 16rem;
-$music-player-close-button-ratio: 4%;
-$music-player-row-ratios: $music-player-close-button-ratio 1fr max(10%, 2vmax);
+$music-player-close-button-ratio: 28px;
+$music-player-row-ratios: $music-player-close-button-ratio 1fr max(18%, 80px);
 $music-player-row-ratios-mobile: 4% 1fr;
 $music-player-expanding-transition: 244ms;
 
@@ -62,11 +65,13 @@ $clr-button-secondary: $clr-secondary-400;
 $clr-button-gray: $clr-background-500;
 $clr-button-error: $clr-misc-error;
 
-$button-padding: 0.3rem 0.6rem;
+$button-padding: 0.4rem 0.7rem;
 $button-padding-tiny: 0.1rem 0.3rem;
 $button-padding-small: 0.2rem 0.6rem;
 $button-padding-big: 0.4rem 0.8rem;
 $button-padding-huge: 0.8rem 1.2rem;
+
+$button-border-radius: 3px;
 
 // Modules/Interactible/Input
 $clr-input: $clr-background-400;

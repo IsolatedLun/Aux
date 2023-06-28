@@ -18,8 +18,9 @@
     bottom: 0;
     right: 0;
     background-color: $clr-background-400;
-    z-index: 99999;
+
     transition: transform 200ms ease-in-out;
+    z-index: $z-index-4;
     &[aria-expanded='false'] {
         transform: translateX(100%);
     }

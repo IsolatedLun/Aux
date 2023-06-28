@@ -15,6 +15,7 @@
 	export let gap: string | number = 1;
 
 	export let collapseOnMobile = false;
+	export let alignCenterOnMobile = false;
 	
 	export let use: (_this: HTMLElement) => void = () => null;
 	const _class = cls.to_string({
@@ -29,6 +30,7 @@
 	class={_class}
 	bind:this={_this}
 	data-collapse={collapseOnMobile}
+	data-center-on-mobile={alignCenterOnMobile}
 >
 	<slot />
 </svelte:element>

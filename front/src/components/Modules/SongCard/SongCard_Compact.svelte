@@ -15,15 +15,15 @@
 	export let cls = cubeCss({});
     export let useColumn = false;
 
-    let paddingType: ButtonAttachments = useColumn ? 'huge-pad' : 'big-pad';
+    let paddingType: ButtonAttachments = 'big-pad';
 	let _combinedCss = cls.combine({
 		blockClass: 'song-card',
-		utilClass: 'pos-relative'
+		utilClass: 'pos-relative width-100'
 	});
 	const dispatch = createEventDispatcher();
 </script>
 
-<Flex {useColumn} cls={cubeCss(_combinedCss)}>
+<Flex {useColumn} cls={cubeCss(_combinedCss)} justify='start'>
 	<div
 		class="
 			[ card__thumbnail-container ] 

@@ -5,8 +5,8 @@
     padding: $button-padding;
     background-color: $background;
 
-    border: none;
-    border-radius: $border-radius-bevelled;
+    border: 2px solid transparent;
+    border-radius: $button-border-radius;
 
     cursor: pointer;
 
@@ -25,6 +25,14 @@
             background-color: $background;
         }
     }
+
+    &[data-attachments*='rotate-icon'] {
+        .icon {
+            display: block;
+            animation: rotateButtonIconAnimation 1s infinite alternate;
+        }
+    }
+
 
     &[data-disabled='true'] {
         opacity: 0.5;
@@ -111,7 +119,7 @@
         pointer-events: none;
 
         transform-origin: center;
-        animation: anim 0.35s linear forwards;
+        animation: overlayAnimation 0.35s linear forwards;
     }
 }
 
@@ -119,7 +127,7 @@ select {
     padding: $button-padding;
 }
 
-@keyframes anim {
+@keyframes overlayAnimation {
     0% {
         scale: 0;
         opacity: 1;
@@ -133,5 +141,22 @@ select {
     100% {
         scale: 4.5;
         opacity: 0;
+    }
+}
+
+@keyframes rotateButtonIconAnimation {
+    0% {
+        scale: 0.9;
+        rotate: 45deg;
+    }
+
+    50% {
+        scale: 0.85;
+        rotate: -180deg;
+    }
+
+    100% {
+        scale: 0.95;
+        rotate: 270deg;
     }
 }
