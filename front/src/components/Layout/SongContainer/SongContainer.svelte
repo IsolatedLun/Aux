@@ -12,10 +12,6 @@
 	import type { Props_SongCard, Props_SongCardContext } from '../../Modules/SongCard/types';
 	import { SongCardShapeEnum } from '../../Modules/SongCard/types';
 
-	onMount(() => {
-		console.log(cardShape)
-	})
-
 	export let songs: Props_SongCard[] = [];
 	export let cardShape: SongCardShapeEnum = SongCardShapeEnum.SPACIOUS;
 	export let previewMode = false;

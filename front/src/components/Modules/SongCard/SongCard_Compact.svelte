@@ -14,12 +14,14 @@
 	export let props: Props_SongCard = createDefaultSongCard();
 	export let cls = cubeCss({});
     export let useColumn = false;
+	export let isPreview = false;
 
     let paddingType: ButtonAttachments = 'big-pad';
 	let _combinedCss = cls.combine({
 		blockClass: 'song-card',
 		utilClass: 'pos-relative width-100'
 	});
+
 	const dispatch = createEventDispatcher();
 </script>
 
@@ -38,7 +40,7 @@
 			<Icon ariaLabel="Play">{ICON_PLAY}</Icon>
 		</Button>
 		<img
-			src="{BACKEND_URL}{props.thumbnail}"
+			src="{isPreview ? props.thumbnail : BACKEND_URL + props.thumbnail}"
 			alt="Thumbnail for {props.title}"
 		/>
 	</div>

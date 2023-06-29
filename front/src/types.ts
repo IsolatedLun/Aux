@@ -15,6 +15,7 @@ export interface KeyValue<T> {
 }
 
 export type Some<T> = T | null;
+export type Enum = Record<string | number, string | number>;
 
 export type TypedKeyValue<K extends string | number, V> = { [key in K]: V };
 

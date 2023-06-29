@@ -16,12 +16,12 @@
 
 	const { getCardShape } = getContext('container') as Props_SongCardContext; 
 	const cardShape: SongCardShapeEnum = getCardShape();
-
 </script>
+
 {#if cardShape === SongCardShapeEnum.SPACIOUS}
-	<SongCardSpacious on:select={setSong} {props} />
+	<SongCardSpacious on:select={setSong} {props} {isPreview} />
 	{:else if cardShape === SongCardShapeEnum.COMPACT_H}
-	<SongCardCompact on:select={setSong} useColumn={false} {props} />
+	<SongCardCompact on:select={setSong} useColumn={false} {props} {isPreview} />
 	{:else if cardShape === SongCardShapeEnum.COMPACT_Y}
-	<SongCardCompact on:select={setSong} useColumn={true} {props} />
+	<SongCardCompact on:select={setSong} useColumn={true} {props} {isPreview} />
 {/if}

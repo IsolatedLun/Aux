@@ -1,5 +1,18 @@
 @use '../../abstracts/' as *;
 
-.card {
-    background-color: $clr-background-400;
+@use 'sass:color';
+
+@mixin createCardMixin($background) {
+    $transparentBackground: transparentize($background, 0.75);
+
+    background-color: $transparentBackground;
+    border: 2px solid $background;
+}
+
+.card[data-variant='primary'] {
+    @include createCardMixin($card-primary);
+}
+
+.card[data-variant='error'] {
+    @include createCardMixin($card-error);
 }

@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { ICON_UPLOAD } from '../../../../consts/icons';
+	import { createEventDispatcher, onMount } from 'svelte';
+	import { ICON_IMAGE, ICON_UPLOAD } from '../../../../consts/icons';
 	import { cubeCss } from '../../../../utils/cubeCss/cubeCss';
 	import Flex from '../../../Box/Flex/Flex.svelte';
 	import Icon from '../../Icon/Icon.svelte';
 	import Button from '../Button/Button.svelte';
+	import type { FileType } from '../../../../utils/types';
 
 	onMount(() => {
 		id = crypto.randomUUID();
@@ -17,15 +18,23 @@
 	function handleInput() {
 		if (inputEl.files) {
 			fileName = inputEl.files[0].name;
+
+			if(fileType === 'image') {
+				dispatch('preview', URL.createObjectURL(inputEl.files[0]));
+			}
+
+			dispatch('input', inputEl.files[0]);
 		}
 	}
 
 	export let id: string = '';
-	export let fileType: string;
+	export let fileType: FileType;
 	export let variant = 'default';
 
 	let inputEl: HTMLInputElement;
 	let fileName = 'Empty file';
+
+	const dispatch = createEventDispatcher();
 </script>
 
 <div class="[ input-container drag-drop-input-container ] [ pos-relative width-100 ]" data-variant={variant}>
@@ -49,6 +58,9 @@
 
 			{:else if variant === 'compact'}
 			<Flex align="center" justify='start' gap={2}>
+				{#if fileType === 'image'}
+					<Icon ariaLabel='Upload image'>{ICON_IMAGE}</Icon>
+				{/if}
 				<Button cls={cubeCss({ utilClass: 'z-index-high' })} on:click={handleButtonClick}
 					>Browse files</Button
 				>

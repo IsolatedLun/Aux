@@ -2701,8 +2701,14 @@ canvas {
     background-color: hsl(0, 0%, 50%);
   }
 }
-.card {
-  background-color: hsl(0, 0%, 15%);
+.card[data-variant=primary] {
+  background-color: rgba(38, 38, 38, 0.25);
+  border: 2px solid hsl(0, 0%, 15%);
+}
+
+.card[data-variant=error] {
+  background-color: rgba(234, 68, 62, 0.25);
+  border: 2px solid hsl(2, 80%, 58%);
 }
 
 .button {

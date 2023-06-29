@@ -17,9 +17,10 @@
 	export let variant = 'primary';
 	export let attachments: ButtonAttachments[] = [];
 	export let disabled = false;
+	export let selected = false;
+	export let isSubmit = false;
 	export let use: (_this: HTMLElement) => void = () => null;
 	export let to: string = '';
-	export let selected = false;
 
 	const dispatch = createEventDispatcher();
 	const _class = cls.to_string({
@@ -50,6 +51,7 @@
 		data-attachments={attachments.join(',')}
 		data-disabled={disabled}
 		data-selected={selected}
+		type={isSubmit ? 'submit' : 'button'}
 		on:click={handleClick}
 	>
 		<slot />
