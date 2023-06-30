@@ -58,7 +58,7 @@
 	});
 </script>
 
-<div class="[ music-player ] [ grid pos-fixed ]" data-expanded={expanded}>
+<div class="[ music-player ] [ grid pos-fixed ]" aria-expanded="{expanded}" data-expanded={expanded}>
 	<audio bind:this={audioEl} src="{BACKEND_URL}{songStoreData.audio}" />
 
 	<Button
@@ -66,7 +66,7 @@
 		cls={cubeCss({ blockClass: 'player__close-btn' })}
 		use={(el) => (el.id = MUSIC_PLAYER_OPEN_BUTTON_ID)}
 	>
-		<Icon ariaLabel="">{ICON_GRIP}</Icon>
+		<Icon ariaLabel={(expanded ? 'Close' : 'Expand') + ' music player'}>{ICON_GRIP}</Icon>
 	</Button>
 
 	<section class="[ player__info ]">

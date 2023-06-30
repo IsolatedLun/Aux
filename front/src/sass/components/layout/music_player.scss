@@ -23,6 +23,8 @@
         .music__thumbnail {
             max-width: $music-player-thumbnail-max-width;
             border-radius: $border-radius-bevelled;
+
+            aspect-ratio: 1;
         }
     }
 

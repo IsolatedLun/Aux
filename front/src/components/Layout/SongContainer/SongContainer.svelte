@@ -22,7 +22,7 @@
 	})
 </script>
 
-<Flex useColumn={true}>
+<Flex useColumn={true} alignCenterOnMobile={true}>
 	<Flex cls={cubeCss({ utilClass: 'width-100' })} gap={2} justify="{previewMode ? 'center' : 'end'}">
 		{#if !previewMode}
 			<Select 
@@ -37,21 +37,21 @@
 				disabled={previewMode}
 				attachments={['hologram', 'transparent', 'capsule']}
 			>
-				<Icon ariaLabel="">{ICON_TABLE_CELLS}</Icon>
+				<Icon ariaLabel="Spacius layout">{ICON_TABLE_CELLS}</Icon>
 			</Button>
 			<Button
 				on:click={() => (cardShape = SongCardShapeEnum.COMPACT_Y)}
 				disabled={previewMode}
 				attachments={['hologram', 'transparent', 'capsule']}
 			>
-				<Icon ariaLabel="">{ICON_GRID_V}</Icon>
+				<Icon ariaLabel="Compact layout 1">{ICON_GRID_V}</Icon>
 			</Button>
 			<Button
 				on:click={() => (cardShape = SongCardShapeEnum.COMPACT_H)}
 				disabled={previewMode}
 				attachments={['hologram', 'transparent', 'capsule']}
 			>
-				<Icon ariaLabel="">{ICON_GRID_H}</Icon>
+				<Icon ariaLabel="Compact layout 2">{ICON_GRID_H}</Icon>
 			</Button>
 		</ButtonSelectGroup>
 	</Flex>
@@ -61,7 +61,8 @@
 				el.setAttribute('data-shape', SongCardShapeEnum[cardShape].toLowerCase());
 				el.setAttribute('data-preview-mode', String(previewMode));
 			}}
-			align='start'
+			align='center'
+			alignCenterOnMobile={true}
 			cls={cubeCss({ blockClass: 'song-card-container', utilClass: 'margin-block-2 width-100' })}
 			gap={3}
 		>

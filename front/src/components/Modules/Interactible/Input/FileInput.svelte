@@ -28,16 +28,21 @@
 	}
 
 	export let id: string = '';
+	export let cls = cubeCss({});
 	export let fileType: FileType;
 	export let variant = 'default';
 
 	let inputEl: HTMLInputElement;
 	let fileName = 'Empty file';
 
+	const _class = cls.to_string({
+		compostClass: 'input-container drag-drop-input-container',
+		utilClass: 'pos-relative width-100'
+	})
 	const dispatch = createEventDispatcher();
 </script>
 
-<div class="[ input-container drag-drop-input-container ] [ pos-relative width-100 ]" data-variant={variant}>
+<div class="{_class}" data-variant={variant}>
 	<label for={id}>
 		{#if variant === 'drag-drop'}
 			<Flex useColumn={true} align="center" gap={2}>

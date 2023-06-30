@@ -56,6 +56,7 @@ export function createHeaders(headers: KeyValue<string> | null, extra: HeaderTyp
 
 		// This type only works for fors that have text data
 		if (_type === 'json') _headers['Content-Type'] = 'application/json';
+		
 		if (_type === 'files+json') _headers['Content-Type'] = 'application/json; multipart/form-data';
 
 		if (_type === 'auth') {

@@ -13,7 +13,7 @@
 }
 
 .clr-secondary-400 {
-  color: hsl(201, 60%, 55%);
+  color: hsl(201, 50%, 50%);
 }
 
 .clr-background-300 {
@@ -1865,7 +1865,7 @@
 }
 
 .clr-secondary-400 {
-  color: hsl(201, 60%, 55%);
+  color: hsl(201, 50%, 50%);
 }
 
 .clr-background-300 {
@@ -1888,7 +1888,7 @@
   --clr-text-muted: hsl(0, 0%, 60%);
   --clr-primary-400: hsl(261, 40%, 55%);
   --clr-primary-500: hsl(261, 40%, 65%);
-  --clr-secondary-400: hsl(201, 60%, 55%);
+  --clr-secondary-400: hsl(201, 50%, 50%);
   --clr-background-300: hsl(0, 0%, 7%);
   --clr-background-400: hsl(0, 0%, 15%);
   --clr-background-500: hsl(0, 0%, 22%);
@@ -1918,7 +1918,7 @@
     color: hsl(261, 40%, 65%);
   }
   .clr-secondary-400 {
-    color: hsl(201, 60%, 55%);
+    color: hsl(201, 50%, 50%);
   }
   .clr-background-300 {
     color: hsl(0, 0%, 7%);
@@ -1936,7 +1936,7 @@
     --clr-text-muted: hsl(0, 0%, 60%);
     --clr-primary-400: hsl(261, 40%, 55%);
     --clr-primary-500: hsl(261, 40%, 65%);
-    --clr-secondary-400: hsl(201, 60%, 55%);
+    --clr-secondary-400: hsl(201, 50%, 50%);
     --clr-background-300: hsl(0, 0%, 7%);
     --clr-background-400: hsl(0, 0%, 15%);
     --clr-background-500: hsl(0, 0%, 22%);
@@ -1965,8 +1965,13 @@ body {
   font-family: "Poppins", system-ui;
   font-size: var(--fs-400);
   background-color: hsl(0, 0%, 7%);
-  overflow-x: hidden;
   text-rendering: optimizeLegibility;
+  min-height: 100%;
+}
+
+html,
+body {
+  overflow: auto;
 }
 
 h1,
@@ -2213,17 +2218,10 @@ canvas {
 }
 
 .song-card-container[data-shape=compact_h] {
-  --column-size: 16rem;
+  --column-size: 12rem;
 }
 .song-card-container[data-shape=compact_h] .card__thumbnail-container {
   max-width: 4rem;
-}
-
-.upload-form {
-  display: grid;
-  max-width: 700px;
-  place-items: center;
-  margin-inline: auto;
 }
 
 .border-radius-bevelled {
@@ -2711,6 +2709,14 @@ canvas {
   border: 2px solid hsl(2, 80%, 58%);
 }
 
+.form {
+  max-width: 700px;
+  align-content: center;
+}
+.form#signup-form {
+  max-width: 444px;
+}
+
 .button {
   position: relative;
   overflow: hidden;
@@ -2782,21 +2788,21 @@ canvas {
 }
 .button[data-variant=secondary] {
   padding: 0.4rem 0.7rem;
-  background-color: hsl(201, 60%, 55%);
+  background-color: hsl(201, 50%, 50%);
   border: 2px solid transparent;
   border-radius: 3px;
   cursor: pointer;
 }
 .button[data-variant=secondary] .overlay {
-  background-color: #a3d0e8;
+  background-color: #9fc9df;
 }
 .button[data-variant=secondary][data-attachments*=hologram] {
-  border: 2px solid rgba(71, 161, 209, 0.45);
-  background-color: rgba(71, 161, 209, 0.45);
-  outline-color: rgba(71, 161, 209, 0.45);
+  border: 2px solid rgba(64, 147, 191, 0.45);
+  background-color: rgba(64, 147, 191, 0.45);
+  outline-color: rgba(64, 147, 191, 0.45);
 }
 .button[data-variant=secondary][data-attachments*=hologram][data-selected=true] {
-  background-color: hsl(201, 60%, 55%);
+  background-color: hsl(201, 50%, 50%);
 }
 .button[data-variant=secondary][data-attachments*=rotate-icon] .icon {
   display: block;
@@ -2808,7 +2814,7 @@ canvas {
 }
 .button[data-variant=secondary][data-attachments*=hollow] {
   background-color: transparent;
-  border: 2px solid hsl(201, 60%, 55%);
+  border: 2px solid hsl(201, 50%, 50%);
 }
 .button[data-variant=secondary][data-attachments*=ratio-1] {
   aspect-ratio: 1;
@@ -3048,6 +3054,7 @@ select {
 .music-player .player__info .music__thumbnail {
   max-width: 16rem;
   border-radius: 9px;
+  aspect-ratio: 1;
 }
 .music-player .player__other {
   grid-area: playerOther;

@@ -48,25 +48,27 @@
 	<label for={id} hidden={!showLabel}>
 		{label}
 	</label>
-	<input
-		bind:this={_this}
-		bind:value={value}
-		class={_class}
-		data-variant={variant}
-		data-attachments={attachments.join(',')}
-		on:input={handleInput}
-		{id}
-		type='text'
-		{placeholder}
-	/>
+	<div class="[ pos-relative width-100 ]">
+		<input
+			bind:this={_this}
+			bind:value={value}
+			class={_class}
+			data-variant={variant}
+			data-attachments={attachments.join(',')}
+			on:input={handleInput}
+			{id}
+			type='text'
+			{placeholder}
+		/>
 
-	{#if endIcon}
-		<Button
-			cls={cubeCss({ blockClass: 'input-end-button', utilClass: 'pos-absolute' })}
-			attachments={['transparent']}
-			on:click={() => endButtonAction(_this)}
-		>
-			<Icon ariaLabel="">{endIcon}</Icon>
-		</Button>
-	{/if}
+		{#if endIcon}
+			<Button
+				cls={cubeCss({ blockClass: 'input-end-button', utilClass: 'pos-absolute' })}
+				attachments={['transparent']}
+				on:click={() => endButtonAction(_this)}
+			>
+				<Icon ariaLabel="">{endIcon}</Icon>
+			</Button>
+		{/if}
+	</div>
 </Flex>

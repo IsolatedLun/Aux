@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { uploadSong } from '../../../services/song/songService';
 	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
 	import { createDefaultSongCard, createDefaultUser } from '../../../utils/defaultCreates';
 	import { validateUploadForm } from '../../../utils/form/form';
@@ -7,6 +8,7 @@
 	import Grid from '../../Box/Grid/Grid.svelte';
 	import SongContainer from '../../Layout/SongContainer/SongContainer.svelte';
 	import Card from '../../Modules/Card/Card.svelte';
+	import Form from '../../Modules/Form/Form.svelte';
 	import Button from '../../Modules/Interactible/Button/Button.svelte';
 	import FileInput from '../../Modules/Interactible/Input/FileInput.svelte';
 	import TagInput from '../../Modules/Interactible/Input/TagInput.svelte';
@@ -21,8 +23,11 @@
 
 	function handleFormSubmit() {
 		const res = validateUploadForm(songForm);
+		if(res !== true) {
+			error = res; return;
+		}
 
-		res !== true ? error = res : error = '';
+		uploadSong(songForm);
 	}
 
 	export let songForm: Form_Song = {
@@ -39,7 +44,7 @@
 	let error = '';
 </script>
 
-<form class="[ upload-form ] [ grid place-items-center ]" on:submit={handleFormSubmit}>
+<Form id='upload-form' on:submit={handleFormSubmit}>
 	<h2 class="[ margin-block-end-2 ]">Upload Your Song</h2>
 	{#if error}
 		<Card variant='error' cls={cubeCss({utilClass: 'margin-block-end-2'})}>
@@ -105,4 +110,4 @@
 			</SongContainer>
 		{/each}
 	</Flex>
-</form>
+</Form>

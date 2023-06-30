@@ -22,9 +22,14 @@ body {
 	font-family: $global-FontFamily;
 	font-size: $global-FontSize;
 	background-color: $global-background-clr;
-
-	overflow-x: hidden;
 	text-rendering: optimizeLegibility;
+
+	min-height: 100%;
+}
+
+html, 
+body {
+	overflow: auto;
 }
 
 h1,

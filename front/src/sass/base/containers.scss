@@ -32,11 +32,3 @@
         max-width: #{$song-container-compact-vertical-column-max-thumbnail-width};
     }
 }
-
-// Forms
-.upload-form {
-    display: grid;
-    max-width: 700px;
-    place-items: center;
-    margin-inline: auto;
-}
