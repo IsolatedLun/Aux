@@ -23,13 +23,15 @@ class PaginatedSongView(APIView):
         return Response(data={'results': res[0], 'next_page': res[1]}, status=OK)
     
 class UploadSongView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, req):
         data = req.POST
         files = req.FILES
        
         try:
             new_song = models.Song.objects.create(
-                user=cUser.objects.get(id=1),
+                user=cUser.objects.get(id=req.user.id),
                 title=data['title'],
                 tags=data['tags[]'], 
                 thumbnail=files['thumbnail'],

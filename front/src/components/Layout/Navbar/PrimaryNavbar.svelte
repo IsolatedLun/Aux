@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { WEB_AUTH_LOGIN_URL, WEB_AUTH_SIGNUP_URL } from '../../../consts';
 	import { ICON_SEARCH } from '../../../consts/icons';
+	import { authStore } from '../../../stores/authStore';
 	import Flex from '../../Box/Flex/Flex.svelte';
 	import Button from '../../Modules/Interactible/Button/Button.svelte';
 	import TextInput from '../../Modules/Interactible/Input/TextInput.svelte';
@@ -7,7 +9,6 @@
 	import SecondaryNavbar from './SecondaryNavbar/SecondaryNavbar.svelte';
 
 	export let secondaryNavbarExpanded = false;
-	export let isLogged = false;
 </script>
 
 <nav class="[ primary-navbar ] [ margin-block-end-2 ]">
@@ -22,12 +23,12 @@
 			endIcon={ICON_SEARCH}
 		/>
 		
-		{#if isLogged}
+		{#if $authStore.isLogged}
 			<NavbarUserProfile on:click={() => secondaryNavbarExpanded = true} />
 			{:else}
 			<Flex gap={2}>
-				<Button>Sign up</Button>
-				<Button variant='secondary'>Log in</Button>
+				<Button to={WEB_AUTH_SIGNUP_URL}>Sign up</Button>
+				<Button to={WEB_AUTH_LOGIN_URL} variant='secondary'>Log in</Button>
 			</Flex>
 		{/if}
 	</Flex>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getTokens } from '../utils/tokenHandler';
+import { getTokensFromLocalStorage } from '../utils/tokenHandler';
 import type { KeyValue } from '../types';
 import type { ErrorResponse, HeaderTypes, HTTP_METHODS } from './types';
 
@@ -37,7 +37,7 @@ export async function createRequest<DataT, ReturnT>(
 
 	return res !== null
     ? Promise.resolve(res)
-    : Promise.reject(Promise.reject(error));
+    : Promise.reject(error);
 }
 
 /**
@@ -60,7 +60,7 @@ export function createHeaders(headers: KeyValue<string> | null, extra: HeaderTyp
 		if (_type === 'files+json') _headers['Content-Type'] = 'application/json; multipart/form-data';
 
 		if (_type === 'auth') {
-			const tokens = getTokens();
+			const tokens = getTokensFromLocalStorage();
 
 			if (tokens.access) _headers['Authorization'] = 'Bearer ' + tokens.access;
 		}

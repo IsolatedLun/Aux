@@ -8,7 +8,9 @@
     }
 
     .navbar__user-profile {
-        max-width: 2.25rem;
+        border: 2px solid $clr-primary-400;
+        max-width: 2.75rem;
+        aspect-ratio: 1;
     }
 
 }

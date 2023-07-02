@@ -1,10 +1,11 @@
+import type { Some } from '../types';
 import type { Props_Tokens } from './types';
 
 /**
  * @param tokens
  * @summary Updates the refresh/access tokens in localStorage
  */
-export function setTokens(tokens: Props_Tokens) {
+export function setTokensToLocalStorage(tokens: Props_Tokens) {
 	if (tokens.refresh) localStorage.setItem('refresh', tokens.refresh);
 	if (tokens.access) localStorage.setItem('access', tokens.access);
 }
@@ -12,22 +13,25 @@ export function setTokens(tokens: Props_Tokens) {
 /**
  * @summary Gets the refresh/access tokens from localStorage
  */
-export function getTokens(): Props_Tokens {
+export function getTokensFromLocalStorage(): Some<Props_Tokens> {
 	if (localStorage === undefined)
-		return {
-			refresh: null,
-			access: null
-		};
+		return null;
+
+	// null + null = 0
+	if(localStorage.getItem('refresh') + localStorage.getItem('access') === 0) {
+		return null;
+	}
+
 	return {
-		refresh: localStorage.getItem('refresh') ?? null,
-		access: localStorage.getItem('access') ?? null
+		refresh: localStorage.getItem('refresh'),
+		access: localStorage.getItem('access')
 	};
 }
 
 /**
  * @summary Deletes the refresh/access tokens from localStorage
  */
-export function destroyTokens() {
+export function destroyTokensFromLocalStorage() {
 	localStorage.removeItem('refresh');
 	localStorage.removeItem('access');
 }

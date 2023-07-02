@@ -3,6 +3,7 @@
 	import {
 		ICON_QUESTION_CIRCLE,
 		ICON_SETTINGS,
+		ICON_SIGN_OUT,
 		ICON_TIMES,
 		ICON_UPLOAD,
 		ICON_USER
@@ -13,6 +14,9 @@
 	import Icon from '../../../Modules/Icon/Icon.svelte';
 	import Button from '../../../Modules/Interactible/Button/Button.svelte';
 	import SecondaryNavbarItem from './SecondaryNavbarItem.svelte';
+	import { authStore } from '../../../../stores/authStore';
+	import { goto } from '$app/navigation';
+	import { WEB_AUTH_LOGIN_URL } from '../../../../consts';
 
 	onMount(() => {
 		const observer = new MutationObserver(() => {
@@ -24,6 +28,13 @@
 
 		// observer.observe(document.querySelector('html') as HTMLElement);
 	})
+
+	function handleLogout() {
+		authStore.logout();
+
+		dispatch('close');
+		goto(WEB_AUTH_LOGIN_URL);
+	}
 
 	export let expanded = false;
 
@@ -75,6 +86,14 @@
 			tag="ul"
 			align="center"
 		>
+			<SecondaryNavbarItem
+				props={{
+					action: handleLogout,
+					buttonVariant: 'secondary',
+					icon: ICON_SIGN_OUT,
+					text: 'Log out'
+				}}
+			/>
 			<SecondaryNavbarItem
 				props={{
 					to: '',

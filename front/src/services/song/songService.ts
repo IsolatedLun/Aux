@@ -19,6 +19,6 @@ export async function uploadSong(data: Form_Song) {
 		BACKEND_URL + 'songs/upload',
         data,
 		HTTP_METHODS.POST,
-		createHeaders({}, ['files+json'])
+		createHeaders({}, ['files+json', 'auth'])
 	);
 }

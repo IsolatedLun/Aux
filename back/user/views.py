@@ -21,19 +21,17 @@ def decode_user_id(request_header):
 class RegisterView(APIView):
     def post(self, req):
         try:
-            profile = req.FILES.get('profile', None)
+            data = req.POST
+            files = req.FILES
 
-            user = models.cUser.objects.create(
-                email_address=req.data['email_address'],
-                password=make_password(req.data['password']),
-                username=req.data['username']
+            models.cUser.objects.create(
+                username=data['username'],
+                email_address=data['emailAddress'],
+                password=make_password(data['password']),
+                profile=files['profile']
             )
 
-            if profile:
-                user.profile = profile
-                user.save()
-
-            return Response(data='User signup', status=OK)
+            return Response(status=OK)
 
         except Exception as e:
             return Response(data='Something went wrong.', status=ERR)
@@ -45,7 +43,7 @@ class JWTLoginView(APIView):
     def post(self, req):
         try:
             user = models.cUser.objects.get(
-                email_address=req.data['email_address'])
+                email_address=req.data['emailAddress'])
 
             if not check_password(req.data['password'], user.password):
                 raise Exception()
@@ -60,7 +58,7 @@ class JWTLoginView(APIView):
                 'user': serializers.cUserSerializer(user).data
             }, OK)
         except Exception as e:
-            return Response({'detail': 'Invalid email or password.'}, ERR)
+            return Response({'detail': 'Invalid email address or password.'}, ERR)
 
 
 class JWTAuthenticateView(APIView):

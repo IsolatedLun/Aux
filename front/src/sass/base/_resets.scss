@@ -30,6 +30,7 @@ body {
 html, 
 body {
 	overflow: auto;
+	outline: none;
 }
 
 h1,
@@ -56,10 +57,15 @@ ul {
 
 input,
 button,
+a.button,
 select,
 textarea {
 	font-family: inherit;
 	font-size: var(--fs-350);
+}
+
+input:where([type='radio'], [type='checkbox']) {
+	accent-color: $clr-primary-400;
 }
 
 textarea {

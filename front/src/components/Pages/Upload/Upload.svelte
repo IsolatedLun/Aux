@@ -24,10 +24,12 @@
 	function handleFormSubmit() {
 		const res = validateUploadForm(songForm);
 		if(res !== true) {
-			error = res; return;
+			formError = res; return;
 		}
 
-		uploadSong(songForm);
+		uploadSong(songForm)
+			.then(() => alert('success'))
+			.catch(err => formError = err);
 	}
 
 	export let songForm: Form_Song = {
@@ -41,16 +43,10 @@
 	};
 
 	let previewThumbnail = '';
-	let error = '';
+	let formError = '';
 </script>
 
-<Form id='upload-form' on:submit={handleFormSubmit}>
-	<h2 class="[ margin-block-end-2 ]">Upload Your Song</h2>
-	{#if error}
-		<Card variant='error' cls={cubeCss({utilClass: 'margin-block-end-2'})}>
-			<p>{error}</p>
-		</Card>
-	{/if}
+<Form id='upload-form' title='Upload Your Song' {formError} on:submit={handleFormSubmit}>
 	<Grid columns={2} gap={4} collapseOnMobile={true} alignCenterOnMobile={true} align="start">
 		<Flex useColumn={true} gap={2}>
 			<TextInput
@@ -90,7 +86,7 @@
 
 	<h3 class="[ margin-block-2 ]">Preview</h3>
 	<Flex
-		cls={cubeCss({ utilClass: 'margin-block-end-4' })}
+		cls={cubeCss({ utilClass: 'margin-block-end-4 margin-inline-auto' })}
 		justify="space-between"
 		gap={4}
 		alignCenterOnMobile={true}

@@ -1972,6 +1972,7 @@ body {
 html,
 body {
   overflow: auto;
+  outline: none;
 }
 
 h1,
@@ -1998,10 +1999,15 @@ ul {
 
 input,
 button,
+a.button,
 select,
 textarea {
   font-family: inherit;
   font-size: var(--fs-350);
+}
+
+input:where([type=radio], [type=checkbox]) {
+  accent-color: hsl(261, 40%, 55%);
 }
 
 textarea {
@@ -3018,7 +3024,9 @@ select {
   max-width: 32ch;
 }
 .primary-navbar .navbar__user-profile {
-  max-width: 2.25rem;
+  border: 2px solid hsl(261, 40%, 55%);
+  max-width: 2.75rem;
+  aspect-ratio: 1;
 }
 
 .secondary-navbar {
