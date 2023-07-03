@@ -8,9 +8,10 @@
 	
 	function setSong() {
 		if(!isPreview)
-			songStore.update((e) => props);
+			songStore.play(i);
 	}
 
+	export let i: number = -1;
 	export let props: Props_SongCard = createDefaultSongCard();
 	export let isPreview = false;
 

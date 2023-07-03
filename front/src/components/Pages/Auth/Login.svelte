@@ -6,6 +6,7 @@
 	import type { LoginResponse } from '../../../services/auth/types';
 	import { authStore } from '../../../stores/authStore';
 	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
+	import { validateLoginForm } from '../../../utils/form/form';
 	import Flex from '../../Box/Flex/Flex.svelte';
 	import Card from '../../Modules/Card/Card.svelte';
 	import Form from '../../Modules/Form/Form.svelte';
@@ -16,6 +17,11 @@
 	import type { LoginForm } from './types';
 
     function handleFormSubmit() {
+		const res = validateLoginForm(loginForm);
+		if(res !== true) {
+			formError = res; return;
+		}
+
         login(loginForm)
             .then(handleLogin)
             .catch(err => formError = err);

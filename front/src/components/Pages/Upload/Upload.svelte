@@ -47,7 +47,7 @@
 </script>
 
 <Form id='upload-form' title='Upload Your Song' {formError} on:submit={handleFormSubmit}>
-	<Grid columns={2} gap={4} collapseOnMobile={true} alignCenterOnMobile={true} align="start">
+	<Grid cls={cubeCss({ utilClass: 'margin-inline-auto' })} columns={2} gap={4} collapseOnMobile={true} alignCenterOnMobile={true} align="start">
 		<Flex useColumn={true} gap={2}>
 			<TextInput
 				variant="primary"

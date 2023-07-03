@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import { onMount } from "svelte";
+	import { createEventDispatcher, onMount } from "svelte";
 	import { createRequest } from "../../../services/service";
 	import { HTTP_METHODS } from "../../../services/types";
 	import type { Props_PaginatorResponse } from "./types";
@@ -15,7 +15,14 @@
 
 		observer = new IntersectionObserver(handleIntersection, options);
 		observer.observe(intersectionEl);
+
+        reset();
     })
+
+    function reset() {
+        results = [];
+        next_page = 1;
+    }
 
     function handleIntersection(
 		entries: IntersectionObserverEntry[],
@@ -39,29 +46,36 @@
         const data = await createRequest<null, Props_PaginatorResponse>(
             urlFn(next_page), null, HTTP_METHODS.GET, {}
         );
-        results = [...results, ...data.results];
+
+        let _results = [...results, ...data.results];
+        results = filterFn ?  filterFn(_results) : _results;
         next_page = data.next_page;
 
         isFetching = false;
+        dispatch('update', results);
     }
 
     export let urlFn: (n: number) => string;
+    export let filterFn: ((results: any[]) => any[]) | null = null;
     export let component: ConstructorOfATypedSvelteComponent;
     export let componentContainer: ConstructorOfATypedSvelteComponent;
 
+    export let results: any[] = [];
+    
     let observer: IntersectionObserver;
     let isFetching = false;
-    let results: any[] = [];
     let next_page: number | null = 1;
 
     let intersectionEl: HTMLElement;
+
+    const dispatch = createEventDispatcher();
 </script>
 
 <div class="[ paginator ]">
     <div class="[ results ]">
         <svelte:component this={componentContainer}>
-            {#each results as result}
-                <svelte:component this={component} props={result} />
+            {#each results as result, i}
+                <svelte:component this={component} props={result} {i} />
             {/each}
             {#if isFetching && next_page !== null}
                 <AutoSkeletron>

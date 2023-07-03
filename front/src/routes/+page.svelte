@@ -1,8 +1,14 @@
-<script lang='ts'>
-	import SongCard from "../components/Modules/SongCard/SongCard.svelte";
-	import SongContainer from "../components/Layout/SongContainer/SongContainer.svelte";
-	import Paginator from "../components/Layout/Paginator/Paginator.svelte";
-	import { BACKEND_URL, PAGINATED_SONG_URL } from "../consts";
+<script lang="ts">
+	import SongCard from '../components/Modules/SongCard/SongCard.svelte';
+	import SongContainer from '../components/Layout/SongContainer/SongContainer.svelte';
+	import Paginator from '../components/Layout/Paginator/Paginator.svelte';
+	import { BACKEND_URL, PAGINATED_SONG_URL } from '../consts';
+	import { songStore } from '../stores/songStore';
 </script>
 
-<Paginator urlFn={PAGINATED_SONG_URL} component={SongCard} componentContainer={SongContainer}  />
+<Paginator
+	on:update={(e) => songStore.setSongs(e.detail)}
+	urlFn={PAGINATED_SONG_URL}
+	component={SongCard}
+	componentContainer={SongContainer}
+/>

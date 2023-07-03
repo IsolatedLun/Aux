@@ -4,6 +4,7 @@
 	import { ICON_EYE } from '../../../consts/icons';
 	import { register } from '../../../services/auth/authService';
 	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
+	import { validateSignUpForm } from '../../../utils/form/form';
 	import Flex from '../../Box/Flex/Flex.svelte';
 	import Form from '../../Modules/Form/Form.svelte';
 	import Button from '../../Modules/Interactible/Button/Button.svelte';
@@ -12,6 +13,11 @@
 	import type { SignUpForm } from './types';
 
     function handleSignUp() {
+        const res = validateSignUpForm(signUpForm);
+		if(res !== true) {
+			formError = res; return;
+		}
+
         register(signUpForm)
             .then(() => goto(WEB_AUTH_LOGIN_URL))
             .catch(err => formError = err);

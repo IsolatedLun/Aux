@@ -24,7 +24,9 @@
 	import { MUSIC_PLAYER_OPEN_BUTTON_ID } from '../../../consts/consts';
 
 	onMount(() => {
-		audioEl.addEventListener('loadstart', () => (audioState.audioLoaded = false));
+		audioEl.addEventListener('loadstart', () => {
+			audioState.audioLoaded = false;
+		});
 		audioEl.addEventListener('loadeddata', () => {
 			audioState.audioLoaded = true;
 			audioState.totalTime = convertToDateTime(audioEl.duration);
@@ -49,17 +51,12 @@
 		currentTime: '00:00',
 		totalTime: '00:00'
 	};
-	let songStoreData: Props_SongCard;
 	let audioEl: HTMLAudioElement;
 	let barEl: HTMLInputElement;
-
-	songStore.subscribe((props) => {
-		songStoreData = props;
-	});
 </script>
 
-<div class="[ music-player ] [ grid pos-fixed ]" aria-expanded="{expanded}" data-expanded={expanded}>
-	<audio bind:this={audioEl} src="{BACKEND_URL}{songStoreData.audio}" />
+<div class="[ music-player ] [ grid pos-fixed ]" aria-expanded={expanded} data-expanded={expanded}>
+	<audio bind:this={audioEl} src="{BACKEND_URL}{$songStore.currentSong.audio}" />
 
 	<Button
 		on:click={() => (expanded = !expanded)}
@@ -73,18 +70,25 @@
 		<div class="[ info__wrapper ] [ grid place-items-center margin-block-auto height-100 ]">
 			<Flex cls={cubeCss({ blockClass: 'info__content' })} useColumn={true} align="center">
 				<div class="[ music__thumbnail ]">
-					<img src="{BACKEND_URL}{songStoreData.thumbnail}" alt="A cat" />
+					<img src="{BACKEND_URL}{$songStore.currentSong.thumbnail}" alt="A cat" />
 				</div>
 				<div class="[ text-align-center ]">
-					<h2>{songStoreData.title}</h2>
-					<p class="[ fs-350 clr-text-muted ]">{songStoreData.user.username}</p>
+					<h2>{$songStore.currentSong.title}</h2>
+					<p class="[ fs-350 clr-text-muted ]">{$songStore.currentSong.user.username}</p>
 				</div>
 			</Flex>
 		</div>
 	</section>
 
 	<section class="[ player__other ] [ padding-2 overflow-y-auto ]">
-		<Paginator urlFn={PAGINATED_SONG_URL} component={SongCard} componentContainer={SongContainer} />
+		{#key $songStore.currentSong.id}
+			<Paginator
+				urlFn={PAGINATED_SONG_URL}
+				filterFn={(songs) => songs.filter((x) => x.id !== $songStore.currentSong.id)}
+				component={SongCard}
+				componentContainer={SongContainer}
+			/>
+		{/key}
 	</section>
 
 	<section class="[ player__bar-container ] [ pos-relative ]">
@@ -112,24 +116,32 @@
 				<p class="[ fs-350 ]">{audioState.totalTime}</p>
 			</Flex>
 			<Flex align="center" justify="start" gap={3}>
-				<Button disabled={!audioState.audioLoaded} cls={cubeCss({ utilClass: 'fs-400' })}>
+				<Button
+					on:click={() => songStore.previous()}
+					disabled={!audioState.audioLoaded}
+					cls={cubeCss({ utilClass: 'fs-400' })}
+				>
 					<Icon ariaLabel="">{ICON_FAST_LEFT}</Icon>
 				</Button>
 				<Button
 					on:click={() => (audioState.paused ? audioEl.play() : audioEl.pause())}
 					cls={cubeCss({ utilClass: 'fs-500' })}
-					attachments={
-						[
-							audioState.paused ? 'hologram' : '', 
-							audioState.paused ? '' : 'rotate-icon',
-							'capsule', 'big-pad', 'ratio-1'
-						]
-					}
+					attachments={[
+						audioState.paused ? 'hologram' : '',
+						audioState.paused ? '' : 'rotate-icon',
+						'capsule',
+						'big-pad',
+						'ratio-1'
+					]}
 					disabled={!audioState.audioLoaded}
 				>
 					<Icon ariaLabel="">{ICON_MUSIC_DISC}</Icon>
 				</Button>
-				<Button disabled={!audioState.audioLoaded} cls={cubeCss({ utilClass: 'fs-400' })}>
+				<Button
+					on:click={() => songStore.next()}
+					disabled={!audioState.audioLoaded}
+					cls={cubeCss({ utilClass: 'fs-400' })}
+				>
 					<Icon ariaLabel="">{ICON_FAST_RIGHT}</Icon>
 				</Button>
 			</Flex>
