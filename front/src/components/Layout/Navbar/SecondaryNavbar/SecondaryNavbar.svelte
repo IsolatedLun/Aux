@@ -1,6 +1,8 @@
 <script lang='ts'>
 	import { createEventDispatcher, onMount } from 'svelte';
 	import {
+	ICON_HISTORY,
+	ICON_HOME,
 		ICON_QUESTION_CIRCLE,
 		ICON_SETTINGS,
 		ICON_SIGN_OUT,
@@ -43,7 +45,7 @@
 	const dispatch = createEventDispatcher()
 </script>
 
-<div class='[ secondary-navbar ] [ pos-fixed padding-2 overflow-y-auto ]' aria-expanded="{expanded}">
+<div class='[ secondary-navbar ] [ pos-fixed padding-2 ]' aria-expanded="{expanded}">
 	<Flex
 		cls={cubeCss({utilClass: 'height-100'})}
 		useColumn={true}
@@ -78,10 +80,26 @@
 					text: 'Settings'
 				}}
 			/>
+
+			<Flex
+				cls={cubeCss({ utilClass: 'width-100 margin-block-start-2' })}
+				useColumn={true}
+				tag="ul"
+				align="center"
+			>
+				<SecondaryNavbarItem
+					props={{
+						to: '/',
+						buttonVariant: 'hoverable',
+						icon: ICON_HOME,
+						text: 'Home'
+					}}
+				/>
+			</Flex>
 		</Flex>
 	
 		<Flex
-			cls={cubeCss({ utilClass: 'width-100 margin-block-start-auto' })}
+			cls={cubeCss({ utilClass: 'width-100 margin-block-start-auto margin-block-end-3' })}
 			useColumn={true}
 			tag="ul"
 			align="center"
@@ -107,8 +125,9 @@
 		<Button
 			on:click={() => dispatch('close')}
 			variant="error"
-			cls={cubeCss({ utilClass: 'width-100 margin-block-end-3' })}
+			cls={cubeCss({ utilClass: 'width-100 margin-block-end-1' })}
 			attachments={['grow']}
+			use={(el) => el.setAttribute('data-mobile', String(true))}
 		>
 			<Icon ariaLabel="Close">{ICON_TIMES}</Icon>
 		</Button>

@@ -14,7 +14,7 @@
 		on:click={() => props.action() ?? null}
 		to={props.to ?? ''}
 		variant={props.buttonVariant}
-		attachments={['big-pad', 'grow']}
+		attachments={['small-pad', 'grow', 'capsule']}
 	>
 		<Flex cls={cubeCss({ utilClass: 'width-100' })} align="center" justify="start">
 			<Icon ariaLabel="">{props.icon}</Icon>

@@ -1,14 +1,15 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
 	import { WEB_AUTH_LOGIN_URL, WEB_AUTH_SIGNUP_URL } from '../../../consts';
-	import { ICON_SEARCH } from '../../../consts/icons';
+	import { ICON_BARS, ICON_SEARCH } from '../../../consts/icons';
 	import { authStore } from '../../../stores/authStore';
 	import Flex from '../../Box/Flex/Flex.svelte';
 	import Button from '../../Modules/Interactible/Button/Button.svelte';
 	import TextInput from '../../Modules/Interactible/Input/TextInput.svelte';
 	import NavbarUserProfile from './NavbarUserProfile.svelte';
-	import SecondaryNavbar from './SecondaryNavbar/SecondaryNavbar.svelte';
+	import Icon from '../../Modules/Icon/Icon.svelte';
 
-	export let secondaryNavbarExpanded = false;
+	const dispatch = createEventDispatcher();
 </script>
 
 <nav class="[ primary-navbar ] [ margin-block-end-2 ]">
@@ -22,16 +23,25 @@
 			attachments={['border-bottom', 'shadow-none', 'transparent', 'border-neutral']}
 			endIcon={ICON_SEARCH}
 		/>
-		
-		{#if $authStore.isLogged}
-			<NavbarUserProfile on:click={() => secondaryNavbarExpanded = true} />
+
+		<Flex align="center" gap={2}>
+			{#if $authStore.isLogged}
+				<NavbarUserProfile />
 			{:else}
-			<Flex gap={2}>
-				<Button to={WEB_AUTH_SIGNUP_URL}>Sign up</Button>
-				<Button to={WEB_AUTH_LOGIN_URL} variant='secondary'>Log in</Button>
-			</Flex>
-		{/if}
+				<Flex gap={2}>
+					<Button to={WEB_AUTH_SIGNUP_URL}>Sign up</Button>
+					<Button to={WEB_AUTH_LOGIN_URL} variant="secondary">Log in</Button>
+				</Flex>
+			{/if}
+
+			<Button
+				use={(el) => el.setAttribute('data-mobile', String(true))}
+				on:click={() => dispatch('secondaryOpen')}
+				variant="hoverable"
+				attachments={['capsule']}
+			>
+				<Icon ariaLabel="More options">{ICON_BARS}</Icon>
+			</Button>
+		</Flex>
 	</Flex>
 </nav>
-
-<SecondaryNavbar on:close={() => secondaryNavbarExpanded = false} expanded={secondaryNavbarExpanded} />

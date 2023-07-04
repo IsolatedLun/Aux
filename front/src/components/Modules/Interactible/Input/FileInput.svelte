@@ -19,7 +19,7 @@
 		if (inputEl.files) {
 			fileName = inputEl.files[0].name;
 
-			if(fileType === 'image') {
+			if (fileType === 'image') {
 				dispatch('preview', URL.createObjectURL(inputEl.files[0]));
 			}
 
@@ -38,11 +38,11 @@
 	const _class = cls.to_string({
 		compostClass: 'input-container drag-drop-input-container',
 		utilClass: 'pos-relative width-100'
-	})
+	});
 	const dispatch = createEventDispatcher();
 </script>
 
-<div class="{_class}" data-variant={variant}>
+<div class={_class} data-variant={variant}>
 	<label for={id}>
 		{#if variant === 'drag-drop'}
 			<Flex useColumn={true} align="center" gap={2}>
@@ -55,19 +55,20 @@
 					>Browse files</Button
 				>
 
-				<Flex useColumn={true} align='center'>
+				<Flex useColumn={true} align="center">
 					<p class="[ clr-text-muted fw-bold fs-300 ]">File name</p>
 					<p class="[ fs-350 text-ellipsis-1 ]">{fileName}</p>
 				</Flex>
 			</Flex>
-
-			{:else if variant === 'compact'}
-			<Flex align="center" justify='start' gap={2}>
+		{:else if variant === 'compact'}
+			<Flex align="center" justify="start" gap={2}>
 				{#if fileType === 'image'}
-					<Icon ariaLabel='Upload image'>{ICON_IMAGE}</Icon>
+					<Icon ariaLabel="Upload image">{ICON_IMAGE}</Icon>
 				{/if}
-				<Button cls={cubeCss({ utilClass: 'z-index-high' })} on:click={handleButtonClick}
-					>Browse files</Button
+				<Button
+					cls={cubeCss({ utilClass: 'z-index-high' })}
+					attachments={['capsule', 'small-pad']}
+					on:click={handleButtonClick}>Browse files</Button
 				>
 				<p class="[ fs-350 text-ellipsis-1 ]">{fileName}</p>
 			</Flex>

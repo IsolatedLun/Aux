@@ -3,6 +3,7 @@ import { createHeaders, createRequest } from '../service';
 import type { Props_SongCard } from '../../components/Modules/SongCard/types';
 import { BACKEND_URL } from '../../consts';
 import type { Form_Song } from '../../components/Pages/Upload/types';
+import type { LanguageRecord } from '../../types';
 
 
 export async function getSongs() {
@@ -20,5 +21,23 @@ export async function uploadSong(data: Form_Song) {
         data,
 		HTTP_METHODS.POST,
 		createHeaders({}, ['files+json', 'auth'])
+	);
+}
+
+export async function viewSong(id: number) {
+	return await createRequest<null, null>(
+		BACKEND_URL + 'songs/view/' + id,
+        null,
+		HTTP_METHODS.POST,
+		createHeaders({}, ['auth'])
+	);
+}
+
+export async function fetchLangugaeList() {
+	return await createRequest<null, LanguageRecord[]>(
+		BACKEND_URL + 'songs/langlist',
+        null,
+		HTTP_METHODS.GET,
+		createHeaders({}, [])
 	);
 }

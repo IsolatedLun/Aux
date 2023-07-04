@@ -12,13 +12,16 @@
 		use(_this);
 	});
 
-	function handleSelect(e: InputEvent) {
-		dispatch('select', (e.target as HTMLSelectElement).value);
+	function handleSelect(e: Event) {
+		const target = (e.target as HTMLSelectElement);
+		const [key, value] = [target.textContent, target.value];
+
+		dispatch('select', {key, value});
 	}
 
 	export let cls = cubeCss({});
 	export let use: (_this: HTMLElement) => void = () => null;
-    export let options: SelectOption[] = [];
+    export let options: Record<string, string>[] = [];
 
 	export let id = '';
 
@@ -32,8 +35,9 @@
 	let _this: HTMLElement;
 </script>
 
-<select class="{_class}" {id}>
+<select class="{_class}" bind:this={_this} {id}>
+	<option disabled selected value>-- Select option --</option>
     {#each options as option}
-        <option value="{option.value}">{option.text}</option>
+        <option on:click={handleSelect} value="{Object.values(option)[1]}">{Object.values(option)[0]}</option>
     {/each}
 </select>

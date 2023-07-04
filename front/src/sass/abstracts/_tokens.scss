@@ -41,9 +41,11 @@ $songCard-thumbnail-brightness-on-hov: 35%;
 $songCard-thumbnail-blur-on-hov: 1px;
 $songCard-thumbnail-scale-on-hov: 1.2;
 
-// Layouts/PrimaryNavbar
+// Layouts/navbar
 $primary-navbar-padding: 0.4rem 1rem;
 $primary-navbar-input-max-width: 32ch;
+
+$aside-max-width: 144px;
 
 // Containers/SongContainer
 $song-container-spacious-column: 10rem;
@@ -62,7 +64,7 @@ $music-player-expanding-transition: 244ms;
 // Modules/Interactible/Button
 $clr-button-primary: $clr-primary-400;
 $clr-button-secondary: $clr-secondary-400;
-$clr-button-gray: $clr-background-500;
+$clr-button-hoverable: $clr-background-500;
 $clr-button-error: $clr-misc-error;
 
 $button-padding: 0.4rem 0.7rem;

@@ -68,8 +68,8 @@ export function validateSignUpForm(form: SignUpForm) {
         () => maxLength_V('Username', form.username, 256),
         () => minLength_V('Email address', form.emailAddress, MIN_EMAIL_LEN),
         () => maxLength_V('Email address', form.emailAddress, MAX_EMAIL_LEN),
-        () => minLength_V('Password', form.emailAddress, MIN_PASSWORD_LEN),
-        () => maxLength_V('Password', form.emailAddress, MAX_PASSWORD_LEN),
+        () => minLength_V('Password', form.password, MIN_PASSWORD_LEN),
+        () => maxLength_V('Password', form.password, MAX_PASSWORD_LEN),
         () => fileType_V('Profile', form.profile, 'image'),
     ]
 

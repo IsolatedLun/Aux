@@ -34,7 +34,7 @@
 	});
 	const _wrapperCombinedClass = wrapperCls.combine({
 		blockClass: 'input-container',
-		utilClass: 'pos-relative width-100'
+		utilClass: 'pos-relative'
 	});
 
 	let _this: HTMLElement;
@@ -42,7 +42,7 @@
 
 <Flex
 	cls={cubeCss(_wrapperCombinedClass)}
-	gap={2}
+	gap={1}
 	align="center"
 	justify="start"
 	use={(e) => e.setAttribute('data-variant', variant)}

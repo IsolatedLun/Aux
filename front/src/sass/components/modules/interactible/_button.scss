@@ -100,6 +100,10 @@
         @include createButton($clr-button-secondary);
     }
 
+    &[data-variant='hoverable'] {
+        @include createButton($clr-button-hoverable);
+    }
+
     &[data-variant='error'] {
         @include createButton($clr-button-error);
     }

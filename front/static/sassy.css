@@ -17,15 +17,15 @@
 }
 
 .clr-background-300 {
-  color: hsl(0, 0%, 7%);
+  color: hsl(0, 0%, 4%);
 }
 
 .clr-background-400 {
-  color: hsl(0, 0%, 15%);
+  color: hsl(0, 0%, 10%);
 }
 
 .clr-background-500 {
-  color: hsl(0, 0%, 22%);
+  color: hsl(0, 0%, 18%);
 }
 
 .clr-misc-error {
@@ -1869,15 +1869,15 @@
 }
 
 .clr-background-300 {
-  color: hsl(0, 0%, 7%);
+  color: hsl(0, 0%, 4%);
 }
 
 .clr-background-400 {
-  color: hsl(0, 0%, 15%);
+  color: hsl(0, 0%, 10%);
 }
 
 .clr-background-500 {
-  color: hsl(0, 0%, 22%);
+  color: hsl(0, 0%, 18%);
 }
 
 .clr-misc-error {
@@ -1889,9 +1889,9 @@
   --clr-primary-400: hsl(261, 40%, 55%);
   --clr-primary-500: hsl(261, 40%, 65%);
   --clr-secondary-400: hsl(201, 50%, 50%);
-  --clr-background-300: hsl(0, 0%, 7%);
-  --clr-background-400: hsl(0, 0%, 15%);
-  --clr-background-500: hsl(0, 0%, 22%);
+  --clr-background-300: hsl(0, 0%, 4%);
+  --clr-background-400: hsl(0, 0%, 10%);
+  --clr-background-500: hsl(0, 0%, 18%);
   --clr-misc-error: hsl(2, 80%, 58%);
   --fs-200: 0.5rem;
   --fs-275: 0.6875rem;
@@ -1921,13 +1921,13 @@
     color: hsl(201, 50%, 50%);
   }
   .clr-background-300 {
-    color: hsl(0, 0%, 7%);
+    color: hsl(0, 0%, 4%);
   }
   .clr-background-400 {
-    color: hsl(0, 0%, 15%);
+    color: hsl(0, 0%, 10%);
   }
   .clr-background-500 {
-    color: hsl(0, 0%, 22%);
+    color: hsl(0, 0%, 18%);
   }
   .clr-misc-error {
     color: hsl(2, 80%, 58%);
@@ -1937,9 +1937,9 @@
     --clr-primary-400: hsl(261, 40%, 55%);
     --clr-primary-500: hsl(261, 40%, 65%);
     --clr-secondary-400: hsl(201, 50%, 50%);
-    --clr-background-300: hsl(0, 0%, 7%);
-    --clr-background-400: hsl(0, 0%, 15%);
-    --clr-background-500: hsl(0, 0%, 22%);
+    --clr-background-300: hsl(0, 0%, 4%);
+    --clr-background-400: hsl(0, 0%, 10%);
+    --clr-background-500: hsl(0, 0%, 18%);
     --clr-misc-error: hsl(2, 80%, 58%);
   }
 }
@@ -1964,7 +1964,7 @@ html {
 body {
   font-family: "Poppins", system-ui;
   font-size: var(--fs-400);
-  background-color: hsl(0, 0%, 7%);
+  background-color: hsl(0, 0%, 4%);
   text-rendering: optimizeLegibility;
   min-height: 100%;
 }
@@ -2201,7 +2201,8 @@ canvas {
 }
 .main-container {
   max-width: min(1300px, 100% - 2rem);
-  margin-inline: auto;
+  margin-inline-start: calc(144px + 1rem);
+  margin-inline-end: 1rem;
 }
 
 .song-card-container[data-preview-mode=false] {
@@ -2230,6 +2231,11 @@ canvas {
   max-width: 4rem;
 }
 
+@media screen and (max-width: 50em) {
+  .main-container {
+    margin-inline: auto;
+  }
+}
 .border-radius-bevelled {
   border-radius: 9px;
 }
@@ -2641,7 +2647,6 @@ canvas {
 }
 
 .song-card .card__thumbnail-container {
-  border: 2px solid hsl(0, 0%, 22%);
   aspect-ratio: 1;
 }
 .song-card .card__thumbnail-container .card__play-btn {
@@ -2706,8 +2711,8 @@ canvas {
   }
 }
 .card[data-variant=primary] {
-  background-color: rgba(38, 38, 38, 0.25);
-  border: 2px solid hsl(0, 0%, 15%);
+  background-color: rgba(26, 26, 26, 0.25);
+  border: 2px solid hsl(0, 0%, 10%);
 }
 
 .card[data-variant=error] {
@@ -2857,6 +2862,71 @@ canvas {
 .button[data-variant=secondary][data-attachments*=transparent] {
   background-color: transparent;
 }
+.button[data-variant=hoverable] {
+  padding: 0.4rem 0.7rem;
+  background-color: hsl(0, 0%, 18%);
+  border: 2px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.button[data-variant=hoverable] .overlay {
+  background-color: #969696;
+}
+.button[data-variant=hoverable][data-attachments*=hologram] {
+  border: 2px solid rgba(46, 46, 46, 0.45);
+  background-color: rgba(46, 46, 46, 0.45);
+  outline-color: rgba(46, 46, 46, 0.45);
+}
+.button[data-variant=hoverable][data-attachments*=hologram][data-selected=true] {
+  background-color: hsl(0, 0%, 18%);
+}
+.button[data-variant=hoverable][data-attachments*=rotate-icon] .icon {
+  display: block;
+  animation: rotateButtonIconAnimation 1s infinite alternate;
+}
+.button[data-variant=hoverable][data-disabled=true] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.button[data-variant=hoverable][data-attachments*=hollow] {
+  background-color: transparent;
+  border: 2px solid hsl(0, 0%, 18%);
+}
+.button[data-variant=hoverable][data-attachments*=ratio-1] {
+  aspect-ratio: 1;
+}
+.button[data-variant=hoverable][data-attachments*=tiny-pad] {
+  padding: 0.1rem 0.3rem;
+}
+.button[data-variant=hoverable][data-attachments*=small-pad] {
+  padding: 0.2rem 0.6rem;
+}
+.button[data-variant=hoverable][data-attachments*=big-pad] {
+  padding: 0.4rem 0.8rem;
+}
+.button[data-variant=hoverable][data-attachments*=huge-pad] {
+  padding: 0.8rem 1.2rem;
+}
+.button[data-variant=hoverable][data-attachments*=capsule] {
+  border-radius: 100vmax;
+}
+.button[data-variant=hoverable][data-attachments*=border-left] {
+  border-start-start-radius: 0px;
+  border-end-start-radius: 0px;
+}
+.button[data-variant=hoverable][data-attachments*=border-right] {
+  border-start-end-radius: 0px;
+  border-end-end-radius: 0px;
+}
+.button[data-variant=hoverable][data-attachments*=flat] {
+  border-radius: 0px;
+}
+.button[data-variant=hoverable][data-attachments*=cube] {
+  aspect-ratio: 1;
+}
+.button[data-variant=hoverable][data-attachments*=transparent] {
+  background-color: transparent;
+}
 .button[data-variant=error] {
   padding: 0.4rem 0.7rem;
   background-color: hsl(2, 80%, 58%);
@@ -2971,19 +3041,19 @@ select {
   top: 50%;
   left: 92%;
   transform: translate(-50%, -50%);
-  color: hsl(0, 0%, 22%);
+  color: hsl(0, 0%, 18%);
   transition: color 375ms ease-in-out;
 }
 .input-container[data-variant=primary] .input {
   padding: 0.3rem 0.6rem;
   border: none;
-  border: 2px solid hsl(0, 0%, 22%);
+  border: 2px solid hsl(0, 0%, 18%);
   border-radius: 9px;
-  background-color: hsl(0, 0%, 15%);
+  background-color: hsl(0, 0%, 10%);
   transition: border-color 375ms ease-in-out;
 }
 .input-container[data-variant=primary] .input:is(:hover, :focus-visible) {
-  box-shadow: 0 0 0px 3px rgba(38, 38, 38, 0.75);
+  box-shadow: 0 0 0px 3px rgba(26, 26, 26, 0.75);
 }
 .input-container[data-variant=primary] .input[data-attachments*=border-flat] {
   border-radius: 0;
@@ -3001,17 +3071,17 @@ select {
   background-color: transparent;
 }
 .input-container[data-variant=primary]:is(:focus-within) .input-end-button {
-  color: hsl(0, 0%, 15%);
+  color: hsl(0, 0%, 10%);
 }
 .input-container.drag-drop-input-container {
   background-color: rgba(126, 94, 186, 0.3);
-  border: 9px solid hsl(0, 0%, 7%);
+  border: 9px solid hsl(0, 0%, 4%);
   border-style: double;
   border-radius: 3px;
 }
 .input-container.drag-drop-input-container[data-variant=compact] {
   max-width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.8rem;
 }
 .input-container.drag-drop-input-container[data-variant=drag-drop] {
   padding: 1.25rem;
@@ -3031,19 +3101,28 @@ select {
 
 .secondary-navbar {
   top: 0;
-  bottom: 0;
-  right: 0;
-  background-color: hsl(0, 0%, 15%);
-  transition: transform 200ms ease-in-out;
-  z-index: 999999;
-}
-.secondary-navbar[aria-expanded=false] {
-  transform: translateX(100%);
-}
-.secondary-navbar[aria-expanded=true] {
-  transform: translateX(0%);
+  width: 100%;
+  height: 100%;
+  max-width: 144px;
+  background-color: hsl(0, 0%, 10%);
 }
 
+@media screen and (max-width: 50em) {
+  .secondary-navbar {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: hsl(0, 0%, 10%);
+    transition: transform 200ms ease-in-out;
+    z-index: 999999;
+  }
+  .secondary-navbar[aria-expanded=false] {
+    transform: translateX(100%);
+  }
+  .secondary-navbar[aria-expanded=true] {
+    transform: translateX(0%);
+  }
+}
 .music-player {
   grid-template-areas: "playerCloseButton playerCloseButton" "playerInfo playerOther" "playerBarContainer playerBarContainer";
   grid-template-rows: 28px 1fr max(18%, 80px);
@@ -3057,7 +3136,7 @@ select {
 }
 .music-player .player__info {
   grid-area: playerInfo;
-  background-color: hsl(0, 0%, 15%);
+  background-color: hsl(0, 0%, 10%);
 }
 .music-player .player__info .music__thumbnail {
   max-width: 16rem;
@@ -3066,11 +3145,11 @@ select {
 }
 .music-player .player__other {
   grid-area: playerOther;
-  background-color: hsl(0, 0%, 15%);
+  background-color: hsl(0, 0%, 10%);
 }
 .music-player .player__bar-container {
   grid-area: playerBarContainer;
-  background-color: hsl(0, 0%, 22%);
+  background-color: hsl(0, 0%, 18%);
 }
 .music-player .player__bar-container .bar {
   top: -8px;

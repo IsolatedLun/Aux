@@ -16,4 +16,4 @@ export type ButtonAttachments =
 	| 'rotate-icon'
 	| 'border-right';
 
-export type ButtonVariants = 'primary' | 'secondary';
+export type ButtonVariants = 'primary' | 'secondary' | 'hoverable';

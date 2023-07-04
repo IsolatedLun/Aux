@@ -22,6 +22,7 @@
 	import Paginator from '../Paginator/Paginator.svelte';
 	import SongCard from '../../Modules/SongCard/SongCard.svelte';
 	import { MUSIC_PLAYER_OPEN_BUTTON_ID } from '../../../consts/consts';
+	import { viewSong } from '../../../services/song/songService';
 
 	onMount(() => {
 		audioEl.addEventListener('loadstart', () => {
@@ -35,6 +36,8 @@
 			barEl.max = String(audioEl.duration);
 
 			audioEl.play();
+
+			viewSong($songStore.currentSong.id);
 		});
 		audioEl.addEventListener('pause', () => (audioState.paused = true));
 		audioEl.addEventListener('play', () => (audioState.paused = false));
@@ -66,8 +69,8 @@
 		<Icon ariaLabel={(expanded ? 'Close' : 'Expand') + ' music player'}>{ICON_GRIP}</Icon>
 	</Button>
 
-	<section class="[ player__info ]">
-		<div class="[ info__wrapper ] [ grid place-items-center margin-block-auto height-100 ]">
+	<section class="[ player__info ] [ overflow-y-auto ]">
+		<div class="[ info__wrapper ] [ grid place-items-center height-100 padding-2 ]">
 			<Flex cls={cubeCss({ blockClass: 'info__content' })} useColumn={true} align="center">
 				<div class="[ music__thumbnail ]">
 					<img src="{BACKEND_URL}{$songStore.currentSong.thumbnail}" alt="A cat" />
@@ -76,6 +79,9 @@
 					<h2>{$songStore.currentSong.title}</h2>
 					<p class="[ fs-350 clr-text-muted ]">{$songStore.currentSong.user.username}</p>
 				</div>
+
+				<h3>Lyrics:</h3>
+				<p></p>
 			</Flex>
 		</div>
 	</section>
