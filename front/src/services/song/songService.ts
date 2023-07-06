@@ -41,3 +41,12 @@ export async function fetchLangugaeList() {
 		createHeaders({}, [])
 	);
 }
+
+export async function fetchLangugaeLyricsForSong(id: number, language: string) {
+	return await createRequest<null, string>(
+		BACKEND_URL + `songs/lyric/${id}/${language}`,
+        null,
+		HTTP_METHODS.GET,
+		createHeaders({}, [])
+	);
+}

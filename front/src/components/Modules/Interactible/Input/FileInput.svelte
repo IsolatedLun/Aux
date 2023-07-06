@@ -23,7 +23,8 @@
 				dispatch('preview', URL.createObjectURL(inputEl.files[0]));
 			}
 
-			dispatch('input', inputEl.files[0]);
+			dispatch('input', inputEl);
+			dispatch('file', inputEl.files[0]);
 		}
 	}
 

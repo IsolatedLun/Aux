@@ -5,14 +5,16 @@ export interface Props_SongCardContext {
 }
 
 export interface Props_SongCard extends Props_DataModel {
-    user: Props_User;
-    title: string;
-    thumbnail: string;
-    audio: string;
+    user: Props_User,
+    title: string,
+    thumbnail: string,
+    audio: string,
 
-    views: number;
-    likes: number;
-    dislikes: number;
+    languages: string[],
+
+    views: number,
+    likes: number,
+    dislikes: number
 }
 
 export enum SongCardShapeEnum {

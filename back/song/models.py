@@ -29,7 +29,6 @@ class SongLyrics(models.Model):
     lyrics = models.TextField()
     
     language = models.CharField(max_length=256)
-    language_shorthand = models.CharField(max_length=64)
 
 class ViewedSong(models.Model):
     user = models.ForeignKey(cUser, on_delete=models.CASCADE)

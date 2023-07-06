@@ -2636,6 +2636,10 @@ canvas {
   border-bottom: 2px solid hsl(261, 40%, 65%);
 }
 
+.whitespace-pre-line {
+  white-space: pre-line;
+}
+
 .visually-hidden {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);

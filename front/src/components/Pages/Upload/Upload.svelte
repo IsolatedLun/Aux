@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ICON_PLUS, ICON_TIMES } from '../../../consts/icons';
+	import { ICON_PLUS } from '../../../consts/icons';
 	import { fetchLangugaeList, uploadSong } from '../../../services/song/songService';
 	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
 	import { createDefaultSongCard, createDefaultUser } from '../../../utils/defaultCreates';
@@ -8,17 +8,16 @@
 	import Flex from '../../Box/Flex/Flex.svelte';
 	import Grid from '../../Box/Grid/Grid.svelte';
 	import SongContainer from '../../Layout/SongContainer/SongContainer.svelte';
-	import Card from '../../Modules/Card/Card.svelte';
 	import Form from '../../Modules/Form/Form.svelte';
 	import Icon from '../../Modules/Icon/Icon.svelte';
 	import Button from '../../Modules/Interactible/Button/Button.svelte';
-	import CheckboxInput from '../../Modules/Interactible/Input/CheckboxInput.svelte';
 	import FileInput from '../../Modules/Interactible/Input/FileInput.svelte';
 	import Select from '../../Modules/Interactible/Input/Select.svelte';
 	import TagInput from '../../Modules/Interactible/Input/TagInput.svelte';
 	import TextInput from '../../Modules/Interactible/Input/TextInput.svelte';
 	import SongCard from '../../Modules/SongCard/SongCard.svelte';
 	import { SongCardShapeEnum } from '../../Modules/SongCard/types';
+	import LyricInputSection from './sections/LyricInputSection.svelte';
 	import type { Form_Song } from './types';
 
 	function handleFormSubmit() {
@@ -39,10 +38,19 @@
 
 	function addLyric() {
 		if (!Object.keys(songForm.lyrics).includes(currentSelectedLanguage))
-			songForm.lyrics[currentSelectedLanguage] = null;
+			songForm.lyrics[currentSelectedLanguage] = '';
 	}
 
-	export let songForm: Form_Song = {
+	function removeLyric(e: CustomEvent<string>) {
+		songForm.lyrics[e.detail] = ''; // Won't re-render without this line.
+		delete songForm.lyrics[e.detail];
+	}
+
+	async function handleLyricInput(e: CustomEvent<{text: string, name: string}>) {
+		songForm.lyrics[e.detail.name] = e.detail.text;
+	}
+
+	let songForm: Form_Song = {
 		title: '',
 		tags: [],
 		lyrics: {},
@@ -54,7 +62,6 @@
 	};
 
 	let currentSelectedLanguage = '';
-	let wrapLanguageInputs = false;
 	let previewThumbnail = '';
 	let formError = '';
 </script>
@@ -82,7 +89,7 @@
 			<FileInput
 				fileType="audio"
 				variant="drag-drop"
-				on:input={(e) => (songForm.audio = e.detail)}
+				on:file={(e) => (songForm.audio = e.detail)}
 			/>
 		</Flex>
 	</Grid>
@@ -95,7 +102,7 @@
 		<FileInput
 			fileType="image"
 			variant="compact"
-			on:input={(e) => (songForm.thumbnail = e.detail)}
+			on:file={(e) => (songForm.thumbnail = e.detail)}
 			on:preview={(e) => (previewThumbnail = e.detail)}
 		/>
 		<Flex
@@ -119,35 +126,7 @@
 			{/await}
 		</Flex>
 
-		<Flex
-			cls={cubeCss({ utilClass: 'width-100 margin-block-start-2' })}
-			align="center"
-			justify="space-between"
-		>
-			<h3>Languages:</h3>
-			<CheckboxInput label="Wrap inputs" bind:bool={wrapLanguageInputs} />
-		</Flex>
-		{#if Object.keys(songForm.lyrics).length === 0}
-			<p class="[ clr-text-muted ] [ padding-1 ]">No languages added</p>
-		{/if}
-		{#key wrapLanguageInputs}
-			<Flex
-				cls={cubeCss({ utilClass: `width-100 margin-block-1 flex-wrap` })}
-				justify="space-between"
-				align="start"
-				useColumn={!wrapLanguageInputs}
-			>
-				{#each Object.keys(songForm.lyrics) as lyric}
-					<Flex align="center" cls={cubeCss({ utilClass: !wrapLanguageInputs ? 'width-100' : '' })}>
-						<p class="[ fs-350 ]">{lyric}:</p>
-						<FileInput fileType="any" variant="compact" />
-						<Button variant="error" attachments={['capsule', 'small-pad']}
-							><Icon ariaLabel="Remove language">{ICON_TIMES}</Icon></Button
-						>
-					</Flex>
-				{/each}
-			</Flex>
-		{/key}
+		<LyricInputSection lyrics={songForm.lyrics} on:input={handleLyricInput} on:remove={removeLyric} />
 	</Flex>
 
 	<h3 class="[ margin-block-2 ]">Preview</h3>

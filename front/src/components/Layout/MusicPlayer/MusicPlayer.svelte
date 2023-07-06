@@ -22,7 +22,8 @@
 	import Paginator from '../Paginator/Paginator.svelte';
 	import SongCard from '../../Modules/SongCard/SongCard.svelte';
 	import { MUSIC_PLAYER_OPEN_BUTTON_ID } from '../../../consts/consts';
-	import { viewSong } from '../../../services/song/songService';
+	import { fetchLangugaeLyricsForSong, viewSong } from '../../../services/song/songService';
+	import Select from '../../Modules/Interactible/Input/Select.svelte';
 
 	onMount(() => {
 		audioEl.addEventListener('loadstart', () => {
@@ -38,6 +39,7 @@
 			audioEl.play();
 
 			viewSong($songStore.currentSong.id);
+			lyrics = '';
 		});
 		audioEl.addEventListener('pause', () => (audioState.paused = true));
 		audioEl.addEventListener('play', () => (audioState.paused = false));
@@ -47,6 +49,13 @@
 		});
 	});
 
+	async function fetchLyrics(language: string) {
+		fetchLangugaeLyricsForSong($songStore.currentSong.id, language)
+			.then((res) => (lyrics = res))
+			.catch(() => (lyrics = 'Currently unavailable.'));
+	}
+
+	let lyrics = '';
 	let expanded = false;
 	let audioState: Props_AudioState = {
 		paused: false,
@@ -69,9 +78,13 @@
 		<Icon ariaLabel={(expanded ? 'Close' : 'Expand') + ' music player'}>{ICON_GRIP}</Icon>
 	</Button>
 
-	<section class="[ player__info ] [ overflow-y-auto ]">
-		<div class="[ info__wrapper ] [ grid place-items-center height-100 padding-2 ]">
-			<Flex cls={cubeCss({ blockClass: 'info__content' })} useColumn={true} align="center">
+	<section class="[ player__info ] [ width-100 overflow-y-auto ]">
+		<div class="[ info__wrapper ] [ grid place-items-center width-100 height-100 padding-2 ]">
+			<Flex
+				cls={cubeCss({ blockClass: 'info__content', utilClass: 'width-100' })}
+				useColumn={true}
+				align="center"
+			>
 				<div class="[ music__thumbnail ]">
 					<img src="{BACKEND_URL}{$songStore.currentSong.thumbnail}" alt="A cat" />
 				</div>
@@ -80,8 +93,23 @@
 					<p class="[ fs-350 clr-text-muted ]">{$songStore.currentSong.user.username}</p>
 				</div>
 
-				<h3>Lyrics:</h3>
-				<p></p>
+				{#if $songStore.currentSong && $songStore.currentSong.languages.length > 0}
+					<Flex
+						cls={cubeCss({ utilClass: 'width-100 margin-block-1' })}
+						align="center"
+						justify="space-between"
+					>
+						<h3>Lyrics</h3>
+						<Select
+							on:select={(e) => fetchLyrics(e.detail.key)}
+							options={$songStore.currentSong.languages.map((x) => ({ [x]: x }))}
+						/>
+					</Flex>
+
+					<p class="[ clr-text-muted whitespace-pre-line padding-block-1 padding-inline-2 ]">
+						{lyrics}
+					</p>
+				{/if}
 			</Flex>
 		</div>
 	</section>

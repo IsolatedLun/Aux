@@ -26,6 +26,7 @@ export function createDefaultSongCard(): Props_SongCard {
 		title: 'No song selected',
 		thumbnail: 'media/thumbnails/default.png',
 		audio: '',
+		languages: [],
 		likes: 0,
 		dislikes: 0,
 		views: 0

@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
 
 from responses import OK, NOT_FOUND, ERR
 from user.models import cUser
@@ -37,12 +37,20 @@ class UploadSongView(APIView):
        
         try:
             new_song = models.Song.objects.create(
-                user=cUser.objects.get(id=req.user.id),
-                title=data['title'],
-                tags=data['tags[]'], 
-                thumbnail=files['thumbnail'],
-                audio=files['audio']
+                user        = cUser.objects.get(id=req.user.id),
+                title       = data['title'],
+                tags        = data['tags[]'], 
+                thumbnail   = files['thumbnail'],
+                audio       = files['audio']
             )
+
+            for key in data.keys():
+                if key.startswith('lyric'):
+                    models.SongLyrics.objects.create(
+                        song_id     = new_song.id,
+                        lyrics      = data[key],
+                        language    = key.split('[')[1][:-1],
+                    )
 
             return Response(data={'id': new_song.id}, status=OK)
         except Exception as e:
@@ -55,8 +63,8 @@ class ViewedSongView(APIView):
     def post(self, req, id: int):
         song = models.Song.objects.get(id=id)
         viewed_song, _ = models.ViewedSong.objects.get_or_create(
-                user=cUser.objects.get(id=req.user.id),
-                song_id=id
+                user    = cUser.objects.get(id=req.user.id),
+                song_id = id
             )
         
         viewed_song.amount_viewed += 1
@@ -66,6 +74,14 @@ class ViewedSongView(APIView):
         viewed_song.save()
 
         return Response(status=OK)
+    
+class SongLyricView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, req, id: int, language: str):
+        lyrics = models.SongLyrics.objects.get(song_id=id, language=language).lyrics
+
+        return Response(data=lyrics, status=OK)
     
 # ========================================
 # User page views
