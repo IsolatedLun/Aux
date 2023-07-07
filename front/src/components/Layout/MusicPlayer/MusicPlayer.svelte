@@ -5,25 +5,22 @@
 		ICON_FAST_LEFT,
 		ICON_FAST_RIGHT,
 		ICON_GRIP,
-		ICON_MUSIC_DISC,
-		ICON_PAUSE,
-		ICON_PLAY
+		ICON_MUSIC_DISC
 	} from '../../../consts/icons';
 	import { songStore } from '../../../stores/songStore';
 	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
 	import Flex from '../../Box/Flex/Flex.svelte';
-	import Grid from '../../Box/Grid/Grid.svelte';
 	import Icon from '../../Modules/Icon/Icon.svelte';
 	import Button from '../../Modules/Interactible/Button/Button.svelte';
-	import type { Props_SongCard } from '../../Modules/SongCard/types';
 	import SongContainer from '../SongContainer/SongContainer.svelte';
 	import type { Props_AudioState } from './types';
 	import { convertToDateTime } from './utils';
 	import Paginator from '../Paginator/Paginator.svelte';
 	import SongCard from '../../Modules/SongCard/SongCard.svelte';
 	import { MUSIC_PLAYER_OPEN_BUTTON_ID } from '../../../consts/consts';
-	import { fetchLangugaeLyricsForSong, viewSong } from '../../../services/song/songService';
-	import Select from '../../Modules/Interactible/Input/Select.svelte';
+	import { viewSong } from '../../../services/song/songService';
+	import PlayerInfo from './sections/PlayerInfo.svelte';
+	import { generalStore } from '../../../stores/generalStore';
 
 	onMount(() => {
 		audioEl.addEventListener('loadstart', () => {
@@ -49,14 +46,7 @@
 		});
 	});
 
-	async function fetchLyrics(language: string) {
-		fetchLangugaeLyricsForSong($songStore.currentSong.id, language)
-			.then((res) => (lyrics = res))
-			.catch(() => (lyrics = 'Currently unavailable.'));
-	}
-
 	let lyrics = '';
-	let expanded = false;
 	let audioState: Props_AudioState = {
 		paused: false,
 		audioLoaded: false,
@@ -67,52 +57,22 @@
 	let barEl: HTMLInputElement;
 </script>
 
-<div class="[ music-player ] [ grid pos-fixed ]" aria-expanded={expanded} data-expanded={expanded}>
+<div
+	class="[ music-player ] [ grid pos-fixed ]"
+	aria-expanded={$generalStore.musicPlayerExpanded}
+	data-expanded={$generalStore.musicPlayerExpanded}
+>
 	<audio bind:this={audioEl} src="{BACKEND_URL}{$songStore.currentSong.audio}" />
-
+	
 	<Button
-		on:click={() => (expanded = !expanded)}
+		on:click={() => generalStore.setMusicPlayerExpandedState(!$generalStore.musicPlayerExpanded)}
 		cls={cubeCss({ blockClass: 'player__close-btn' })}
 		use={(el) => (el.id = MUSIC_PLAYER_OPEN_BUTTON_ID)}
 	>
-		<Icon ariaLabel={(expanded ? 'Close' : 'Expand') + ' music player'}>{ICON_GRIP}</Icon>
+		<Icon ariaLabel={($generalStore.musicPlayerExpanded ? 'Close' : 'Expand') + ' music player'}>{ICON_GRIP}</Icon>
 	</Button>
 
-	<section class="[ player__info ] [ width-100 overflow-y-auto ]">
-		<div class="[ info__wrapper ] [ grid place-items-center width-100 height-100 padding-2 ]">
-			<Flex
-				cls={cubeCss({ blockClass: 'info__content', utilClass: 'width-100' })}
-				useColumn={true}
-				align="center"
-			>
-				<div class="[ music__thumbnail ]">
-					<img src="{BACKEND_URL}{$songStore.currentSong.thumbnail}" alt="A cat" />
-				</div>
-				<div class="[ text-align-center ]">
-					<h2>{$songStore.currentSong.title}</h2>
-					<p class="[ fs-350 clr-text-muted ]">{$songStore.currentSong.user.username}</p>
-				</div>
-
-				{#if $songStore.currentSong && $songStore.currentSong.languages.length > 0}
-					<Flex
-						cls={cubeCss({ utilClass: 'width-100 margin-block-1' })}
-						align="center"
-						justify="space-between"
-					>
-						<h3>Lyrics</h3>
-						<Select
-							on:select={(e) => fetchLyrics(e.detail.key)}
-							options={$songStore.currentSong.languages.map((x) => ({ [x]: x }))}
-						/>
-					</Flex>
-
-					<p class="[ clr-text-muted whitespace-pre-line padding-block-1 padding-inline-2 ]">
-						{lyrics}
-					</p>
-				{/if}
-			</Flex>
-		</div>
-	</section>
+	<PlayerInfo />
 
 	<section class="[ player__other ] [ padding-2 overflow-y-auto ]">
 		{#key $songStore.currentSong.id}

@@ -34,6 +34,7 @@
 {#if to}
 	<a
 		bind:this={_this}
+		on:click
 		href={to}
 		class={_class}
 		data-variant={variant}

@@ -6,9 +6,10 @@
 	import { songStore } from '../stores/songStore';
 </script>
 
-<Paginator
-	on:update={(e) => songStore.setSongs(e.detail)}
-	urlFn={PAGINATED_SONG_URL}
-	component={SongCard}
-	componentContainer={SongContainer}
-/>
+<div class="[ margin-block-end-4 ]">
+	<Paginator
+		urlFn={PAGINATED_SONG_URL}
+		component={SongCard}
+		componentContainer={SongContainer}
+	/>
+</div>

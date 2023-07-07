@@ -22,6 +22,7 @@ export function createDefaultSongCard(): Props_SongCard {
 	return {
 		...createDefaultModel(),
 
+		id: -1,
 		user: createDefaultUser(),
 		title: 'No song selected',
 		thumbnail: 'media/thumbnails/default.png',

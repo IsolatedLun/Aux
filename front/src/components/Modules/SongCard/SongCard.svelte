@@ -1,17 +1,22 @@
 <script lang="ts">
-	import { getContext, setContext } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 	import { songStore } from '../../../stores/songStore';
 	import { createDefaultSongCard } from '../../../utils/defaultCreates';
 	import SongCardCompact from './SongCard_Compact.svelte';
 	import SongCardSpacious from './SongCard_Spacious.svelte';
 	import { SongCardShapeEnum, type Props_SongCard, type Props_SongCardContext } from './types';
+
+	onMount(() => {
+		if(props.id !== -1)
+			i = songStore.addSong(props);
+	})
 	
 	function setSong() {
 		if(!isPreview)
 			songStore.play(i);
 	}
 
-	export let i: number = -1;
+	let i: number = -1;
 	export let props: Props_SongCard = createDefaultSongCard();
 	export let isPreview = false;
 

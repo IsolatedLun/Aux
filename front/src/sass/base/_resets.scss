@@ -110,3 +110,8 @@ canvas {
 [data-visible='false'] {
 	visibility: hidden !important;
 }
+
+[data-disabled='true'] {
+	opacity: 0.5;
+	pointer-events: none;
+}

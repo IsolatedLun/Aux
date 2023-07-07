@@ -22,6 +22,7 @@
 	export let label: string;
 	export let use: (_this: HTMLElement) => void = () => null;
 	export let showLabel = true;
+	export let disabled = false;
 
 	export let id = '';
 	export let bool = false;
@@ -40,24 +41,26 @@
 	let _this: HTMLElement;
 </script>
 
-<Flex
-	cls={cubeCss(_wrapperCombinedClass)}
-	gap={1}
-	align="center"
-	justify="start"
-	use={(e) => e.setAttribute('data-variant', variant)}
->
-	<input
-		bind:this={_this}
-		bind:checked={bool}
-		class={_class}
-		data-variant={variant}
-		data-attachments={attachments.join(',')}
-		on:input={handleInput}
-		{id}
-		type="checkbox"
-	/>
-	<label for={id} hidden={!showLabel}>
-		{label}
-	</label>
+<div data-disabled={disabled}>
+	<Flex
+		cls={cubeCss(_wrapperCombinedClass)}
+		gap={1}
+		align="center"
+		justify="start"
+		use={(e) => e.setAttribute('data-variant', variant)}
+	>
+		<input
+			bind:this={_this}
+			bind:checked={bool}
+			class={_class}
+			data-variant={variant}
+			data-attachments={attachments.join(',')}
+			on:input={handleInput}
+			{id}
+			type="checkbox"
+		/>
+		<label for={id} hidden={!showLabel}>
+			{label}
+		</label>
 </Flex>
+</div>

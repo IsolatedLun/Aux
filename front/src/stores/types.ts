@@ -9,8 +9,10 @@ export interface SongStore_T {
 }
 
 export interface AuthStore_T {
-    tokens: Props_Tokens,
     user: Some<Props_User>,
-    
     isLogged: boolean
+}
+
+export interface GeneralStore_T {
+    musicPlayerExpanded: boolean,
 }

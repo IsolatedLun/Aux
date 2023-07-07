@@ -2050,6 +2050,11 @@ canvas {
   visibility: hidden !important;
 }
 
+[data-disabled=true] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 @media screen and (max-width: 65em) {
   :root {
     --fs-200: 0.45rem;
@@ -2758,10 +2763,6 @@ canvas {
   display: block;
   animation: rotateButtonIconAnimation 1s infinite alternate;
 }
-.button[data-variant=primary][data-disabled=true] {
-  opacity: 0.5;
-  pointer-events: none;
-}
 .button[data-variant=primary][data-attachments*=hollow] {
   background-color: transparent;
   border: 2px solid hsl(261, 40%, 55%);
@@ -2822,10 +2823,6 @@ canvas {
 .button[data-variant=secondary][data-attachments*=rotate-icon] .icon {
   display: block;
   animation: rotateButtonIconAnimation 1s infinite alternate;
-}
-.button[data-variant=secondary][data-disabled=true] {
-  opacity: 0.5;
-  pointer-events: none;
 }
 .button[data-variant=secondary][data-attachments*=hollow] {
   background-color: transparent;
@@ -2888,10 +2885,6 @@ canvas {
   display: block;
   animation: rotateButtonIconAnimation 1s infinite alternate;
 }
-.button[data-variant=hoverable][data-disabled=true] {
-  opacity: 0.5;
-  pointer-events: none;
-}
 .button[data-variant=hoverable][data-attachments*=hollow] {
   background-color: transparent;
   border: 2px solid hsl(0, 0%, 18%);
@@ -2952,10 +2945,6 @@ canvas {
 .button[data-variant=error][data-attachments*=rotate-icon] .icon {
   display: block;
   animation: rotateButtonIconAnimation 1s infinite alternate;
-}
-.button[data-variant=error][data-disabled=true] {
-  opacity: 0.5;
-  pointer-events: none;
 }
 .button[data-variant=error][data-attachments*=hollow] {
   background-color: transparent;
@@ -3040,6 +3029,10 @@ select {
     scale: 0.95;
     rotate: 270deg;
   }
+}
+.input-container textarea {
+  width: 100%;
+  resize: vertical;
 }
 .input-container[data-variant=primary] .input-end-button {
   top: 50%;

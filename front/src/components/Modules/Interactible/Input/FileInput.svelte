@@ -32,6 +32,7 @@
 	export let cls = cubeCss({});
 	export let fileType: FileType;
 	export let variant = 'default';
+	export let disabled = false;
 
 	let inputEl: HTMLInputElement;
 	let fileName = 'Empty file';
@@ -43,7 +44,7 @@
 	const dispatch = createEventDispatcher();
 </script>
 
-<div class={_class} data-variant={variant}>
+<div class={_class} data-variant={variant} data-disabled={disabled}>
 	<label for={id}>
 		{#if variant === 'drag-drop'}
 			<Flex useColumn={true} align="center" gap={2}>

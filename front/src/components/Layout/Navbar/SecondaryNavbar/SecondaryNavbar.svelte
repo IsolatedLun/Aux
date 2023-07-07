@@ -5,6 +5,7 @@
 	ICON_HOME,
 		ICON_QUESTION_CIRCLE,
 		ICON_SETTINGS,
+		ICON_SIGN_IN,
 		ICON_SIGN_OUT,
 		ICON_TIMES,
 		ICON_UPLOAD,
@@ -18,7 +19,7 @@
 	import SecondaryNavbarItem from './SecondaryNavbarItem.svelte';
 	import { authStore } from '../../../../stores/authStore';
 	import { goto } from '$app/navigation';
-	import { WEB_AUTH_LOGIN_URL } from '../../../../consts';
+	import { WEB_AUTH_LOGIN_URL, WEB_AUTH_SIGNUP_URL } from '../../../../consts';
 
 	onMount(() => {
 		const observer = new MutationObserver(() => {
@@ -53,33 +54,55 @@
 	>
 	
 		<Flex cls={cubeCss({ utilClass: 'width-100' })} useColumn={true} tag="ul" align="center">
-			<SecondaryNavbarItem
-				props={{
-					to: 'upload',
-					buttonVariant: 'primary',
-					icon: ICON_UPLOAD,
-					text: 'Upload'
-				}}
-			/>
+			{#if $authStore.isLogged}
+				<SecondaryNavbarItem
+					props={{
+						to: 'upload',
+						buttonVariant: 'primary',
+						icon: ICON_UPLOAD,
+						text: 'Upload'
+					}}
+				/>
+
+				{:else}
+				<SecondaryNavbarItem
+					props={{
+						to: WEB_AUTH_SIGNUP_URL,
+						buttonVariant: 'primary',
+						icon: ICON_SIGN_IN,
+						text: 'Sign up'
+					}}
+				/>
+				<SecondaryNavbarItem
+					props={{
+						to: WEB_AUTH_LOGIN_URL,
+						buttonVariant: 'secondary',
+						icon: ICON_SIGN_IN,
+						text: 'Log in'
+					}}
+				/>
+			{/if}
 		</Flex>
 	
 		<Flex cls={cubeCss({ utilClass: 'width-100' })} useColumn={true} tag="ul" align="center">
-			<SecondaryNavbarItem
-				props={{
-					to: '',
-					buttonVariant: 'primary',
-					icon: ICON_USER,
-					text: 'My profile'
-				}}
-			/>
-			<SecondaryNavbarItem
-				props={{
-					to: '',
-					buttonVariant: 'primary',
-					icon: ICON_SETTINGS,
-					text: 'Settings'
-				}}
-			/>
+			{#if $authStore.isLogged}
+				<SecondaryNavbarItem
+					props={{
+						to: '',
+						buttonVariant: 'primary',
+						icon: ICON_USER,
+						text: 'My profile'
+					}}
+				/>
+				<SecondaryNavbarItem
+					props={{
+						to: '',
+						buttonVariant: 'primary',
+						icon: ICON_SETTINGS,
+						text: 'Settings'
+					}}
+				/>
+			{/if}
 
 			<Flex
 				cls={cubeCss({ utilClass: 'width-100 margin-block-start-2' })}
@@ -104,14 +127,16 @@
 			tag="ul"
 			align="center"
 		>
-			<SecondaryNavbarItem
-				props={{
-					action: handleLogout,
-					buttonVariant: 'secondary',
-					icon: ICON_SIGN_OUT,
-					text: 'Log out'
-				}}
-			/>
+			{#if $authStore.isLogged}
+				<SecondaryNavbarItem
+					props={{
+						action: handleLogout,
+						buttonVariant: 'secondary',
+						icon: ICON_SIGN_OUT,
+						text: 'Log out'
+					}}
+				/>
+			{/if}
 			<SecondaryNavbarItem
 				props={{
 					to: '',

@@ -52,6 +52,11 @@
 }
 
 .input-container {
+    textarea {
+        width: 100%;
+        resize: vertical;
+    }
+
     &[data-variant='primary'] {
         @include createInput($clr-background-400);
     }

@@ -2,7 +2,7 @@ import { HTTP_METHODS } from '../types';
 import { createHeaders, createRequest } from '../service';
 import type { Props_SongCard } from '../../components/Modules/SongCard/types';
 import { BACKEND_URL } from '../../consts';
-import type { Form_Song } from '../../components/Pages/Upload/types';
+import type { Form_EditSong, Form_Song } from '../../components/Pages/Upload/types';
 import type { LanguageRecord } from '../../types';
 
 
@@ -18,6 +18,15 @@ export async function getSongs() {
 export async function uploadSong(data: Form_Song) {
 	return await createRequest<Form_Song, null>(
 		BACKEND_URL + 'songs/upload',
+        data,
+		HTTP_METHODS.POST,
+		createHeaders({}, ['files+json', 'auth'])
+	);
+}
+
+export async function editSong(data: Form_EditSong) {
+	return await createRequest<Form_EditSong, null>(
+		BACKEND_URL + `songs/${data.id}/edit`,
         data,
 		HTTP_METHODS.POST,
 		createHeaders({}, ['files+json', 'auth'])
@@ -42,9 +51,18 @@ export async function fetchLangugaeList() {
 	);
 }
 
-export async function fetchLangugaeLyricsForSong(id: number, language: string) {
+export async function fetchLanguageLyricsForSong(id: number, language: string) {
 	return await createRequest<null, string>(
 		BACKEND_URL + `songs/lyric/${id}/${language}`,
+        null,
+		HTTP_METHODS.GET,
+		createHeaders({}, [])
+	);
+}
+
+export async function fetchAllLanguageLyricsForSong(id: number) {
+	return await createRequest<null, Record<string, string>>(
+		BACKEND_URL + `songs/lyric/${id}/all`,
         null,
 		HTTP_METHODS.GET,
 		createHeaders({}, [])

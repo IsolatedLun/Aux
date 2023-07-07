@@ -1,10 +1,12 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 	import { ICON_PLUS } from '../../../consts/icons';
-	import { fetchLangugaeList, uploadSong } from '../../../services/song/songService';
+	import { fetchLangugaeList, uploadSong, fetchAllLanguageLyricsForSong, editSong } from '../../../services/song/songService';
 	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
 	import { createDefaultSongCard, createDefaultUser } from '../../../utils/defaultCreates';
-	import { validateUploadForm } from '../../../utils/form/form';
-	import { filterEnumByNumbers, isFileTypeOf } from '../../../utils/general';
+	import { validateEditSongForm, validateUploadForm } from '../../../utils/form/form';
+	import { filterEnumByNumbers } from '../../../utils/general';
 	import Flex from '../../Box/Flex/Flex.svelte';
 	import Grid from '../../Box/Grid/Grid.svelte';
 	import SongContainer from '../../Layout/SongContainer/SongContainer.svelte';
@@ -19,16 +21,44 @@
 	import { SongCardShapeEnum } from '../../Modules/SongCard/types';
 	import LyricInputSection from './sections/LyricInputSection.svelte';
 	import type { Form_Song } from './types';
+	import { songStore } from '../../../stores/songStore';
+	import { authStore } from '../../../stores/authStore';
+	import { goto } from '$app/navigation';
+	import { BACKEND_URL } from '../../../consts';
+
+	onMount(() => {
+		isEditMode = $page.url.searchParams.get('edit') === 'true';
+
+		if(isEditMode) {
+			if(
+				($authStore.user && $songStore.currentSong.user.id !== $authStore.user.id)
+				|| $songStore.currentSong.id === -1
+			)
+				goto('/');
+				
+			songForm = {
+				title: $songStore.currentSong.title,
+				tags: [],
+				user: $songStore.currentSong.user,
+				audio: null,
+				thumbnail: null,
+				lyrics: {},
+			}
+		}
+	})
 
 	function handleFormSubmit() {
-		const res = validateUploadForm(songForm);
+		const res = isEditMode ? validateEditSongForm(songForm) : validateUploadForm(songForm);
 		if (res !== true) {
 			formError = res;
 			return;
 		}
 
+		if(isEditMode) {
+			editSong({...songForm, id: $songStore.currentSong.id})
+				.catch((err) => (formError = err));
+		}
 		uploadSong(songForm)
-			.then(() => alert('success'))
 			.catch((err) => (formError = err));
 	}
 
@@ -50,6 +80,13 @@
 		songForm.lyrics[e.detail.name] = e.detail.text;
 	}
 
+	async function handleFetchAllLyrics() {
+		const data = await fetchAllLanguageLyricsForSong($songStore.currentSong.id);
+		songForm.lyrics = data;
+
+		return Promise.resolve(data);
+	}
+
 	let songForm: Form_Song = {
 		title: '',
 		tags: [],
@@ -61,6 +98,7 @@
 		user: createDefaultUser()
 	};
 
+	let isEditMode = false;
 	let currentSelectedLanguage = '';
 	let previewThumbnail = '';
 	let formError = '';
@@ -77,8 +115,8 @@
 	>
 		<Flex useColumn={true} gap={2}>
 			<TextInput
-				variant="primary"
 				bind:value={songForm.title}
+				variant="primary"
 				label="Title"
 				showLabel={true}
 				placeholder="Enter title"
@@ -87,6 +125,7 @@
 		</Flex>
 		<Flex useColumn={true} align="center">
 			<FileInput
+				disabled={isEditMode}
 				fileType="audio"
 				variant="drag-drop"
 				on:file={(e) => (songForm.audio = e.detail)}
@@ -100,6 +139,7 @@
 		useColumn={true}
 	>
 		<FileInput
+			disabled={isEditMode}
 			fileType="image"
 			variant="compact"
 			on:file={(e) => (songForm.thumbnail = e.detail)}
@@ -108,10 +148,16 @@
 		<Flex
 			cls={cubeCss({ utilClass: 'width-100 margin-inline-start-1' })}
 			justify="space-between"
+			collapseOnMobile={true}
+			alignCenterOnMobile={true}
 			gap={2}
 		>
 			<Flex>
-				<Button isSubmit={true}>Upload</Button>
+				{#if isEditMode}
+					<Button variant='secondary' isSubmit={true}>Save changes</Button>
+					{:else}
+					<Button isSubmit={true}>Upload</Button>
+				{/if}
 				<Button variant="error">Cancel</Button>
 			</Flex>
 			{#await fetchLangugaeList() then langList}
@@ -126,7 +172,13 @@
 			{/await}
 		</Flex>
 
-		<LyricInputSection lyrics={songForm.lyrics} on:input={handleLyricInput} on:remove={removeLyric} />
+		{#if isEditMode}
+			{#await handleFetchAllLyrics() then _}
+				<LyricInputSection lyrics={songForm.lyrics} on:input={handleLyricInput} on:remove={removeLyric} />
+			{/await}
+			{:else}
+				<LyricInputSection lyrics={songForm.lyrics} on:input={handleLyricInput} on:remove={removeLyric} />
+		{/if}
 	</Flex>
 
 	<h3 class="[ margin-block-2 ]">Preview</h3>
@@ -138,13 +190,13 @@
 		collapseOnMobile={true}
 	>
 		{#each filterEnumByNumbers(SongCardShapeEnum) as shape, i}
-			<SongContainer initialButtonIdx={i} cardShape={shape} previewMode={true}>
+			<SongContainer initialButtonIdx={i} cardShape={Number(shape)} previewMode={true}>
 				<SongCard
 					isPreview={true}
 					props={{
 						...createDefaultSongCard(),
 						...songForm,
-						thumbnail: previewThumbnail,
+						thumbnail: isEditMode ? BACKEND_URL + $songStore.currentSong.thumbnail : previewThumbnail,
 						audio: ''
 					}}
 				/>

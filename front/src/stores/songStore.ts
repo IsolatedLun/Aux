@@ -14,15 +14,24 @@ export function createSongStore() {
     return {
         subscribe: store.subscribe,
 
-        setSongs: (songs: Props_SongCard[]) => store.update(_store => {
-            _store.songs = songs;
-            return _store;
-        }),
+        addSong: (song: Props_SongCard) => {
+            let idx: number = -1;
+            store.update(_store => {
+                for(let i = 0; i < _store.songs.length; i++) {
+                    if(_store.songs[i].id === song.id) {
+                        idx = i;
+                        return _store;
+                    }
+                }
+                
+                _store.songs.push(song);
+                idx = _store.songs.length - 1;
 
-        appendSongs: (songs: Props_SongCard[]) => store.update(_store => {
-            _store.songs.push(...songs);
-            return _store;
-        }),
+                return _store;
+            })
+
+            return idx;
+        },
 
         play: (i: number) => store.update(_store => {
             _store.i = i;

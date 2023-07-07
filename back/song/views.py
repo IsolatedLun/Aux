@@ -44,6 +44,7 @@ class UploadSongView(APIView):
                 audio       = files['audio']
             )
 
+            # Data is received as lyric[English], lyric[Armenian], ...
             for key in data.keys():
                 if key.startswith('lyric'):
                     models.SongLyrics.objects.create(
@@ -56,6 +57,53 @@ class UploadSongView(APIView):
         except Exception as e:
             print(e)
             return Response(status=ERR)
+        
+class EditSongView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, req, id: int):
+        data = req.POST
+        files = req.FILES
+       
+        song = models.Song.objects.get(id = id)
+        song.title = data['title']
+        song.save()
+
+        song_lyrics = models.SongLyrics.objects.filter(song_id=id)
+        song_lyric_languages = [x.language for x in song_lyrics]
+
+        # Data is received as lyric[English], lyric[Armenian], ...
+        for key in data.keys():
+            if key.startswith('lyric'):
+                language = key.split('[')[1][:-1]
+                if language not in song_lyric_languages: # If the language does not exist, then create
+                    models.SongLyrics.objects.create(
+                        song_id     = song.id,
+                        lyrics      = data[key],
+                        language    = key.split('[')[1][:-1],
+                    )
+                    song_lyric_languages.remove(language)
+
+                else: # If the language exists, then update
+                    lyric = models.SongLyrics.objects.get(
+                            song_id  = song.id,
+                            language = key.split('[')[1][:-1]
+                        )
+                    lyric.lyrics = data[key]
+                    lyric.save()
+                    
+                    song_lyric_languages.remove(language)
+
+        # The remaining languages have been deleted, we know this because we looped through all the languages list
+        # and removed the language from the list after creating/updating
+        # the remaining languages are the ones that were deleted.
+        for language in song_lyric_languages:
+            models.SongLyrics.objects.get(
+                song_id  = song.id,
+                language = language
+            ).delete()
+
+        return Response(status=OK)
 
 class ViewedSongView(APIView):
     permission_classes = [IsAuthenticated]
@@ -82,6 +130,19 @@ class SongLyricView(APIView):
         lyrics = models.SongLyrics.objects.get(song_id=id, language=language).lyrics
 
         return Response(data=lyrics, status=OK)
+
+class AllSongLyricsView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, req, id: int):
+        all_lyrics = models.SongLyrics.objects.filter(song_id=id)
+        data = {}
+
+        for x in all_lyrics:
+            data[x.language] = x.lyrics
+
+        return Response(data=data, status=OK)
+
     
 # ========================================
 # User page views

@@ -10,3 +10,12 @@ export interface Form_Song {
 
     user: Props_User;
 }
+
+export interface Form_EditSong {
+    id: number,
+    title: string,
+    tags: string[],
+    lyrics: Record<string, string>,
+
+    user: Props_User;
+}

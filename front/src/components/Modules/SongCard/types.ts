@@ -7,6 +7,7 @@ export interface Props_SongCardContext {
 export interface Props_SongCard extends Props_DataModel {
     user: Props_User,
     title: string,
+    tags: string[],
     thumbnail: string,
     audio: string,
 

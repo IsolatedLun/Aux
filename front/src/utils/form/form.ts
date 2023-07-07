@@ -51,6 +51,15 @@ export function validateUploadForm(form: Form_Song) {
     return runFormValidators(validators);
 }
 
+export function validateEditSongForm(form: Form_Song) {
+    const validators: FormValidatorFn[] = [
+        () => minLength_V('Title', form.title, 1),
+        () => maxLength_V('Title', form.title, 64),
+    ]
+
+    return runFormValidators(validators);
+}
+
 export function validateLoginForm(form: LoginForm) {
     const validators: FormValidatorFn[] = [
         () => minLength_V('Email address', form.emailAddress, MIN_EMAIL_LEN),

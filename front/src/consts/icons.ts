@@ -28,6 +28,8 @@ export const ICON_PAUSE = '\uf04c';
 export const ICON_GRIP = '\uf58d';
 export const ICON_QUESTION_CIRCLE = '\uf059';
 export const ICON_SIGN_OUT = '\uf08b';
+export const ICON_SIGN_IN = '\uf090';
+export const ICON_EDIT ='\uf044';
 
 export const ICON_GRID_V = '\uf58e';
 export const ICON_GRID_H = '\uf58d';

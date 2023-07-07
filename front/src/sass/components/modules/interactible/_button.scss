@@ -33,12 +33,6 @@
         }
     }
 
-
-    &[data-disabled='true'] {
-        opacity: 0.5;
-        pointer-events: none;
-    }
-
     &[data-attachments*='hollow'] {
         background-color: transparent;
         border: 2px solid $background;
