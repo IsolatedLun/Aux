@@ -18,6 +18,7 @@ export function getTokensFromLocalStorage(): Some<Props_Tokens> {
 		return null;
 
 	// null + null = 0
+	// @ts-ignore
 	if(localStorage.getItem('refresh') + localStorage.getItem('access') === 0) {
 		return null;
 	}

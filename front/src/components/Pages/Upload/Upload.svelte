@@ -2,7 +2,12 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import { ICON_PLUS } from '../../../consts/icons';
-	import { fetchLangugaeList, uploadSong, fetchAllLanguageLyricsForSong, editSong } from '../../../services/song/songService';
+	import {
+		fetchLangugaeList,
+		uploadSong,
+		fetchAllLanguageLyricsForSong,
+		editSong
+	} from '../../../services/song/songService';
 	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
 	import { createDefaultSongCard, createDefaultUser } from '../../../utils/defaultCreates';
 	import { validateEditSongForm, validateUploadForm } from '../../../utils/form/form';
@@ -29,23 +34,23 @@
 	onMount(() => {
 		isEditMode = $page.url.searchParams.get('edit') === 'true';
 
-		if(isEditMode) {
-			if(
-				($authStore.user && $songStore.currentSong.user.id !== $authStore.user.id)
-				|| $songStore.currentSong.id === -1
+		if (isEditMode) {
+			if (
+				($authStore.user && $songStore.currentSong.user.id !== $authStore.user.id) ||
+				$songStore.currentSong.id === -1
 			)
 				goto('/');
-				
+
 			songForm = {
 				title: $songStore.currentSong.title,
 				tags: [],
 				user: $songStore.currentSong.user,
 				audio: null,
 				thumbnail: null,
-				lyrics: {},
-			}
+				lyrics: {}
+			};
 		}
-	})
+	});
 
 	function handleFormSubmit() {
 		const res = isEditMode ? validateEditSongForm(songForm) : validateUploadForm(songForm);
@@ -54,12 +59,11 @@
 			return;
 		}
 
-		if(isEditMode) {
-			editSong({...songForm, id: $songStore.currentSong.id})
-				.catch((err) => (formError = err));
+		if (isEditMode) {
+			editSong({ ...songForm, id: $songStore.currentSong.id }).catch((err) => (formError = err));
 		}
-		uploadSong(songForm)
-			.catch((err) => (formError = err));
+		
+		uploadSong(songForm).catch((err) => (formError = err));
 	}
 
 	function removeTag(tag: string) {
@@ -76,7 +80,7 @@
 		delete songForm.lyrics[e.detail];
 	}
 
-	async function handleLyricInput(e: CustomEvent<{text: string, name: string}>) {
+	async function handleLyricInput(e: CustomEvent<{ text: string; name: string }>) {
 		songForm.lyrics[e.detail.name] = e.detail.text;
 	}
 
@@ -154,8 +158,8 @@
 		>
 			<Flex>
 				{#if isEditMode}
-					<Button variant='secondary' isSubmit={true}>Save changes</Button>
-					{:else}
+					<Button variant="secondary" isSubmit={true}>Save changes</Button>
+				{:else}
 					<Button isSubmit={true}>Upload</Button>
 				{/if}
 				<Button variant="error">Cancel</Button>
@@ -163,7 +167,11 @@
 			{#await fetchLangugaeList() then langList}
 				<Flex align="center">
 					<p>Lyrics:</p>
-					<Select on:select={(e) => (currentSelectedLanguage = e.detail.key)} options={langList} />
+					<Select
+						on:select={(e) => (currentSelectedLanguage = e.detail.key)}
+						options={langList}
+						isOptional={true}
+					/>
 					<Button on:click={addLyric} variant="hoverable" attachments={['capsule']}>
 						<Icon ariaLabel="">{ICON_PLUS}</Icon>
 						<span class="[ margin-inline-start-1 ]">Add language</span>
@@ -174,10 +182,18 @@
 
 		{#if isEditMode}
 			{#await handleFetchAllLyrics() then _}
-				<LyricInputSection lyrics={songForm.lyrics} on:input={handleLyricInput} on:remove={removeLyric} />
+				<LyricInputSection
+					lyrics={songForm.lyrics}
+					on:input={handleLyricInput}
+					on:remove={removeLyric}
+				/>
 			{/await}
-			{:else}
-				<LyricInputSection lyrics={songForm.lyrics} on:input={handleLyricInput} on:remove={removeLyric} />
+		{:else}
+			<LyricInputSection
+				lyrics={songForm.lyrics}
+				on:input={handleLyricInput}
+				on:remove={removeLyric}
+			/>
 		{/if}
 	</Flex>
 
@@ -196,7 +212,9 @@
 					props={{
 						...createDefaultSongCard(),
 						...songForm,
-						thumbnail: isEditMode ? BACKEND_URL + $songStore.currentSong.thumbnail : previewThumbnail,
+						thumbnail: isEditMode
+							? BACKEND_URL + $songStore.currentSong.thumbnail
+							: previewThumbnail,
 						audio: ''
 					}}
 				/>

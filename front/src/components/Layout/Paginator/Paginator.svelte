@@ -71,18 +71,12 @@
     const dispatch = createEventDispatcher();
 </script>
 
-<div class="[ paginator ]">
-    <div class="[ results ]">
-        <svelte:component this={componentContainer}>
-            {#each results as result, i}
-                <svelte:component this={component} props={result} {i} />
-            {/each}
-            {#if isFetching && next_page !== null}
-                <AutoSkeletron>
-                    <SongCard />
-                </AutoSkeletron>
-            {/if}
-        </svelte:component>
-    </div>
-    <div bind:this={intersectionEl} class="[ paginator__intersection ]" aria-hidden="true" />
-</div>
+{#each results as result, i}
+    <svelte:component this={component} props={result} {i} />
+{/each}
+{#if isFetching && next_page !== null}
+    <AutoSkeletron>
+        <SongCard />
+    </AutoSkeletron>
+{/if}
+<div bind:this={intersectionEl} class="[ paginator__intersection ]" aria-hidden="true" />

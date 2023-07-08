@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('<int:page>', views.PaginatedSongView.as_view(), name='GET | Paginated songs'),
+    path('<int:page>/user/<int:id>', views.PaginatedUserSongsView.as_view(), name='GET | Paginated user songs'),
     path('<int:id>/edit', views.EditSongView.as_view(), name='POST | Edit song'),
     
     path('upload', views.UploadSongView.as_view(), name='POST | Upload song'),

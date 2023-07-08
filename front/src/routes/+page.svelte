@@ -6,10 +6,13 @@
 	import { songStore } from '../stores/songStore';
 </script>
 
+<title>Aux | Home</title>
 <div class="[ margin-block-end-4 ]">
-	<Paginator
-		urlFn={PAGINATED_SONG_URL}
-		component={SongCard}
-		componentContainer={SongContainer}
-	/>
+	<SongContainer>
+		<Paginator
+			urlFn={PAGINATED_SONG_URL}
+			component={SongCard}
+			componentContainer={SongContainer}
+		/>
+	</SongContainer>
 </div>

@@ -22,6 +22,7 @@
 	export let cls = cubeCss({});
 	export let use: (_this: HTMLElement) => void = () => null;
     export let options: Record<string, string>[] = [];
+	export let isOptional = false;
 
 	export let id = '';
 
@@ -36,7 +37,10 @@
 </script>
 
 <select class="{_class}" bind:this={_this} {id}>
-	<option disabled selected value>-- Select option --</option>
+	{#if isOptional}
+		<option disabled selected value>-- Select option --</option>
+	{/if}
+	
     {#each options as option}
         <option on:click={handleSelect} value="{Object.values(option)[1]}">{Object.values(option)[0]}</option>
     {/each}

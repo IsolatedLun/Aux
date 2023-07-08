@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, setContext } from 'svelte';
+	import { createEventDispatcher, onMount, setContext } from 'svelte';
 	import { ICON_GRID_H, ICON_GRID_V, ICON_TABLE_CELLS } from '../../../consts/icons';
 	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
 	import Flex from '../../Box/Flex/Flex.svelte';
@@ -20,14 +20,19 @@
 	setContext<Props_SongCardContext>('container', {
 		getCardShape: () => cardShape
 	})
+
+	const dispatch = createEventDispatcher();
 </script>
 
 <Flex useColumn={true} alignCenterOnMobile={true}>
 	<Flex cls={cubeCss({ utilClass: 'width-100' })} gap={2} justify="{previewMode ? 'center' : 'end'}">
 		{#if !previewMode}
 			<Select 
+				on:select={(e) => dispatch('select', e.detail)}
 				options={[
-					{value: 'top-rated', text: 'Top Rated'}
+					{text: 'Newest', value: '-date_created'},
+					{text: 'Popular', value: 'views'},
+					{text: 'Oldest', value: 'date_created'}
 				]} 
 			/>
 		{/if}

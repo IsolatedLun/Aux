@@ -23,11 +23,24 @@ class PaginatedSongView(APIView):
             serializers.SongSerializer,
             {},
             page,
-            30
+            16
         )
 
         return Response(data={'results': res[0], 'next_page': res[1]}, status=OK)
     
+class PaginatedUserSongsView(APIView):
+    def get(self, req, page: int, id: int):
+        res = pagination_wrapper(
+            models.Song,
+            {'user_id': id},
+            serializers.SongSerializer,
+            {},
+            page,
+            16
+        )
+
+        return Response(data={'results': res[0], 'next_page': res[1]}, status=OK)
+
 class UploadSongView(APIView):
     permission_classes = [IsAuthenticated]
 

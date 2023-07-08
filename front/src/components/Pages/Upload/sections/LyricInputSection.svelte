@@ -64,7 +64,7 @@
 				cls={cubeCss({ utilClass: 'width-100' })}
 			>
 				<p class="[ fs-350 ]">{lyric}:</p>
-				<div class="[ input-container ] [ width-100 ]">
+				<div class="[ input-container ] [ width-100 ]" data-variant='primary'>
 					<textarea
 						on:input={(e) => handleTextArea(e, lyric)}
 						class="[ input ]"

@@ -1,6 +1,7 @@
 // Backend Url's
 export const BACKEND_URL = 'http://127.0.0.1:8000/'
 export const PAGINATED_SONG_URL = (page: number) => BACKEND_URL + 'songs/' + page;
+export const PAGINATED_USER_SONG_URL = (page: number, id: number) => (page: number) => PAGINATED_SONG_URL(page) + '/user/' + id;
 
 // Web Url's
 export const WEB_UPLOAD_SONG_URL = '/upload';

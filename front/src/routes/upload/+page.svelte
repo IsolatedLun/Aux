@@ -1,5 +1,12 @@
 <script>
-	import Upload from "../../components/Pages/Upload/Upload.svelte";
+	import AuthProtected from "../../components/Modules/Auth/AuthProtected.svelte";
+import Upload from "../../components/Pages/Upload/Upload.svelte";
 
 </script>
-<Upload />
+
+<title>Aux | Upload</title>
+
+
+<AuthProtected>
+	<Upload />
+</AuthProtected>

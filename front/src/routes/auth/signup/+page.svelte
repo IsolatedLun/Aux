@@ -3,4 +3,5 @@
 
 </script>
 
+<title>Aux | Sign up</title>
 <SignUp />

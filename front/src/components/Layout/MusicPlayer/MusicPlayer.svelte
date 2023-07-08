@@ -76,12 +76,14 @@
 
 	<section class="[ player__other ] [ padding-2 overflow-y-auto ]">
 		{#key $songStore.currentSong.id}
-			<Paginator
-				urlFn={PAGINATED_SONG_URL}
-				filterFn={(songs) => songs.filter((x) => x.id !== $songStore.currentSong.id)}
-				component={SongCard}
-				componentContainer={SongContainer}
-			/>
+			<SongContainer>
+				<Paginator
+					urlFn={PAGINATED_SONG_URL}
+					filterFn={(songs) => songs.filter((x) => x.id !== $songStore.currentSong.id)}
+					component={SongCard}
+					componentContainer={SongContainer}
+				/>
+			</SongContainer>
 		{/key}
 	</section>
 
