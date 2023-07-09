@@ -58,7 +58,6 @@
     export let urlFn: (n: number) => string;
     export let filterFn: ((results: any[]) => any[]) | null = null;
     export let component: ConstructorOfATypedSvelteComponent;
-    export let componentContainer: ConstructorOfATypedSvelteComponent;
 
     export let results: any[] = [];
     

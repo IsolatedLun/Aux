@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import { BACKEND_URL } from '../../../consts';
+	import { BACKEND_URL, WEB_USER_PROFILE_URL } from '../../../consts';
 	import { ICON_EYE, ICON_PLAY } from '../../../consts/icons';
 	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
 	import { createDefaultSongCard } from '../../../utils/defaultCreates';
@@ -9,6 +9,7 @@
 	import Button from '../Interactible/Button/Button.svelte';
 	import Numeric from '../Numeric/Numeric.svelte';
 	import type { Props_SongCard } from './types';
+	import UserProfile from '../Profile/UserProfile.svelte';
 	
 	export let props: Props_SongCard = createDefaultSongCard();
 	export let cls = cubeCss({});
@@ -53,11 +54,8 @@
 				<Numeric value={props.views} /> <span class="[ visually-hidden ]">views</span>
 			</p>
 		</Flex>
-		<div class="[ card__profile-container ] [ border-radius-max ]">
-			<img
-				src="{BACKEND_URL}{props.user.profile}"
-				alt="Profile of {props.user.username}"
-			/>
-		</div>
+		<a href="{WEB_USER_PROFILE_URL(props.user.id)}">
+			<UserProfile user={props.user} variant='songCard' />
+		</a>
 	</Flex>
 </Flex>

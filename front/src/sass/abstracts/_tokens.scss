@@ -41,7 +41,7 @@ $songCard-thumbnail-brightness-on-hov: 35%;
 $songCard-thumbnail-blur-on-hov: 1px;
 $songCard-thumbnail-scale-on-hov: 1.2;
 
-// Layouts/navbar
+// Layouts/Navbar
 $primary-navbar-padding: 0.4rem 1rem;
 $primary-navbar-input-max-width: 32ch;
 
@@ -81,7 +81,7 @@ $clr-input-neutral: $clr-background-500;
 $clr-input-border-on-hov: $clr-primary-400;
 $clr-input-border: $clr-background-500;
 
-$input-primary: $clr-background-400;
+$input-primary: $clr-primary-400;
 
 $drag-input-compact-padding: 0.4rem 0.8rem;
 $drag-input-default-padding: 1.25rem;
@@ -93,3 +93,7 @@ $input-border-color-transition-duration: 375ms;
 // Modules/Card
 $card-primary: $clr-background-400;
 $card-error: $clr-misc-error;
+
+// Modules/Profile
+$profile-default-width: 2.75rem;
+$profile-large-width: 8rem;

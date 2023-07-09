@@ -31,3 +31,12 @@ export async function authenticate() {
 		createHeaders({}, ['auth'])
 	);
 }
+
+export async function fetchUser(id: number) {
+	return await createRequest<null, Props_User>(
+		BACKEND_URL + 'users/' + id,
+        null,
+		HTTP_METHODS.GET,
+		createHeaders({}, [])
+	);
+}

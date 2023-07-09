@@ -8,9 +8,11 @@ export interface SongStore_T {
     i: number
 }
 
+export type AuthResultTypes = 'failure' | 'neutral' | 'success';
 export interface AuthStore_T {
     user: Some<Props_User>,
-    isLogged: boolean
+    isLogged: boolean,
+    authResult: AuthResultTypes,
 }
 
 export interface GeneralStore_T {

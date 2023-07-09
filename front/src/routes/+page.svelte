@@ -2,17 +2,20 @@
 	import SongCard from '../components/Modules/SongCard/SongCard.svelte';
 	import SongContainer from '../components/Layout/SongContainer/SongContainer.svelte';
 	import Paginator from '../components/Layout/Paginator/Paginator.svelte';
-	import { BACKEND_URL, PAGINATED_SONG_URL } from '../consts';
-	import { songStore } from '../stores/songStore';
+	import { PAGINATED_SONG_URL } from '../consts';
+	import type { SongOrderTypes } from '../components/Layout/SongContainer/types';
+
+	let orderBy: SongOrderTypes = 'date_created';
 </script>
 
 <title>Aux | Home</title>
 <div class="[ margin-block-end-4 ]">
-	<SongContainer>
-		<Paginator
-			urlFn={PAGINATED_SONG_URL}
-			component={SongCard}
-			componentContainer={SongContainer}
-		/>
+	<SongContainer on:select={(e) => orderBy = e.detail.value}>
+		{#key orderBy}
+			<Paginator
+				urlFn={PAGINATED_SONG_URL(1, orderBy)}
+				component={SongCard}
+			/>
+		{/key}
 	</SongContainer>
 </div>

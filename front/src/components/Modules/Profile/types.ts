@@ -1,0 +1,1 @@
+export type UserProfileVariants = 'default' | 'songCard' | 'large';

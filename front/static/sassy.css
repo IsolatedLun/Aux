@@ -2675,10 +2675,6 @@ canvas {
 .song-card p {
   word-wrap: anywhere;
 }
-.song-card .card__profile-container {
-  width: 1.475rem;
-  aspect-ratio: 1;
-}
 .song-card:is(:hover, :focus-visible) .card__thumbnail-container img {
   filter: brightness(35%) blur(1px);
   transform: scale(1.2);
@@ -2735,6 +2731,19 @@ canvas {
 }
 .form#signup-form {
   max-width: 444px;
+}
+
+.profile {
+  aspect-ratio: 1;
+}
+.profile[data-variant=default] {
+  max-width: 2.75rem;
+}
+.profile[data-variant=songCard] {
+  max-width: 1.475rem;
+}
+.profile[data-variant=large] {
+  max-width: 8rem;
 }
 
 .button {
@@ -3046,11 +3055,11 @@ select {
   border: none;
   border: 2px solid hsl(0, 0%, 18%);
   border-radius: 9px;
-  background-color: hsl(0, 0%, 10%);
+  background-color: hsl(261, 40%, 55%);
   transition: border-color 375ms ease-in-out;
 }
 .input-container[data-variant=primary] .input:is(:hover, :focus-visible) {
-  box-shadow: 0 0 0px 3px rgba(26, 26, 26, 0.75);
+  box-shadow: 0 0 0px 3px rgba(126, 94, 186, 0.75);
 }
 .input-container[data-variant=primary] .input[data-attachments*=border-flat] {
   border-radius: 0;
@@ -3068,10 +3077,10 @@ select {
   background-color: transparent;
 }
 .input-container[data-variant=primary]:is(:focus-within) .input-end-button {
-  color: hsl(0, 0%, 10%);
+  color: hsl(261, 40%, 55%);
 }
 .input-container.drag-drop-input-container {
-  background-color: rgba(26, 26, 26, 0.3);
+  background-color: rgba(126, 94, 186, 0.3);
   border: 9px solid hsl(0, 0%, 4%);
   border-style: double;
   border-radius: 3px;
@@ -3089,11 +3098,6 @@ select {
 }
 .primary-navbar .input-container {
   max-width: 32ch;
-}
-.primary-navbar .navbar__user-profile {
-  border: 2px solid hsl(261, 40%, 55%);
-  max-width: 2.75rem;
-  aspect-ratio: 1;
 }
 
 .secondary-navbar {

@@ -31,7 +31,7 @@
 				on:select={(e) => dispatch('select', e.detail)}
 				options={[
 					{text: 'Newest', value: '-date_created'},
-					{text: 'Popular', value: 'views'},
+					{text: 'Popular', value: '-views'},
 					{text: 'Oldest', value: 'date_created'}
 				]} 
 			/>

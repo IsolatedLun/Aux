@@ -151,7 +151,7 @@
 			on:click={() => dispatch('close')}
 			variant="error"
 			cls={cubeCss({ utilClass: 'width-100 margin-block-end-1' })}
-			attachments={['grow']}
+			attachments={['grow', 'capsule']}
 			use={(el) => el.setAttribute('data-mobile', String(true))}
 		>
 			<Icon ariaLabel="Close">{ICON_TIMES}</Icon>

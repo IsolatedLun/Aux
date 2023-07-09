@@ -13,7 +13,18 @@
     onMount(() => {
         const tokens = getTokensFromLocalStorage();
         if(tokens) {
-            authenticate().then(res => authStore.login(res));
+            authenticate()
+                .then(res => {
+                    authStore.login(res);
+                    authStore.setAuthResult('success');
+                })
+                .catch(() => {
+                    authStore.logout();
+                    authStore.setAuthResult('failure');
+                });
+        }
+        else {
+            authStore.setAuthResult('failure');
         }
     })
 

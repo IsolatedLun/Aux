@@ -10,6 +10,7 @@ export function createAuthStore() {
     const store = writable<AuthStore_T>({
         user: null,
         isLogged: false,
+        authResult: 'neutral'
     });
 
     return {
@@ -18,6 +19,7 @@ export function createAuthStore() {
         login: (user: Props_User) => store.update(_store => {            
             _store.user = user;
             _store.isLogged = true;
+            _store.authResult = 'success';
 
             return _store;
         }),
@@ -26,8 +28,15 @@ export function createAuthStore() {
             
             _store.user = null;
             _store.isLogged = false;
+            _store.authResult = 'failure';
+
             return _store;
         }),
+
+        setAuthResult: (res) => store.update(_store => {
+            _store.authResult = res;
+            return _store;
+        })
     }
 }
 

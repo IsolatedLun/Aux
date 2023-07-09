@@ -11,7 +11,7 @@
 <li class="[ width-100 ]">
 	<Button
 		cls={cubeCss({ utilClass: 'width-100' })}
-		on:click={() => props.action() ?? null}
+		on:click={() => props.action ? props.action() : null}
 		to={props.to ?? ''}
 		variant={props.buttonVariant}
 		attachments={['small-pad', 'grow', 'capsule']}

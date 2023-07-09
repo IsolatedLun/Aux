@@ -16,27 +16,29 @@ class LanguangeRecordView(APIView):
 
 
 class PaginatedSongView(APIView):
-    def get(self, req, page: int):
+    def get(self, req, page: int, order_by: str):
         res = pagination_wrapper(
             models.Song,
             {},
             serializers.SongSerializer,
             {},
             page,
-            16
+            16,
+            order_by
         )
 
         return Response(data={'results': res[0], 'next_page': res[1]}, status=OK)
     
 class PaginatedUserSongsView(APIView):
-    def get(self, req, page: int, id: int):
+    def get(self, req, page: int, id: int, order_by: str):
         res = pagination_wrapper(
             models.Song,
             {'user_id': id},
             serializers.SongSerializer,
             {},
             page,
-            16
+            16,
+            order_by
         )
 
         return Response(data={'results': res[0], 'next_page': res[1]}, status=OK)

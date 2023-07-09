@@ -6,16 +6,17 @@
 	import Flex from "../../Box/Flex/Flex.svelte";
 	import Button from "../../Modules/Interactible/Button/Button.svelte";
 	import { authStore } from "../../../stores/authStore";
+	import UserProfile from "../../Modules/Profile/UserProfile.svelte";
 
     const dispatch = createEventDispatcher();
 
 	const userId = $authStore.user!.id;
 </script>
 
-<a class="[ primary-navbar-user ]" href="{WEB_USER_PROFILE_URL(userId)}">
-    <Button on:click={() => dispatch('click')} attachments={['transparent', 'small-pad']}>
-        <div class="[ navbar__user-profile ] [ border-radius-max ] [ pointers-none ]">
-            <img src="{BACKEND_URL}{$authStore.user?.profile}" alt="Your profile" />
-        </div>
-    </Button>
-</a>
+{#if $authStore.user}
+	<a class="[ primary-navbar-user ]" href="{WEB_USER_PROFILE_URL(userId)}" data-desktop='true'>
+		<Button on:click={() => dispatch('click')} attachments={['transparent', 'small-pad']}>
+			<UserProfile user={$authStore.user} />
+		</Button>
+	</a>
+{/if}

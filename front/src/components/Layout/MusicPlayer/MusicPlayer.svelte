@@ -21,6 +21,7 @@
 	import { viewSong } from '../../../services/song/songService';
 	import PlayerInfo from './sections/PlayerInfo.svelte';
 	import { generalStore } from '../../../stores/generalStore';
+	import type { SongOrderTypes } from '../SongContainer/types';
 
 	onMount(() => {
 		audioEl.addEventListener('loadstart', () => {
@@ -46,6 +47,7 @@
 		});
 	});
 
+	let orderBy: SongOrderTypes = 'date_created';
 	let lyrics = '';
 	let audioState: Props_AudioState = {
 		paused: false,
@@ -76,13 +78,14 @@
 
 	<section class="[ player__other ] [ padding-2 overflow-y-auto ]">
 		{#key $songStore.currentSong.id}
-			<SongContainer>
-				<Paginator
-					urlFn={PAGINATED_SONG_URL}
-					filterFn={(songs) => songs.filter((x) => x.id !== $songStore.currentSong.id)}
-					component={SongCard}
-					componentContainer={SongContainer}
-				/>
+			<SongContainer on:select={(e) => orderBy = e.detail.value}>
+				{#key orderBy}
+					<Paginator
+						urlFn={PAGINATED_SONG_URL(1, orderBy)}
+						filterFn={(songs) => songs.filter((x) => x.id !== $songStore.currentSong.id)}
+						component={SongCard}
+					/>
+				{/key}
 			</SongContainer>
 		{/key}
 	</section>

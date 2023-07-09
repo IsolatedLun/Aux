@@ -3,8 +3,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('<int:page>', views.PaginatedSongView.as_view(), name='GET | Paginated songs'),
-    path('<int:page>/user/<int:id>', views.PaginatedUserSongsView.as_view(), name='GET | Paginated user songs'),
+    path('<int:page>/<str:order_by>', views.PaginatedSongView.as_view(), name='GET | Paginated songs'),
+    path('<int:page>/user/<int:id>/<str:order_by>', views.PaginatedUserSongsView.as_view(), name='GET | Paginated user songs'),
     path('<int:id>/edit', views.EditSongView.as_view(), name='POST | Edit song'),
     
     path('upload', views.UploadSongView.as_view(), name='POST | Upload song'),

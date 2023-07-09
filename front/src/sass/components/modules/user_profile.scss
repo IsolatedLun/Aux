@@ -1,0 +1,17 @@
+@use '../../abstracts/' as *;
+
+.profile {
+    &[data-variant='default'] {
+        max-width: $profile-default-width;
+    }
+
+    &[data-variant='songCard'] {
+        max-width: $songCard-profile-width;
+    }
+
+    &[data-variant='large'] {
+        max-width: $profile-large-width;
+    }
+
+    aspect-ratio: 1;
+}

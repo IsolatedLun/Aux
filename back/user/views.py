@@ -72,10 +72,10 @@ class JWTAuthenticateView(APIView):
 
 
 class UserView(APIView):
-    def get(self, req, user_id):
+    def get(self, req, id):
         try:
-            user = models.cUser.objects.get(id=user_id)
-            serializer = serializers.cUserViewSerializer(user).data
+            user = models.cUser.objects.get(id=id)
+            serializer = serializers.cUserSerializer(user).data
 
             return Response(data=serializer, status=OK)
         except Exception as e:

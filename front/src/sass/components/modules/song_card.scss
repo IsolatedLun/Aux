@@ -27,11 +27,6 @@
         word-wrap: anywhere;
     }
 
-    .card__profile-container {
-        width: $songCard-profile-width;
-        aspect-ratio: 1;
-    }
-
     &:is(:hover, :focus-visible) {
         .card__thumbnail-container {
             img {
