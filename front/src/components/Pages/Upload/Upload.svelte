@@ -6,7 +6,8 @@
 		fetchLangugaeList,
 		uploadSong,
 		fetchAllLanguageLyricsForSong,
-		editSong
+		editSong,
+		deleteSong
 	} from '../../../services/song/songService';
 	import { cubeCss } from '../../../utils/cubeCss/cubeCss';
 	import { createDefaultSongCard, createDefaultUser } from '../../../utils/defaultCreates';
@@ -29,7 +30,7 @@
 	import { songStore } from '../../../stores/songStore';
 	import { authStore } from '../../../stores/authStore';
 	import { goto } from '$app/navigation';
-	import { BACKEND_URL } from '../../../consts';
+	import { BACKEND_URL, WEB_USER_PROFILE_URL } from '../../../consts';
 
 	onMount(() => {
 		isEditMode = $page.url.searchParams.get('edit') === 'true';
@@ -60,10 +61,14 @@
 		}
 
 		if (isEditMode) {
-			editSong({ ...songForm, id: $songStore.currentSong.id }).catch((err) => (formError = err));
+			editSong({ ...songForm, id: $songStore.currentSong.id })
+				.then(() => goto(WEB_USER_PROFILE_URL($authStore.user!.id)))
+				.catch((err) => (formError = err));
 		}
-		
-		uploadSong(songForm).catch((err) => (formError = err));
+
+		uploadSong(songForm)
+			.then(() => goto(WEB_USER_PROFILE_URL($authStore.user!.id)))
+			.catch((err) => (formError = err));
 	}
 
 	function removeTag(tag: string) {
@@ -89,6 +94,12 @@
 		songForm.lyrics = data;
 
 		return Promise.resolve(data);
+	}
+
+	function handleDeleteSong() {
+		deleteSong($songStore.currentSong.id).finally(() =>
+			goto(WEB_USER_PROFILE_URL($authStore.user!.id))
+		);
 	}
 
 	let songForm: Form_Song = {
@@ -152,17 +163,28 @@
 		<Flex
 			cls={cubeCss({ utilClass: 'width-100 margin-inline-start-1' })}
 			justify="space-between"
+			align="center"
 			collapseOnMobile={true}
 			alignCenterOnMobile={true}
 			gap={2}
 		>
 			<Flex>
 				{#if isEditMode}
-					<Button variant="secondary" isSubmit={true}>Save changes</Button>
+					<Button variant="secondary" attachments={['small-pad', 'capsule']} isSubmit={true}
+						>Save changes</Button
+					>
+					<Button on:click={handleDeleteSong} variant="error" attachments={['small-pad', 'capsule']}
+						>Delete</Button
+					>
 				{:else}
 					<Button isSubmit={true}>Upload</Button>
 				{/if}
-				<Button variant="error">Cancel</Button>
+				<Button
+					to="/"
+					cls={cubeCss({ utilClass: 'margin-inline-start-1' })}
+					attachments={['small-pad', 'capsule']}
+					variant="hoverable">Cancel</Button
+				>
 			</Flex>
 			{#await fetchLangugaeList() then langList}
 				<Flex align="center">
@@ -172,7 +194,7 @@
 						options={langList}
 						isOptional={true}
 					/>
-					<Button on:click={addLyric} variant="hoverable" attachments={['capsule']}>
+					<Button on:click={addLyric} variant="hoverable" attachments={['capsule', 'small-pad']}>
 						<Icon ariaLabel="">{ICON_PLUS}</Icon>
 						<span class="[ margin-inline-start-1 ]">Add language</span>
 					</Button>

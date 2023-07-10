@@ -62,7 +62,7 @@
     }
 
     &.drag-drop-input-container {
-        background-color: transparentize($input-primary, 0.7);
+        background-color: transparentize($drag-input-background, 0.7);
         
         border: 9px solid $clr-background-300;
         border-style: double;

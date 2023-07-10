@@ -1,9 +1,10 @@
 // Backend Url's
-export const BACKEND_URL = 'http://127.0.0.1:8000/'
-export const PAGINATED_SONG_URL = 
-    (page: number, orderBy: SongOrderTypes) => (page: number) => BACKEND_URL + 'songs/' + page + '/' + orderBy;
-export const PAGINATED_USER_SONG_URL = (page: number, id: number, orderBy: SongOrderTypes) => (page: number) => PAGINATED_SONG_URL(page) + '/user/' + id + '/' + orderBy;
+export const BACKEND_URL = 'http://127.0.0.1:8000/';
+export const PAGINATED_SONG_URL = (page: number, orderBy: SongOrderTypes) => 
+    (page: number) => `${BACKEND_URL}songs/${page}/${orderBy}`;
 
+export const PAGINATED_USER_SONG_URL = (page: number, id: number, orderBy: SongOrderTypes) => 
+    (page: number) => `${BACKEND_URL}songs/${page}/user/${id}/${orderBy}`;
 
 // Web Url's
 export const WEB_UPLOAD_SONG_URL = '/upload';

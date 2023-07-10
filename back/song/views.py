@@ -119,6 +119,17 @@ class EditSongView(APIView):
             ).delete()
 
         return Response(status=OK)
+    
+class DeleteSongView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, req, id: int):
+        song = models.Song.objects.get(id=id)
+        if song.user.id == req.user.id:
+            song.delete()
+
+            return Response(status=OK)
+        return Response(status=ERR)
 
 class ViewedSongView(APIView):
     permission_classes = [IsAuthenticated]

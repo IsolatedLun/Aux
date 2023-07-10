@@ -34,7 +34,7 @@ class ViewedSong(models.Model):
     user = models.ForeignKey(cUser, on_delete=models.CASCADE)
     song = models.ForeignKey(Song, on_delete=models.CASCADE)
 
-    last_viewed = models.DateTimeField(auto_now_add=True)
+    last_viewed = models.DateTimeField(auto_now=True)
     amount_viewed = models.PositiveBigIntegerField(default=0)
 
 class RatedSong(models.Model):

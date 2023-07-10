@@ -42,6 +42,17 @@ export async function viewSong(id: number) {
 	);
 }
 
+export async function deleteSong(id: number) {
+	return await createRequest<null, null>(
+		BACKEND_URL + 'songs/' + id + '/delete',
+        null,
+		HTTP_METHODS.DELETE,
+		createHeaders({}, ['auth'])
+	);
+}
+
+// ==========================================
+
 export async function fetchLangugaeList() {
 	return await createRequest<null, LanguageRecord[]>(
 		BACKEND_URL + 'songs/langlist',

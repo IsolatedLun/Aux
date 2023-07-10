@@ -19,7 +19,7 @@
 	import SecondaryNavbarItem from './SecondaryNavbarItem.svelte';
 	import { authStore } from '../../../../stores/authStore';
 	import { goto } from '$app/navigation';
-	import { WEB_AUTH_LOGIN_URL, WEB_AUTH_SIGNUP_URL } from '../../../../consts';
+	import { WEB_AUTH_LOGIN_URL, WEB_AUTH_SIGNUP_URL, WEB_USER_PROFILE_URL } from '../../../../consts';
 
 	onMount(() => {
 		const observer = new MutationObserver(() => {
@@ -85,10 +85,10 @@
 		</Flex>
 	
 		<Flex cls={cubeCss({ utilClass: 'width-100' })} useColumn={true} tag="ul" align="center">
-			{#if $authStore.isLogged}
+			{#if $authStore.user && $authStore.isLogged}
 				<SecondaryNavbarItem
 					props={{
-						to: '',
+						to: WEB_USER_PROFILE_URL($authStore.user.id),
 						buttonVariant: 'primary',
 						icon: ICON_USER,
 						text: 'My profile'

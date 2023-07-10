@@ -5,6 +5,7 @@
 		ICON_FAST_LEFT,
 		ICON_FAST_RIGHT,
 		ICON_GRIP,
+		ICON_LOOP,
 		ICON_MUSIC_DISC
 	} from '../../../consts/icons';
 	import { songStore } from '../../../stores/songStore';
@@ -45,6 +46,10 @@
 			audioState.currentTime = convertToDateTime(audioEl.currentTime);
 			barEl.value = String(audioEl.currentTime);
 		});
+		audioEl.addEventListener('ended', () => {
+			if(!audioState.loop)
+				songStore.next();
+		})
 	});
 
 	let orderBy: SongOrderTypes = 'date_created';
@@ -52,6 +57,7 @@
 	let audioState: Props_AudioState = {
 		paused: false,
 		audioLoaded: false,
+		loop: false,
 		currentTime: '00:00',
 		totalTime: '00:00'
 	};
@@ -64,21 +70,23 @@
 	aria-expanded={$generalStore.musicPlayerExpanded}
 	data-expanded={$generalStore.musicPlayerExpanded}
 >
-	<audio bind:this={audioEl} src="{BACKEND_URL}{$songStore.currentSong.audio}" />
-	
+	<audio bind:this={audioEl} src="{BACKEND_URL}{$songStore.currentSong.audio}" loop={audioState.loop} />
+
 	<Button
 		on:click={() => generalStore.setMusicPlayerExpandedState(!$generalStore.musicPlayerExpanded)}
 		cls={cubeCss({ blockClass: 'player__close-btn' })}
 		use={(el) => (el.id = MUSIC_PLAYER_OPEN_BUTTON_ID)}
 	>
-		<Icon ariaLabel={($generalStore.musicPlayerExpanded ? 'Close' : 'Expand') + ' music player'}>{ICON_GRIP}</Icon>
+		<Icon ariaLabel={($generalStore.musicPlayerExpanded ? 'Close' : 'Expand') + ' music player'}
+			>{ICON_GRIP}</Icon
+		>
 	</Button>
 
 	<PlayerInfo />
 
 	<section class="[ player__other ] [ padding-2 overflow-y-auto ]">
 		{#key $songStore.currentSong.id}
-			<SongContainer on:select={(e) => orderBy = e.detail.value}>
+			<SongContainer on:select={(e) => (orderBy = e.detail.value)}>
 				{#key orderBy}
 					<Paginator
 						urlFn={PAGINATED_SONG_URL(1, orderBy)}
@@ -142,6 +150,13 @@
 					cls={cubeCss({ utilClass: 'fs-400' })}
 				>
 					<Icon ariaLabel="">{ICON_FAST_RIGHT}</Icon>
+				</Button>
+
+				<Button
+					on:click={() => (audioState.loop = !audioState.loop)}
+					attachments={[audioState.loop ? '' : 'hologram']}
+				>
+					<Icon ariaLabel={audioState.loop ? 'Dont loop' : 'Loop'}>{ICON_LOOP}</Icon>
 				</Button>
 			</Flex>
 		</Flex>

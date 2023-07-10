@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import { BACKEND_URL, PAGINATED_USER_SONG_URL } from "../../../consts";
+	import { BACKEND_URL, PAGINATED_SONG_URL, PAGINATED_USER_SONG_URL } from "../../../consts";
 	import { ICON_ERROR } from "../../../consts/icons";
 	import { fetchUser } from "../../../services/auth/authService";
 	import { cubeCss } from "../../../utils/cubeCss/cubeCss";
