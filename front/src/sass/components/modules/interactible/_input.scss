@@ -46,7 +46,7 @@
 
     &:is(:focus-within) {
         .input-end-button {
-            color: $theme;
+            color: color.adjust($theme, $lightness: 50%);
         }
     }
 }

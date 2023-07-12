@@ -6,6 +6,9 @@ export const PAGINATED_SONG_URL = (page: number, orderBy: SongOrderTypes) =>
 export const PAGINATED_USER_SONG_URL = (page: number, id: number, orderBy: SongOrderTypes) => 
     (page: number) => `${BACKEND_URL}songs/${page}/user/${id}/${orderBy}`;
 
+export const PAGINATED_SEARCH_SONG_URL = (page: number, id: number, query: string) => 
+    (page: number) => `${BACKEND_URL}songs/${page}/${query}/search`;
+
 // Web Url's
 export const WEB_UPLOAD_SONG_URL = '/upload';
 export const WEB_EDIT_SONG_URL = '/upload?edit=true';

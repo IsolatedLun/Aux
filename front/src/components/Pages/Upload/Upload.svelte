@@ -168,7 +168,7 @@
 			alignCenterOnMobile={true}
 			gap={2}
 		>
-			<Flex>
+			<Flex align='center'>
 				{#if isEditMode}
 					<Button variant="secondary" attachments={['small-pad', 'capsule']} isSubmit={true}
 						>Save changes</Button

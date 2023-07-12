@@ -10,6 +10,8 @@ from . import serializers
 from utils.paginator import pagination_wrapper
 from utils.languages import LANGUAGES
 
+SONGS_PER_PAGE = 16
+
 class LanguangeRecordView(APIView):
     def get(self, req):
         return Response(data=LANGUAGES, status=OK)
@@ -23,7 +25,7 @@ class PaginatedSongView(APIView):
             serializers.SongSerializer,
             {},
             page,
-            16,
+            SONGS_PER_PAGE,
             order_by
         )
 
@@ -37,7 +39,7 @@ class PaginatedUserSongsView(APIView):
             serializers.SongSerializer,
             {},
             page,
-            16,
+            SONGS_PER_PAGE,
             order_by
         )
 
@@ -70,7 +72,6 @@ class UploadSongView(APIView):
 
             return Response(data={'id': new_song.id}, status=OK)
         except Exception as e:
-            print(e)
             return Response(status=ERR)
         
 class EditSongView(APIView):
@@ -131,6 +132,41 @@ class DeleteSongView(APIView):
             return Response(status=OK)
         return Response(status=ERR)
 
+class SearchSongView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, req, page: int, query: str):
+        res = pagination_wrapper(
+            models.Song,
+            {'title__icontains': query},
+            serializers.SongSerializer,
+            {},
+            page,
+            SONGS_PER_PAGE
+        )
+
+        return Response(data={'results': res[0], 'next_page': res[1]}, status=OK)
+    
+class SearchUserSongHistoryView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, req, page: int, query: str):
+        viewed_songs = models.ViewedSong.objects.filter(
+            song_set__user_id           =   req.user.id,
+            song_set__title__icontains  =   query
+        ).song_set.all()
+
+        res = pagination_wrapper(
+            viewed_songs,
+            {},
+            serializers.SongSerializer,
+            {},
+            page,
+            SONGS_PER_PAGE
+        )
+
+        return Response(data={'results': res[0], 'next_page': res[1]}, status=OK)
+
 class ViewedSongView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -181,7 +217,7 @@ class PaginatedUserUploadedSongView(APIView):
             serializers.SongSerializer,
             {},
             page,
-            30
+            SONGS_PER_PAGE
         )
 
         return Response(data={'results': res[0], 'next_page': res[1]}, status=OK)

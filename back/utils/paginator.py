@@ -1,13 +1,14 @@
 from django.core.paginator import Paginator
-from django.db.models import Model
+from django.db.models.base import ModelBase
 from rest_framework import serializers
 from typing import TypeVar, Generic, List, Callable
+from django.db.models.query import QuerySet
 
-I = TypeVar('I', Model, Callable)
+I = TypeVar('I', ModelBase, Callable)
 O = TypeVar('O', serializers.ModelSerializer, Callable)
 
 def pagination_wrapper(
-    table: I,
+    table_or_queryset: I | QuerySet,
     filters: dict,
     serializer: O,
     serializer_kwargs: dict,
@@ -19,7 +20,8 @@ def pagination_wrapper(
         A pagination wrapper for all models.\n
         Returns a serialized queryset with the next page index
     """
-    queryset = table.objects.all().filter(**filters)
+    if(type(table_or_queryset) == ModelBase):
+        queryset = table_or_queryset.objects.all().filter(**filters)
 
     if sort_by:
         queryset = queryset.order_by(sort_by)
