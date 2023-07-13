@@ -25,7 +25,7 @@
 	const dispatch = createEventDispatcher();
 	const _class = cls.to_string({
 		compostClass: 'button',
-		utilClass: to ? 'display-block' : ''
+		utilClass: `${to ? 'display-block' : ''}`
 	});
 
 	let _this: HTMLElement;

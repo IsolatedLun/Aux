@@ -1,10 +1,11 @@
 <script lang='ts'>
 	import { createEventDispatcher, onMount } from "svelte";
-	import { createRequest } from "../../../services/service";
+	import { createHeaders, createRequest } from "../../../services/service";
 	import { HTTP_METHODS } from "../../../services/types";
 	import type { Props_PaginatorResponse } from "./types";
 	import AutoSkeletron from "../../Modules/Skeletron/AutoSkeletron.svelte";
 	import SongCard from "../../Modules/SongCard/SongCard.svelte";
+	import { authStore } from "../../../stores/authStore";
 
     onMount(() => {
         let options = {
@@ -44,7 +45,7 @@
         }
 
         const data = await createRequest<null, Props_PaginatorResponse>(
-            urlFn(next_page), null, HTTP_METHODS.GET, {}
+            urlFn(next_page), null, HTTP_METHODS.GET, includeAuthHeader ? createHeaders({}, ['auth']) : {}
         );
 
         let _results = [...results, ...data.results];
@@ -55,6 +56,7 @@
         dispatch('update', results);
     }
 
+    export let includeAuthHeader = false;
     export let urlFn: (n: number) => string;
     export let filterFn: ((results: any[]) => any[]) | null = null;
     export let component: ConstructorOfATypedSvelteComponent;

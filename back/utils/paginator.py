@@ -22,6 +22,8 @@ def pagination_wrapper(
     """
     if(type(table_or_queryset) == ModelBase):
         queryset = table_or_queryset.objects.all().filter(**filters)
+    else:
+        queryset = table_or_queryset
 
     if sort_by:
         queryset = queryset.order_by(sort_by)

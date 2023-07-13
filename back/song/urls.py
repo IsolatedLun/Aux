@@ -16,5 +16,8 @@ urlpatterns = [
     
     path('<int:page>/<str:query>/search', views.SearchSongView().as_view(), name='GET | Search song'),
     path('<int:page>/<str:order_by>', views.PaginatedSongView.as_view(), name='GET | Paginated songs'),
-    path('<int:page>/user/<int:id>/<str:order_by>', views.PaginatedUserSongsView.as_view(), name='GET | Paginated user songs')
+    path('<int:page>/user/<int:id>/<str:order_by>', views.PaginatedUserSongsView.as_view(), name='GET | Paginated user songs'),
+    path('<int:page>/user/history/<str:query>', 
+         views.PaginatedSearchUserSongHistoryView.as_view(), name='GET | Paginated user history songs + search'
+    )
 ]

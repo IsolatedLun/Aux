@@ -147,22 +147,30 @@ class SearchSongView(APIView):
 
         return Response(data={'results': res[0], 'next_page': res[1]}, status=OK)
     
-class SearchUserSongHistoryView(APIView):
+class PaginatedSearchUserSongHistoryView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, req, page: int, query: str):
-        viewed_songs = models.ViewedSong.objects.filter(
-            song_set__user_id           =   req.user.id,
-            song_set__title__icontains  =   query
-        ).song_set.all()
-
+        viewed_songs_ids = []
+        if(query == '*'):
+            viewed_songs_ids = models.ViewedSong.objects.filter(
+                user_id                 =   req.user.id,
+            ).order_by('-last_viewed').values_list('song_id')
+        else:
+            viewed_songs_ids = models.ViewedSong.objects.filter(
+                user_id                 =   req.user.id,
+                song__title__icontains   =   query
+            ).order_by('-last_viewed').values_list('song_id')
+            
+        # Filtering causes order to be changed
+        # Find a way to fix it
         res = pagination_wrapper(
-            viewed_songs,
+            models.Song.objects.filter(id__in=viewed_songs_ids),
             {},
             serializers.SongSerializer,
             {},
             page,
-            SONGS_PER_PAGE
+            SONGS_PER_PAGE,
         )
 
         return Response(data={'results': res[0], 'next_page': res[1]}, status=OK)

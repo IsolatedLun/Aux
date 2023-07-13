@@ -19,7 +19,7 @@
 	import SecondaryNavbarItem from './SecondaryNavbarItem.svelte';
 	import { authStore } from '../../../../stores/authStore';
 	import { goto } from '$app/navigation';
-	import { WEB_AUTH_LOGIN_URL, WEB_AUTH_SIGNUP_URL, WEB_USER_PROFILE_URL } from '../../../../consts';
+	import { WEB_AUTH_LOGIN_URL, WEB_AUTH_SIGNUP_URL, WEB_HISTORY_URL, WEB_USER_PROFILE_URL } from '../../../../consts';
 
 	onMount(() => {
 		const observer = new MutationObserver(() => {
@@ -118,6 +118,16 @@
 						text: 'Home'
 					}}
 				/>
+				{#if $authStore.isLogged}
+					<SecondaryNavbarItem
+						props={{
+							to: WEB_HISTORY_URL,
+							buttonVariant: 'hoverable',
+							icon: ICON_HISTORY,
+							text: 'History'
+						}}
+					/>
+				{/if}
 			</Flex>
 		</Flex>
 	

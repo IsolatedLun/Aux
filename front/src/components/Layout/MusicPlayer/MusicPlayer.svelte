@@ -47,9 +47,8 @@
 			barEl.value = String(audioEl.currentTime);
 		});
 		audioEl.addEventListener('ended', () => {
-			if(!audioState.loop)
-				songStore.next();
-		})
+			if (!audioState.loop) songStore.next();
+		});
 	});
 
 	let orderBy: SongOrderTypes = 'date_created';
@@ -70,7 +69,11 @@
 	aria-expanded={$generalStore.musicPlayerExpanded}
 	data-expanded={$generalStore.musicPlayerExpanded}
 >
-	<audio bind:this={audioEl} src="{BACKEND_URL}{$songStore.currentSong.audio}" loop={audioState.loop} />
+	<audio
+		bind:this={audioEl}
+		src="{BACKEND_URL}{$songStore.currentSong.audio}"
+		loop={audioState.loop}
+	/>
 
 	<Button
 		on:click={() => generalStore.setMusicPlayerExpandedState(!$generalStore.musicPlayerExpanded)}
@@ -84,7 +87,10 @@
 
 	<PlayerInfo />
 
-	<section class="[ player__other ] [ padding-2 overflow-y-auto ]">
+	<section
+		class="[ player__other ] [ padding-2 overflow-y-auto ]"
+		data-disabled={!$generalStore.musicPlayerExpanded}
+	>
 		{#key $songStore.currentSong.id}
 			<SongContainer on:select={(e) => (orderBy = e.detail.value)}>
 				{#key orderBy}
@@ -98,7 +104,10 @@
 		{/key}
 	</section>
 
-	<section class="[ player__bar-container ] [ pos-relative ]">
+	<section
+		class="[ player__bar-container ] [ pos-relative ]"
+		data-disabled={!$generalStore.musicPlayerExpanded}
+	>
 		<input
 			bind:this={barEl}
 			on:input={() => (audioEl.currentTime = Number(barEl.value))}

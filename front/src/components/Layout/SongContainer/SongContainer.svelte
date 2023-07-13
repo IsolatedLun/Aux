@@ -13,16 +13,18 @@
 	import { SongCardShapeEnum } from '../../Modules/SongCard/types';
 	import TextInput from '../../Modules/Interactible/Input/TextInput.svelte';
 
-	function handleSearch(e: Event) {
-		const target = e.target as HTMLInputElement;
-		dispatch('search', target.value);
+	function handleSearch() {
+		dispatch('search', searchText);
 	}
 
 	export let songs: Props_SongCard[] = [];
 	export let cardShape: SongCardShapeEnum = SongCardShapeEnum.SPACIOUS;
 	export let previewMode = false;
 	export let searchMode = false;
+	export let hideOrderBy = false;
 	export let initialButtonIdx = 0;
+
+	let searchText = '';
 
 	setContext<Props_SongCardContext>('container', {
 		getCardShape: () => cardShape
@@ -40,14 +42,16 @@
 		tag="header"
 		cls={cubeCss({ utilClass: 'width-100' })}
 		justify={searchMode ? 'space-between' : 'end'}
+		collapseOnMobile={true}
+		alignCenterOnMobile={true}
 	>
 		{#if searchMode}
-			<Flex align="center">
-				<TextInput label="Search songs" placeholder="Search..." on:input={handleSearch} />
-				<Button variant="secondary" attachments={['capsule']}>
-					<Flex>
+			<Flex cls={cubeCss({utilClass: 'flex-grow-0'})} align="center">
+				<TextInput label="Search songs" placeholder="Search..." bind:value={searchText} />
+				<Button variant="secondary" attachments={['capsule']} on:click={handleSearch}>
+					<Flex gap={2}>
 						<p>Search</p>
-						<Icon ariaLabel="Search">{ICON_SEARCH}</Icon>
+						<Icon cls={cubeCss({utilClass: 'margin-inline-end-4'})} ariaLabel="Search">{ICON_SEARCH}</Icon>
 					</Flex>
 				</Button>
 			</Flex>
@@ -57,7 +61,7 @@
 			gap={2}
 			justify={previewMode ? 'center' : 'end'}
 		>
-			{#if !previewMode}
+			{#if !previewMode && !hideOrderBy}
 				<Select
 					on:select={(e) => dispatch('select', e.detail)}
 					options={[

@@ -114,4 +114,7 @@ canvas {
 [data-disabled='true'] {
 	opacity: 0.5;
 	pointer-events: none;
+	user-select: none;
+
+	transition: opacity 1s ease-in-out;
 }

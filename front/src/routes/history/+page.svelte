@@ -1,6 +1,9 @@
 <script>
-	import History from "../../components/Pages/History/History.svelte";
+	import AuthProtected from "../../components/Modules/Auth/AuthProtected.svelte";
+import History from "../../components/Pages/History/History.svelte";
 
 </script>
 
-<History />
+<AuthProtected>
+	<History />
+</AuthProtected>
