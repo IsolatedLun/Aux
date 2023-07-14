@@ -4,6 +4,7 @@
 	ICON_HISTORY,
 	ICON_HOME,
 		ICON_QUESTION_CIRCLE,
+		ICON_SEARCH,
 		ICON_SETTINGS,
 		ICON_SIGN_IN,
 		ICON_SIGN_OUT,
@@ -19,7 +20,7 @@
 	import SecondaryNavbarItem from './SecondaryNavbarItem.svelte';
 	import { authStore } from '../../../../stores/authStore';
 	import { goto } from '$app/navigation';
-	import { WEB_AUTH_LOGIN_URL, WEB_AUTH_SIGNUP_URL, WEB_HISTORY_URL, WEB_UPLOAD_SONG_URL, WEB_USER_PROFILE_URL } from '../../../../consts';
+	import { WEB_AUTH_LOGIN_URL, WEB_AUTH_SIGNUP_URL, WEB_HISTORY_URL, WEB_SEARCH_SONG_URL, WEB_SETTINGS_URL, WEB_UPLOAD_SONG_URL, WEB_USER_PROFILE_URL } from '../../../../consts';
 
 	onMount(() => {
 		const observer = new MutationObserver(() => {
@@ -96,7 +97,7 @@
 				/>
 				<SecondaryNavbarItem
 					props={{
-						to: '',
+						to: WEB_SETTINGS_URL,
 						buttonVariant: 'primary',
 						icon: ICON_SETTINGS,
 						text: 'Settings'
@@ -128,6 +129,14 @@
 						}}
 					/>
 				{/if}
+				<SecondaryNavbarItem
+						props={{
+							to: WEB_SEARCH_SONG_URL('*'),
+							buttonVariant: 'hoverable',
+							icon: ICON_SEARCH,
+							text: 'Search'
+						}}
+					/>
 			</Flex>
 		</Flex>
 	

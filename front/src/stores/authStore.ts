@@ -1,5 +1,5 @@
 import { writable } from "svelte/store";
-import type { AuthStore_T } from "./types";
+import type { AuthResultTypes, AuthStore_T } from "./types";
 import type { Props_Tokens } from "../utils/types";
 import type { Props_User } from "../types";
 import { destroyTokensFromLocalStorage, getTokensFromLocalStorage, setTokensToLocalStorage } from "../utils/tokenHandler";
@@ -33,7 +33,11 @@ export function createAuthStore() {
             return _store;
         }),
 
-        setAuthResult: (res) => store.update(_store => {
+        setUser: (user: Props_User) => store.update(_store => {
+            _store.user = user;
+            return _store;
+        }),
+        setAuthResult: (res: AuthResultTypes) => store.update(_store => {
             _store.authResult = res;
             return _store;
         })

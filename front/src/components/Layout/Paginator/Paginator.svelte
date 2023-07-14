@@ -6,6 +6,9 @@
 	import AutoSkeletron from "../../Modules/Skeletron/AutoSkeletron.svelte";
 	import SongCard from "../../Modules/SongCard/SongCard.svelte";
 	import { authStore } from "../../../stores/authStore";
+	import Card from "../../Modules/Card/Card.svelte";
+	import Grid from "../../Box/Grid/Grid.svelte";
+	import { cubeCss } from "../../../utils/cubeCss/cubeCss";
 
     onMount(() => {
         let options = {
@@ -79,5 +82,8 @@
     <AutoSkeletron>
         <SongCard />
     </AutoSkeletron>
+{/if}
+{#if !isFetching && results.length === 0}
+    <Card cls={cubeCss({utilClass: 'margin-inline-auto'})} padding={2}>No results found</Card>
 {/if}
 <div bind:this={intersectionEl} class="[ paginator__intersection ]" aria-hidden="true" />

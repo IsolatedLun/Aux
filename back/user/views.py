@@ -81,3 +81,31 @@ class UserView(APIView):
         except Exception as e:
             print(e)
             return Response({'detail': 'User does not exist.'}, status=ERR)
+
+class DeleteUserView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, req):
+        models.cUser.objects.delete(id=req.user.id)
+
+        return Response(status=OK)
+
+class SaveUserView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, req):
+        data = req.POST
+        files = req.FILES
+
+        user = models.cUser.objects.get(id=req.user.id)
+        user.username = data['username']
+        if data['newPassword']:
+            user.password = make_password(data['newPassword'])
+
+        if files.get('profile', False):
+            user.profile = files['profile']
+
+        user.save()
+        
+        serialized_data = serializers.cUserSerializer(user).data
+        return Response(data=serialized_data, status=OK)

@@ -31,6 +31,7 @@
 	import { authStore } from '../../../stores/authStore';
 	import { goto } from '$app/navigation';
 	import { BACKEND_URL, WEB_USER_PROFILE_URL } from '../../../consts';
+	import Card from '../../Modules/Card/Card.svelte';
 
 	onMount(() => {
 		isEditMode = $page.url.searchParams.get('edit') === 'true';
@@ -120,33 +121,35 @@
 </script>
 
 <Form id="upload-form" title="Upload Your Song" {formError} on:submit={handleFormSubmit}>
-	<Grid
-		cls={cubeCss({ utilClass: 'margin-inline-auto' })}
-		columns={2}
-		gap={4}
-		collapseOnMobile={true}
-		alignCenterOnMobile={true}
-		align="start"
-	>
-		<Flex useColumn={true} gap={2}>
-			<TextInput
-				bind:value={songForm.title}
-				variant="primary"
-				label="Title"
-				showLabel={true}
-				placeholder="Enter title"
-			/>
-			<TagInput bind:tags={songForm.tags} on:remove={(e) => removeTag(e.detail)} />
-		</Flex>
-		<Flex useColumn={true} align="center">
-			<FileInput
-				disabled={isEditMode}
-				fileType="audio"
-				variant="drag-drop"
-				on:file={(e) => (songForm.audio = e.detail)}
-			/>
-		</Flex>
-	</Grid>
+	<Card padding={2}>
+		<Grid
+			cls={cubeCss({ utilClass: 'margin-inline-auto' })}
+			columns={2}
+			gap={4}
+			collapseOnMobile={true}
+			alignCenterOnMobile={true}
+			align="start"
+		>
+			<Flex useColumn={true} gap={2}>
+				<TextInput
+					bind:value={songForm.title}
+					variant="primary"
+					label="Title"
+					showLabel={true}
+					placeholder="Enter title"
+				/>
+				<TagInput bind:tags={songForm.tags} on:remove={(e) => removeTag(e.detail)} />
+			</Flex>
+			<Flex useColumn={true} align="center">
+				<FileInput
+					disabled={isEditMode}
+					fileType="audio"
+					variant="drag-drop"
+					on:file={(e) => (songForm.audio = e.detail)}
+				/>
+			</Flex>
+		</Grid>
+	</Card>
 
 	<Flex
 		cls={cubeCss({ utilClass: 'width-100 margin-block-start-2' })}
@@ -168,7 +171,7 @@
 			alignCenterOnMobile={true}
 			gap={2}
 		>
-			<Flex align='center'>
+			<Flex cls={cubeCss({ utilClass: 'margin-block-start-1' })} align='center'>
 				{#if isEditMode}
 					<Button variant="secondary" attachments={['small-pad', 'capsule']} isSubmit={true}
 						>Save changes</Button
@@ -177,7 +180,7 @@
 						>Delete</Button
 					>
 				{:else}
-					<Button isSubmit={true}>Upload</Button>
+					<Button isSubmit={true} attachments={['capsule']}>Upload</Button>
 				{/if}
 				<Button
 					to="/"
@@ -202,21 +205,23 @@
 			{/await}
 		</Flex>
 
-		{#if isEditMode}
-			{#await handleFetchAllLyrics() then _}
+		<Card cls={cubeCss({utilClass: 'width-100 margin-block-start-2'})} padding={2}>
+			{#if isEditMode}
+				{#await handleFetchAllLyrics() then _}
+					<LyricInputSection
+						lyrics={songForm.lyrics}
+						on:input={handleLyricInput}
+						on:remove={removeLyric}
+					/>
+				{/await}
+			{:else}
 				<LyricInputSection
 					lyrics={songForm.lyrics}
 					on:input={handleLyricInput}
 					on:remove={removeLyric}
 				/>
-			{/await}
-		{:else}
-			<LyricInputSection
-				lyrics={songForm.lyrics}
-				on:input={handleLyricInput}
-				on:remove={removeLyric}
-			/>
-		{/if}
+			{/if}
+		</Card>
 	</Flex>
 
 	<h3 class="[ margin-block-2 ]">Preview</h3>

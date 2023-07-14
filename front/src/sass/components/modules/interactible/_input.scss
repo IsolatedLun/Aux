@@ -62,11 +62,10 @@
     }
 
     &.drag-drop-input-container {
-        background-color: transparentize($drag-input-background, 0.7);
+        background-color: transparentize($drag-input-background, 0.8);
         
-        border: 9px solid $clr-background-300;
-        border-style: double;
-        border-radius: 3px;
+        border: 2px solid transparentize($clr-primary-500, 0.7);
+        border-radius: $border-radius-bevelled;
 
         &[data-variant='compact'] {
             max-width: 100%;

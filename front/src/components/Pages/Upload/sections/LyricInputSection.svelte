@@ -34,7 +34,7 @@
 </script>
 
 <Flex
-	cls={cubeCss({ utilClass: 'width-100 margin-block-start-2' })}
+	cls={cubeCss({ utilClass: 'width-100' })}
 	align="center"
 	justify="space-between"
 >

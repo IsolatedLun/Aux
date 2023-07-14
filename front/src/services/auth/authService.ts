@@ -3,6 +3,7 @@ import { createHeaders, createRequest } from '../service';
 import { BACKEND_URL } from '../../consts';
 import type { LoginResponse } from './types';
 import type { Props_User } from '../../types';
+import type { EditUserForm } from '../../components/Pages/Settings/types';
 
 export async function register(data: any) {
 	return await createRequest<any, LoginResponse>(
@@ -38,5 +39,23 @@ export async function fetchUser(id: number) {
         null,
 		HTTP_METHODS.GET,
 		createHeaders({}, [])
+	);
+}
+
+export async function deleteUser() {
+	return await createRequest<null, null>(
+		BACKEND_URL + 'users/delete',
+        null,
+		HTTP_METHODS.DELETE,
+		createHeaders({}, ['auth'])
+	);
+}
+
+export async function saveUser(editUserForm: EditUserForm) {
+	return await createRequest<EditUserForm, null>(
+		BACKEND_URL + 'users/save',
+        editUserForm,
+		HTTP_METHODS.POST,
+		createHeaders({}, ['files+json', 'auth'])
 	);
 }
