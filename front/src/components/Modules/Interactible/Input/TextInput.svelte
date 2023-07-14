@@ -5,14 +5,20 @@
 	import type { TextInputAttachments } from './types';
 	import Icon from '../../Icon/Icon.svelte';
 	import Button from '../Button/Button.svelte';
+	import type { Some } from '../../../../types';
 
 	onMount(() => {
 		id = crypto.randomUUID();
-		use(_this);
+		use(_this!);
 	});
 
 	function handleInput(e: Event) {
 		dispatch('input', e);
+	}
+
+	function handleKeyDown(e: KeyboardEvent) {
+		if (e.key === 'Enter')
+			dispatch('enter');
 	}
 
 	export let cls = cubeCss({});
@@ -26,9 +32,7 @@
 
 	export let id = '';
 	export let value = '';
-
 	export let endIcon: string | null = null;
-	export let endButtonAction: (_this: HTMLElement) => void = () => null;
 
 	const dispatch = createEventDispatcher();
 
@@ -41,7 +45,7 @@
 		utilClass: 'pos-relative width-100'
 	});
 
-	let _this: HTMLElement;
+	export let _this: Some<HTMLElement> = null;
 </script>
 
 <Flex cls={cubeCss(_wrapperCombinedClass)} useColumn={true} use={(e) => e.setAttribute('data-variant', variant)}>
@@ -52,10 +56,13 @@
 		<input
 			bind:this={_this}
 			bind:value={value}
+			
+			on:input={handleInput}
+			on:keydown={handleKeyDown}
+
 			class={_class}
 			data-variant={variant}
 			data-attachments={attachments.join(',')}
-			on:input={handleInput}
 			{id}
 			type='text'
 			{placeholder}
@@ -65,7 +72,7 @@
 			<Button
 				cls={cubeCss({ blockClass: 'input-end-button', utilClass: 'pos-absolute' })}
 				attachments={['transparent']}
-				on:click={() => endButtonAction(_this)}
+				on:click={() => dispatch('endButtonClick', _this)}
 			>
 				<Icon ariaLabel="">{endIcon}</Icon>
 			</Button>

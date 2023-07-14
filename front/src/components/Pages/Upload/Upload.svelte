@@ -76,7 +76,7 @@
 	}
 
 	function addLyric() {
-		if (!Object.keys(songForm.lyrics).includes(currentSelectedLanguage))
+		if (!Object.keys(songForm.lyrics).includes(currentSelectedLanguage) && currentSelectedLanguage)
 			songForm.lyrics[currentSelectedLanguage] = '';
 	}
 

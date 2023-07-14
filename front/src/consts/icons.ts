@@ -37,6 +37,7 @@ export const ICON_GRID_H = '\uf58d';
 export const ICON_TABLE_CELLS = '\uf009';
 
 export const ICON_EYE = '\uf06e';
+export const ICON_EYE_CROSSED = '\uf070';
 
 export const ICON_TRASH = '\uf1f8';
 export const ICON_BUCKET = '\ue4cf';

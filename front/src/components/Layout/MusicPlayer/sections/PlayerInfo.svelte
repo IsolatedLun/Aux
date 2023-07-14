@@ -54,6 +54,7 @@
 					<h3>Lyrics</h3>
 					<Select
 						on:select={(e) => fetchLyrics(e.detail.key)}
+						isOptional={true}
 						options={$songStore.currentSong.languages.map((x) => ({ [x]: x }))}
 					/>
 				</Flex>

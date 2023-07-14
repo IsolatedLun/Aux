@@ -1967,12 +1967,12 @@ body {
   background-color: hsl(0, 0%, 4%);
   text-rendering: optimizeLegibility;
   min-height: 100%;
+  outline: none !important;
 }
 
 html,
 body {
   overflow: auto;
-  outline: none;
 }
 
 h1,

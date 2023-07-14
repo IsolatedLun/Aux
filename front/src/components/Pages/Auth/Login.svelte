@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { WEB_AUTH_SIGNUP_URL } from '../../../consts';
-	import { ICON_EYE } from '../../../consts/icons';
+	import { ICON_EYE, ICON_EYE_CROSSED } from '../../../consts/icons';
 	import { login } from '../../../services/auth/authService';
 	import type { LoginResponse } from '../../../services/auth/types';
 	import { authStore } from '../../../stores/authStore';
@@ -14,6 +14,7 @@
 	import CheckboxInput from '../../Modules/Interactible/Input/CheckboxInput.svelte';
 	import FileInput from '../../Modules/Interactible/Input/FileInput.svelte';
 	import TextInput from '../../Modules/Interactible/Input/TextInput.svelte';
+	import { togglePasswordInput } from '../../Modules/Interactible/Input/utils';
 	import type { LoginForm } from './types';
 
     function handleFormSubmit() {
@@ -37,6 +38,7 @@
 
     let formError = '';
 	let remember = false;
+	let showPassword = false;
 
 	const loginForm: LoginForm = {
 		emailAddress: '',
@@ -56,7 +58,8 @@
 		label="Password"
 		placeholder="Enter password"
 		showLabel={true}
-		endIcon={ICON_EYE}
+		on:endButtonClick={(e) => showPassword = togglePasswordInput(e.detail)}
+        endIcon={showPassword ? ICON_EYE_CROSSED : ICON_EYE}
 	/>
 	<CheckboxInput label='Remember me?' bind:bool={remember} />
 	<Button isSubmit={true}>Log in</Button>

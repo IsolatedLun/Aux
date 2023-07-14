@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import { WEB_AUTH_LOGIN_URL, WEB_AUTH_SIGNUP_URL } from '../../../consts';
+	import { WEB_AUTH_LOGIN_URL, WEB_AUTH_SIGNUP_URL, WEB_SEARCH_SONG_URL } from '../../../consts';
 	import { ICON_BARS, ICON_SEARCH } from '../../../consts/icons';
 	import { authStore } from '../../../stores/authStore';
 	import Flex from '../../Box/Flex/Flex.svelte';
@@ -8,7 +8,9 @@
 	import TextInput from '../../Modules/Interactible/Input/TextInput.svelte';
 	import NavbarUserProfile from './NavbarUserProfile.svelte';
 	import Icon from '../../Modules/Icon/Icon.svelte';
+	import { goto } from '$app/navigation';
 
+	let searchText: string = '';
 	const dispatch = createEventDispatcher();
 </script>
 
@@ -18,10 +20,13 @@
 			<a href="/">Aux</a>
 		</h1>
 		<TextInput
+			on:enter={() => goto(WEB_SEARCH_SONG_URL(searchText))}
+			bind:value={searchText}
 			label="Search songs"
 			placeholder="Search songs..."
 			attachments={['border-bottom', 'shadow-none', 'transparent', 'border-neutral']}
 			endIcon={ICON_SEARCH}
+			on:endButtonClick={() => goto(WEB_SEARCH_SONG_URL(searchText))}
 		/>
 
 		<Flex align="center" gap={2}>

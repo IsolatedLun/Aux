@@ -1,4 +1,5 @@
 <script lang='ts'>
+	import { page } from "$app/stores";
 	import { BACKEND_URL, PAGINATED_SONG_URL, PAGINATED_USER_SONG_URL } from "../../../consts";
 	import { ICON_ERROR } from "../../../consts/icons";
 	import { fetchUser } from "../../../services/auth/authService";
@@ -14,12 +15,12 @@
 	import UserProfile from "../../Modules/Profile/UserProfile.svelte";
 	import SongCard from "../../Modules/SongCard/SongCard.svelte";
 
-    export let id: number;
-
+    let id = Number($page.params['id']);
     let orderBy: SongOrderTypes = 'date_created';
 </script>
 
-{#await fetchUser(id) then data}
+{#key $page.params}
+    {#await fetchUser(id) then data}
     <Flex cls={cubeCss({blockClass: 'user'})} useColumn={true} align='center'>
         <UserProfile user={data} variant='large' />
         <h2>{data.username}</h2>
@@ -45,4 +46,5 @@
             </Card>
             <Button variant='secondary' to='/'>Go back</Button>
         </Grid>
-{/await}
+    {/await}
+{/key}
