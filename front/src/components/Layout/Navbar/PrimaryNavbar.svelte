@@ -15,28 +15,30 @@
 </script>
 
 <nav class="[ primary-navbar ] [ margin-block-end-2 ]">
-	<Flex align="center" justify="space-between">
+	<Flex align="center" justify="space-between" gap={2}>
 		<h1 class="[ fw-bold ]">
 			<a href="/">Aux</a>
 		</h1>
 		<TextInput
-			on:enter={() => goto(WEB_SEARCH_SONG_URL(searchText))}
+			on:enter={() => searchText.length > 0 ? goto(WEB_SEARCH_SONG_URL(searchText)) : null}
 			bind:value={searchText}
 			label="Search songs"
 			placeholder="Search songs..."
 			attachments={['border-bottom', 'shadow-none', 'transparent', 'border-neutral']}
 			endIcon={ICON_SEARCH}
-			on:endButtonClick={() => goto(WEB_SEARCH_SONG_URL(searchText))}
+			on:endButtonClick={() => searchText.length > 0 ? goto(WEB_SEARCH_SONG_URL(searchText)) : null}
 		/>
 
 		<Flex align="center" gap={2}>
 			{#if $authStore.isLogged}
 				<NavbarUserProfile />
 			{:else}
-				<Flex gap={2}>
-					<Button to={WEB_AUTH_SIGNUP_URL}>Sign up</Button>
-					<Button to={WEB_AUTH_LOGIN_URL} variant="secondary">Log in</Button>
-				</Flex>
+				<div data-desktop='true'>
+					<Flex gap={2}>
+						<Button to={WEB_AUTH_SIGNUP_URL}>Sign up</Button>
+						<Button to={WEB_AUTH_LOGIN_URL} variant="secondary">Log in</Button>
+					</Flex>
+				</div>
 			{/if}
 
 			<Button

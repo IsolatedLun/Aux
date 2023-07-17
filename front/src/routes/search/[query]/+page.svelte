@@ -13,7 +13,7 @@
 {#key $page.params}
     <div class="[ margin-block-end-4 ]">
         {#if $page.params['query'] === '*'}
-            <h2>Start searching!</h2>
+            <h2 class="[ margin-block-end-2 ]">Start searching!</h2>
             {:else}
             <h2>
                 <span class="[ clr-text-muted ]">{results_length}</span> 
