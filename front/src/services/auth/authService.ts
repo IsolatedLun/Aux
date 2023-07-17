@@ -52,7 +52,7 @@ export async function deleteUser() {
 }
 
 export async function saveUser(editUserForm: EditUserForm) {
-	return await createRequest<EditUserForm, null>(
+	return await createRequest<EditUserForm, Props_User>(
 		BACKEND_URL + 'users/save',
         editUserForm,
 		HTTP_METHODS.POST,

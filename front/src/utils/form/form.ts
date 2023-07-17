@@ -1,4 +1,5 @@
 import type { LoginForm, SignUpForm } from "../../components/Pages/Auth/types";
+import type { EditUserForm } from "../../components/Pages/Settings/types";
 import type { Form_Song } from "../../components/Pages/Upload/types";
 import type { Some } from "../../types";
 import { isFileTypeOf } from "../general";
@@ -31,7 +32,15 @@ export function fileType_V(key: string, data: Some<File>, type: FileType) {
     return isFileTypeOf(type, data) ? true : `${key} field must be an ${type} file`;
 }
 
+export function orNull<T>(data: Some<T>, fn: () => any) {
+    if(data)
+        return fn()
+    return true;
+};
+
 // ========================================
+const MIN_USERNAME_LEN = 1;
+const MAX_USERNAME_LEN = 256;
 const MIN_EMAIL_LEN = 3;
 const MAX_EMAIL_LEN = 254;
 const MIN_PASSWORD_LEN = 8;
@@ -64,8 +73,8 @@ export function validateLoginForm(form: LoginForm) {
     const validators: FormValidatorFn[] = [
         () => minLength_V('Email address', form.emailAddress, MIN_EMAIL_LEN),
         () => maxLength_V('Email address', form.emailAddress, MAX_EMAIL_LEN),
-        () => minLength_V('Password', form.emailAddress, MIN_PASSWORD_LEN),
-        () => maxLength_V('Password', form.emailAddress, MAX_PASSWORD_LEN),
+        () => minLength_V('Password', form.password, MIN_PASSWORD_LEN),
+        () => maxLength_V('Password', form.password, MAX_PASSWORD_LEN),
     ]
 
     return runFormValidators(validators);
@@ -73,13 +82,25 @@ export function validateLoginForm(form: LoginForm) {
 
 export function validateSignUpForm(form: SignUpForm) {
     const validators: FormValidatorFn[] = [
-        () => minLength_V('Username', form.username, 1),
-        () => maxLength_V('Username', form.username, 256),
+        () => minLength_V('Username', form.username, MIN_USERNAME_LEN),
+        () => maxLength_V('Username', form.username, MAX_USERNAME_LEN),
         () => minLength_V('Email address', form.emailAddress, MIN_EMAIL_LEN),
         () => maxLength_V('Email address', form.emailAddress, MAX_EMAIL_LEN),
         () => minLength_V('Password', form.password, MIN_PASSWORD_LEN),
         () => maxLength_V('Password', form.password, MAX_PASSWORD_LEN),
         () => fileType_V('Profile', form.profile, 'image'),
+    ]
+
+    return runFormValidators(validators);
+}
+
+export function validateEditUserForm(form: EditUserForm) {
+    const validators: FormValidatorFn[] = [
+        () => minLength_V('Username', form.username, MIN_USERNAME_LEN),
+        () => maxLength_V('Username', form.username, MAX_USERNAME_LEN),
+        () => minLength_V('newPassword', form.newPassword, 0),
+        () => maxLength_V('newPassword', form.newPassword, MAX_PASSWORD_LEN),
+        () => orNull(form.profile, () => fileType_V('Profile', form.profile, 'image')),
     ]
 
     return runFormValidators(validators);

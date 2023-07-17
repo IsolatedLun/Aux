@@ -8,6 +8,7 @@
 	import Flex from "../../Box/Flex/Flex.svelte";
     import Card from "../../Modules/Card/Card.svelte";
 	import Button from "../../Modules/Interactible/Button/Button.svelte";
+	import FileInput from "../../Modules/Interactible/Input/FileInput.svelte";
 	import TextInput from "../../Modules/Interactible/Input/TextInput.svelte";
 	import { togglePasswordInput } from "../../Modules/Interactible/Input/utils";
 	import UserProfile from "../../Modules/Profile/UserProfile.svelte";
@@ -35,6 +36,7 @@
         newPassword: '',
         profile: null
     }
+    let profilePreview = '';
     let showPassword = false;
 </script>
 
@@ -60,11 +62,17 @@
                     on:endButtonClick={(e) => showPassword = togglePasswordInput(e.detail)}
                     endIcon={showPassword ? ICON_EYE_CROSSED : ICON_EYE}
                 />
+                <FileInput
+                    fileType="image"
+                    variant="compact"
+                    on:file={(e) => (editForm.profile = e.detail)}
+                    on:preview={(e) => (profilePreview = e.detail)}
+                />
             </Flex>
         </Flex>
     </Card>
 
-    <Flex cls={cubeCss({utilClass: 'width-100 margin-block-start-2'})}>
+    <Flex cls={cubeCss({utilClass: 'width-100 margin-block-start-2 margin-block-end-6'})}>
         <Flex gap={2}>
             <Button on:click={handleSaveUser} variant='secondary' attachments={['capsule']}>Save account</Button>
             <Button on:click={handleDeleteUser} variant='error' attachments={['capsule']}>Delete account</Button>
