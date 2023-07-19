@@ -36,12 +36,12 @@
 	let _this: HTMLElement;
 </script>
 
-<select class="{_class}" bind:this={_this} {id}>
+<select class="{_class}" bind:this={_this} {id} on:change={handleSelect}>
 	{#if isOptional}
 		<option disabled selected value>-- Select option --</option>
 	{/if}
 	
     {#each options as option}
-        <option on:click={handleSelect} value="{Object.values(option)[1]}">{Object.values(option)[0]}</option>
+        <option value="{Object.values(option)[1]}">{Object.values(option)[0]}</option>
     {/each}
 </select>

@@ -72,7 +72,7 @@
         </Flex>
     </Card>
 
-    <Flex cls={cubeCss({utilClass: 'width-100 margin-block-start-2 margin-block-end-6'})}>
+    <Flex cls={cubeCss({utilClass: 'width-100 margin-block-start-2 margin-block-end-6'})} collapseOnMobile={true} alignCenterOnMobile={true}>
         <Flex gap={2}>
             <Button on:click={handleSaveUser} variant='secondary' attachments={['capsule']}>Save account</Button>
             <Button on:click={handleDeleteUser} variant='error' attachments={['capsule']}>Delete account</Button>

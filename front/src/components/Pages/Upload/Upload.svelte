@@ -121,14 +121,13 @@
 </script>
 
 <Form id="upload-form" title="Upload Your Song" {formError} on:submit={handleFormSubmit}>
-	<Card padding={2}>
+	<Card cls={cubeCss({ utilClass: 'margin-inline-auto' })} padding={2}>
 		<Grid
 			cls={cubeCss({ utilClass: 'margin-inline-auto' })}
 			columns={2}
 			gap={4}
 			collapseOnMobile={true}
 			alignCenterOnMobile={true}
-			align="start"
 		>
 			<Flex useColumn={true} gap={2}>
 				<TextInput

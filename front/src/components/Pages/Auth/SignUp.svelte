@@ -58,7 +58,7 @@
         endIcon={showPassword ? ICON_EYE_CROSSED : ICON_EYE}
     />
     <FileInput
-        on:input={(e) => (signUpForm.profile = e.detail)}
+        on:file={(e) => (signUpForm.profile = e.detail)}
         cls={cubeCss({ utilClass: 'margin-block-2' })}
         fileType="image"
         variant="compact"
